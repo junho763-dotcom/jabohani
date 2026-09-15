@@ -481,6 +481,35 @@
   .rnote { margin-top: 16px; }
   @media (max-width: 767px) { .rrow { grid-template-columns: 1fr; gap: 6px; } .rrow .val { text-align: left; } .raxis { grid-template-columns: 1fr; } .raxis > :not(.ticks) { display: none; } }
   .why li .h-sm { font-size: 22px; }
+
+  /* ===== 꿀팁 슬랩 (홈 상단) ===== */
+  .tips .lockup { max-width: 800px; }
+  .slab { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--hair); }
+  .slab > div { padding: 28px 24px 28px 0; border-right: 1px solid var(--hair); }
+  .slab > div + div { padding-left: 24px; }
+  .slab > div:last-child { border-right: 0; }
+  .slab .big { font-size: 44px; font-weight: 400; letter-spacing: -1.4px; line-height: 1; color: var(--ink); }
+  .slab .big small { font-size: 18px; letter-spacing: -.2px; margin-left: 4px; color: var(--graphite); }
+  .slab .l { font-size: 14px; font-weight: 500; color: var(--ink); margin-top: 14px; }
+  .slab .d { font-size: 13px; color: var(--slate); margin-top: 4px; line-height: 1.5; }
+  @media (max-width: 1023px) { .slab { grid-template-columns: repeat(2, 1fr); } .slab > div:nth-child(2) { border-right: 0; } .slab > div:nth-child(-n+2) { border-bottom: 1px solid var(--hair); } .slab > div:nth-child(3) { padding-left: 0; } }
+  @media (max-width: 767px) { .slab .big { font-size: 36px; } .slab > div { padding: 20px 16px 20px 0; } }
+  .tips-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 24px 48px; margin-top: 56px; align-items: start; }
+  @media (max-width: 1023px) { .tips-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .chart-h { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 12px; }
+  .chart-h .t { font-size: 18px; font-weight: 500; letter-spacing: -.2px; color: var(--ink); }
+  .stack { margin-top: 40px; }
+  .stackbar { display: flex; height: 28px; border-radius: 4px; overflow: hidden; gap: 2px; background: var(--canvas); }
+  .stackbar span { display: block; height: 100%; }
+  .stackbar .s1 { background: var(--ink); } .stackbar .s2 { background: #4a5058; } .stackbar .s3 { background: #8a9099; } .stackbar .s4 { background: #c9ccd1; }
+  .legend { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px; }
+  .legend div { display: grid; gap: 2px; font-size: 13px; color: var(--graphite); padding-top: 8px; border-top: 2px solid var(--hair); }
+  .legend .sw { width: 10px; height: 10px; border-radius: 2px; display: inline-block; margin-right: 6px; vertical-align: -1px; }
+  .legend b { font-weight: 500; color: var(--ink); }
+  .legend .pct { font-size: 16px; color: var(--ink); }
+  @media (max-width: 767px) { .legend { grid-template-columns: repeat(2, 1fr); } }
+  .tips-side .steps li .h-sm { font-size: 20px; }
+  .tips-side .steps li { padding: 20px 0; }
 </style>
 
 <a class="skip" href="#main">본문으로 건너가기</a>
@@ -535,7 +564,41 @@
   </div>
 </section>
 
-    <section class="sec" id="home-glance" aria-labelledby="glanceTitle">
+
+    <section class="sec tips" id="home-tips" aria-labelledby="tipsTitle">
+      <div class="wrap">
+        <div class="lockup"><p class="eyebrow">자동차보험, 알고 가면 다릅니다</p><h2 class="h-md" id="tipsTitle">보험사가 먼저 말해주지 않는 네 가지.</h2><p class="lead">접수번호 하나로 진료비가 0원이 되고, 합의는 치료가 끝난 뒤에 하는 것이 원칙입니다. 아래 숫자와 예시를 기억해 두세요.</p></div>
+        <div class="slab num">
+          <div><div class="big">0<small>원</small></div><div class="l">자보 접수 시 본인부담</div><div class="d">진찰·추나·약침·한약·물리치료·입원 병실료까지. 진료비는 한의원이 보험사에 청구합니다.</div></div>
+          <div><div class="big">20<small>회 제한 없음</small></div><div class="l">추나요법 회차</div><div class="d">건강보험의 연 20회 제한은 자동차보험 진료에 적용되지 않습니다. 회차는 한의사 판단과 보험사 심사에 따릅니다.</div></div>
+          <div><div class="big">치료 뒤</div><div class="l">합의 시점</div><div class="d">합의서에 서명하면 그 사고의 치료비 청구는 원칙적으로 끝납니다. 통증이 남아 있으면 치료를 이어가세요.</div></div>
+          <div><div class="big">+2<small>항목</small></div><div class="l">따로 청구하는 것</div><div class="d">통원 교통비와 휴업손해는 한의원이 아니라 보험사에 직접 청구합니다. 통원 일수와 소득 증빙을 모아두세요.</div></div>
+        </div>
+        <div class="tips-grid">
+          <div>
+            <div class="chart-h"><span class="t">치료 형태별 합의금 범위</span><span class="meta">예시값 · 만원 · 경상 12~14급 기준</span></div>
+            <div class="rchart" id="settleChart" role="img" aria-label="치료 형태별 합의금 범위 예시 차트"></div>
+            <div class="stack">
+              <div class="chart-h"><span class="t">합의금은 무엇으로 구성되나</span><span class="meta">예시 비율</span></div>
+              <div class="stackbar" role="img" aria-label="합의금 구성 비율 예시: 위자료 45%, 휴업손해 30%, 향후치료비 15%, 교통비·기타 10%" id="stackBar"></div>
+              <div class="legend" id="stackLegend"></div>
+            </div>
+            <p class="meta rnote">익명 사례를 참고한 예시값(데모)입니다. 실제 금액과 비율은 과실 비율·소득·치료 기간·보험사에 따라 크게 다르며, 자보한의는 합의를 대행하거나 금액을 보장하지 않습니다.</p>
+          </div>
+          <div class="tips-side">
+            <p class="eyebrow" style="margin-bottom:4px">합의 요령 핵심</p>
+            <ol class="steps">
+              <li><span class="n num">01</span><div><h3 class="h-sm">치료가 끝나기 전엔 합의하지 않기</h3><p class="body">보험사가 재촉해도 "치료 중"이라고 답하면 됩니다. 합의 뒤 추가 치료비는 청구가 어렵습니다.</p></div></li>
+              <li><span class="n num">02</span><div><h3 class="h-sm">첫 제시액은 시작점</h3><p class="body">위자료·휴업손해·향후치료비·교통비 항목별 산출 근거를 요구하고, 통화 내용은 문자로 남기세요.</p></div></li>
+              <li><span class="n num">03</span><div><h3 class="h-sm">기록이 금액을 만듭니다</h3><p class="body">진단서, 진료확인서(통원 일수), 교통비 영수증, 소득 증빙. 한의원 서류는 예약 때 미리 요청하세요.</p></div></li>
+              <li><span class="n num">04</span><div><h3 class="h-sm">과실이 있어도 치료비는 별개</h3><p class="body">과실 비율은 합의금에 반영되지만, 대인 접수된 치료비는 보험사가 부담합니다.</p></div></li>
+            </ol>
+            <div style="display:flex;gap:16px;align-items:center;margin-top:24px;flex-wrap:wrap"><a class="btn primary" href="#/guide">보험 가이드 전체 보기</a><a class="tlink muted" href="#/find">한의원 찾기 →</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="sec rule" id="home-glance" aria-labelledby="glanceTitle">
       <div class="wrap">
         <div class="lockup"><p class="eyebrow">한눈에 보기</p><h2 class="h-md" id="glanceTitle">자보한의에서 할 수 있는 것.</h2></div>
         <ol class="glance">
@@ -582,26 +645,7 @@
       </div>
     </section>
 
-    <section class="sec rule" id="home-settle" aria-labelledby="settleTitle">
-      <div class="wrap">
-        <div class="lockup"><p class="eyebrow">합의, 미리 알아두기 · 데모</p><h2 class="h-md" id="settleTitle">치료 형태에 따라 합의금은 이렇게 달라집니다.</h2><p class="lead">익명 사례를 참고해 만든 예시값입니다. 경상(상해 12~14급) 기준이며, 실제 금액은 과실 비율·소득·치료 기간·보험사에 따라 크게 다릅니다.</p></div>
-        <div class="g75">
-          <div>
-            <div class="rchart" id="settleChart" role="img" aria-label="치료 형태별 합의금 범위 예시 차트"></div>
-            <p class="meta rnote">단위 만원 · 위자료·휴업손해·향후치료비·교통비를 합한 합의금 범위 예시 · 자보한의는 합의를 대행하거나 금액을 보장하지 않습니다.</p>
-          </div>
-          <div>
-            <p class="eyebrow" style="margin-bottom:12px">합의 요령 핵심 3가지</p>
-            <ol class="steps">
-              <li><span class="n num">01</span><div><h3 class="h-sm" style="font-size:20px">치료가 끝나기 전엔 합의하지 않기</h3><p class="body">합의 뒤에는 추가 치료비를 청구하기 어렵습니다. 통증이 남아 있으면 치료를 이어가세요.</p></div></li>
-              <li><span class="n num">02</span><div><h3 class="h-sm" style="font-size:20px">첫 제시액은 시작점</h3><p class="body">위자료·휴업손해·향후치료비·교통비 항목별로 근거를 요구하고 문자로 남기세요.</p></div></li>
-              <li><span class="n num">03</span><div><h3 class="h-sm" style="font-size:20px">기록이 금액을 만듭니다</h3><p class="body">진단서, 통원 일수, 교통비 영수증, 소득 증빙을 모아두면 협상이 달라집니다.</p></div></li>
-            </ol>
-            <a class="tlink" href="#/guide" style="margin-top:16px">합의 요령 전체 보기 →</a>
-          </div>
-        </div>
-      </div>
-    </section>
+
     <section class="sec rule" id="home-find" aria-labelledby="homeFindTitle">
       <div class="wrap g75">
         <div><p class="eyebrow">한의원 찾기</p><h2 class="h-md" id="homeFindTitle" style="margin-top:12px">지역별 입점 한의원을 비교하고 예약합니다.</h2><p class="lead" style="margin-top:16px;max-width:30em">시·구를 고르고 치료 항목과 조건으로 걸러 보세요. 최대 3곳을 비교함에 담아 한 표로 볼 수 있습니다.</p><a class="btn primary" href="#/find" style="margin-top:32px">한의원 찾기</a></div>
@@ -1435,6 +1479,8 @@ const SETTLE = [ { k:'통원 1주 이내', sub:'진단 2주 이내 · 경상', m
 const SET_MAX = 500;
 function renderSettle(sel) { const el = $(sel); if (!el) return; el.innerHTML = SETTLE.map(r => `<div class="rrow" title="${r.k}: ${r.min}~${r.max}만원 (예시)"><span class="lbl">${r.k}<small>${r.sub}</small></span><span class="rtrack" aria-hidden="true"><span class="rbar" style="left:${r.min / SET_MAX * 100}%;width:${(r.max - r.min) / SET_MAX * 100}%"></span></span><span class="val num">${r.min}~${r.max}만원</span></div>`).join('') + `<div class="raxis"><span></span><span class="ticks num">${[0,100,200,300,400,500].map(t => `<span>${t}</span>`).join('')}</span><span class="meta" style="text-align:right">예시값</span></div>`; }
 renderSettle('#settleChart'); renderSettle('#settleChart2');
+const STACK = [ ['위자료', 45, 's1', '상해 급수·치료 기간 기준'], ['휴업손해', 30, 's2', '쉰 기간 × 소득'], ['향후치료비', 15, 's3', '합의서에 명시해야 인정'], ['교통비·기타', 10, 's4', '통원 일수 기준'] ];
+if ($('#stackBar')) { $('#stackBar').innerHTML = STACK.map(([n, v, c]) => `<span class="${c}" style="width:${v}%" title="${n} ${v}%"></span>`).join(''); $('#stackLegend').innerHTML = STACK.map(([n, v, c, d]) => `<div><span><span class="sw ${c}" style="background:${c==='s1'?'var(--ink)':c==='s2'?'#4a5058':c==='s3'?'#8a9099':'#c9ccd1'}"></span><b>${n}</b></span><span class="pct num">${v}%</span><span class="meta">${d}</span></div>`).join(''); }
 $('#glanceFind').textContent = `입점 ${CLINICS.length}곳 · ${Object.keys(REGIONS).join('·')}`;
 $('#glanceReviews').textContent = `진료 확인 후기 ${CLINICS.reduce((a, c) => a + c.rvs.length, 0)}개 · 첫 후기 5,000P`;
 $('#stepsHome').innerHTML = $('#guide-full .steps').innerHTML;
