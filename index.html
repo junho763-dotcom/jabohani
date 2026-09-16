@@ -687,6 +687,15 @@
   table.insurers td.n0 { color: var(--stone); }
   table.insurers .cnt { display: inline-block; margin-left: 6px; font-size: 11px; color: var(--stone); border: 1px solid var(--hair-soft); border-radius: 9999px; padding: 0 6px; }
   .phead .display .hl, .dark-strip.phead-dark .display .hl { -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+
+  .ins-charts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .ins-chart .rrow { grid-template-columns: 96px 1fr 72px; padding: 9px 0; }
+  .ins-chart .rrow .lbl { font-size: 13px; }
+  .ins-chart .rrow .val { font-size: 13px; }
+  .ins-chart .raxis { grid-template-columns: 96px 1fr 72px; }
+  .ins-chart .rtrack { height: 22px; } .ins-chart .rbar { top: 6px; height: 10px; }
+  @media (max-width: 1023px) { .ins-charts { grid-template-columns: 1fr; } }
+  @media (max-width: 767px) { .ins-chart .rrow { grid-template-columns: 1fr; } .ins-chart .raxis { grid-template-columns: 1fr; } }
 </style>
 
 <a class="skip" href="#main">본문으로 건너가기</a>
@@ -913,7 +922,17 @@
   <!-- ===== GUIDE ===== -->
   <div class="page" data-page="guide" hidden>
     <section class="phead"><div class="wrap"><p class="eyebrow">보험 가이드</p><h1 class="display" id="guidePageTitle" tabindex="-1">자동차보험, 이것만 알면 됩니다.</h1><p class="lead">접수번호를 받는 방법부터 항목별 적용 원칙, 입원과 통원의 차이까지. 최종 판단은 보험사와 한의원의 기준을 따릅니다.</p></div></section>
-    <section class="sec" id="guide-full" aria-labelledby="guideTitle">
+    <section class="sec" id="guide-insurers" aria-labelledby="guideInsTitle">
+      <div class="wrap">
+        <div class="lockup"><p class="eyebrow">보험사별 합의금 · 데모</p><h2 class="h-md" id="guideInsTitle">보험사마다 합의 기준이 다릅니다.</h2><p class="lead">자동차보험 상해급수(1~14급) 기준으로 합의금 범위를 보험사별로 모아 보여드릴 자리입니다. 한의원 치료 대상은 대부분 12~14급 경상이며, 골절 등 9~11급은 병원 협진이 필요합니다. 아래 숫자는 실제 통계가 아닌 자리표시 예시이며, 진료를 마친 분들의 익명 합의 사례가 쌓이면 실제 값으로 교체됩니다. 동부화재는 2017년부터 DB손해보험입니다.</p></div>
+        <div class="ins-charts" id="insurerCharts"></div>
+        <p class="p-sub" style="margin:40px 0 8px">상세 표</p>
+        <div class="ins-wrap"><table class="ins insurers" id="insurerTable"></table></div>
+        <div class="row-cta" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:16px"><button class="btn primary" type="button" data-auth>내 합의 사례 익명 제보</button><span class="meta">제보는 보험사·사고 규모·치료 형태·합의금만 익명으로 수집하며, 20건 이상 모인 칸부터 실제 범위로 표시합니다.</span></div>
+        <p class="meta" style="margin-top:12px">면책: 합의금은 과실 비율, 상해 급수, 소득, 치료 기간, 담당자 재량에 따라 크게 달라집니다. 한방에는 합의를 대행하거나 금액을 보장하지 않으며, 특정 보험사를 평가하지 않습니다.</p>
+      </div>
+    </section>
+    <section class="sec rule" id="guide-full" aria-labelledby="guideTitle">
     <div class="wrap">
       <div class="lockup" hidden>
         <p class="eyebrow">이용 안내</p>
@@ -995,14 +1014,7 @@
       </div>
     </section>
 
-    <section class="sec rule" id="guide-insurers" aria-labelledby="guideInsTitle">
-      <div class="wrap">
-        <div class="lockup"><p class="eyebrow">보험사별 합의금 · 데모</p><h2 class="h-md" id="guideInsTitle">보험사마다 합의 기준이 다릅니다.</h2><p class="lead">사고 규모별 합의금 범위를 보험사별로 모아 보여드릴 자리입니다. 아래 숫자는 실제 통계가 아닌 자리표시 예시이며, 진료를 마친 분들의 익명 합의 사례가 쌓이면 실제 값으로 교체됩니다. 동부화재는 2017년부터 DB손해보험입니다.</p></div>
-        <div class="ins-wrap"><table class="ins insurers" id="insurerTable"></table></div>
-        <div class="row-cta" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:16px"><button class="btn primary" type="button" data-auth>내 합의 사례 익명 제보</button><span class="meta">제보는 보험사·사고 규모·치료 형태·합의금만 익명으로 수집하며, 20건 이상 모인 칸부터 실제 범위로 표시합니다.</span></div>
-        <p class="meta" style="margin-top:12px">면책: 합의금은 과실 비율, 상해 급수, 소득, 치료 기간, 담당자 재량에 따라 크게 달라집니다. 한방에는 합의를 대행하거나 금액을 보장하지 않으며, 특정 보험사를 평가하지 않습니다.</p>
-      </div>
-    </section>
+
   </div>
 
   <!-- ===== REVIEWS ===== -->
@@ -1765,13 +1777,20 @@ renderBody('neck');
   $('#orbit').innerHTML = items.map(([ic, l, st, href], i) => { const ang = -90 + i * 45; const x = 50 + R * Math.cos(ang * Math.PI / 180), y = 50 + R * Math.sin(ang * Math.PI / 180); return `<a class="oc" href="${href}" style="left:${x.toFixed(1)}%;top:${y.toFixed(1)}%">${pic(ic)}${l}<span class="st">${st}</span></a>`; }).join('') + '<span class="core wm"><b>한방</b><i>에</i><span class="dot">.</span></span>';
 })();
 
-/* 보험사별 합의금 예시 표 (자리표시값 · 사례 0건) */
+/* 보험사별 합의금 예시 (자리표시값 · 사례 0건) — 상해급수 기준 3구간 */
 (function insurers() {
   const el = $('#insurerTable'); if (!el) return;
-  const cols = [['접촉사고', '경상 · 통원 2~3주'], ['조금 심한 사고', '입원 3~7일 + 통원'], ['심한 사고', '입원 2주 이상 · 진단 3주+']];
+  const cols = [
+    ['상해 14급 · 경상', '경추·요추 염좌, 타박 · 진단 2주 · 통원 2~3주', 150],
+    ['상해 12~13급 · 경상', '염좌·타박 진단 3주, 뇌진탕 · 통원 3~4주 또는 입원 3~7일', 350],
+    ['상해 9~11급 · 중등도', '골절·인대 파열 등 · 입원 1~2주 이상 · 병원 협진', 550],
+  ];
   const base = [[50, 120], [150, 300], [250, 500]];
   const rows = [['DB손해보험', '옛 동부화재', 0], ['삼성화재', '', 5], ['현대해상', '', -5], ['KB손해보험', '', 0], ['메리츠화재', '', -10], ['한화손해보험', '', 5], ['롯데손해보험', '', 0], ['흥국화재', '', -5]];
   el.innerHTML = `<thead><tr><th>보험사</th>${cols.map(([c, d]) => `<th>${c}<span class="d" style="display:block;font-weight:400;color:var(--stone)">${d}</span></th>`).join('')}<th>사례</th></tr></thead><tbody>${rows.map(([n, sub, adj]) => `<tr><td>${n}${sub ? `<span class="d">${sub}</span>` : ''}</td>${base.map(([a, b]) => `<td class="n0 num">${a + adj}~${b + adj}만원<span class="cnt">예시</span></td>`).join('')}<td class="num n0">0건</td></tr>`).join('')}</tbody>`;
+  const ch = $('#insurerCharts'); if (!ch) return;
+  ch.innerHTML = cols.map(([c, d, max], ci) => { const [a0, b0] = base[ci]; const ticks = [0, max / 5, max * 2 / 5, max * 3 / 5, max * 4 / 5, max].map(v => Math.round(v));
+    return `<div class="ins-chart"><div class="chart-h"><span class="t">${c}</span><span class="meta">예시 · 만원</span></div><p class="meta" style="margin:-6px 0 10px">${d}</p><div class="rchart">${rows.map(([n, sub, adj]) => `<div class="rrow" title="${n}: ${a0 + adj}~${b0 + adj}만원 (예시)"><span class="lbl">${n}</span><span class="rtrack" aria-hidden="true"><span class="rbar" style="left:${(a0 + adj) / max * 100}%;width:${(b0 - a0) / max * 100}%"></span></span><span class="val num">${a0 + adj}~${b0 + adj}</span></div>`).join('')}<div class="raxis"><span></span><span class="ticks num">${ticks.map(t => `<span>${t}</span>`).join('')}</span><span></span></div></div></div>`; }).join('');
 })();
 /* 히어로 조건 칩 12개 (픽토그램 포함) */
 $('#hotChips').innerHTML = [...FILTERS_T, ...FILTERS_C].map(([k, l]) => `<button class="chip" type="button" data-hot="${esc(k)}" aria-pressed="false">${pic(k)}${l}</button>`).join('');
