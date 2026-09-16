@@ -572,12 +572,12 @@
   .body-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 24px 56px; align-items: start; }
   @media (max-width: 1023px) { .body-grid { grid-template-columns: 1fr; gap: 32px; } }
   .figure { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: start; }
-  .figure svg { width: 100%; max-width: 260px; height: auto; display: block; margin: 0 auto; }
-  .figure .outline { fill: none; stroke: var(--hair-soft); stroke-width: 1.5; }
-  .figure .part { fill: transparent; stroke: var(--slate); stroke-width: 1.5; cursor: pointer; transition: fill .12s, stroke .12s; outline: none; }
-  .figure .part:hover { fill: rgba(127,209,176,.22); stroke: var(--ink); }
-  .figure .part[aria-pressed="true"] { fill: rgba(127,209,176,.6); stroke: var(--ink); }
-  .figure .part:focus-visible { stroke: var(--ink); stroke-width: 2.5; }
+  .figure svg { width: 100%; max-width: 230px; height: auto; display: block; margin: 0 auto; }
+  .figure .sil { fill: #14483a; }
+  .figure .part { fill: transparent; stroke: none; cursor: pointer; transition: fill .12s; outline: none; }
+  .figure .part:hover { fill: rgba(127,209,176,.45); }
+  .figure .part[aria-pressed="true"] { fill: #7fd1b0; }
+  .figure .part:focus-visible { fill: rgba(127,209,176,.6); }
   .figure .cap { font-family: var(--font); font-size: 11px; fill: var(--stone); letter-spacing: .2px; }
   .partlist { display: grid; gap: 4px; }
   .partlist button { display: grid; grid-template-columns: 24px 1fr; gap: 10px; align-items: center; text-align: left; padding: 10px 12px; border-radius: 8px; font-size: 15px; color: var(--graphite); border: 1px solid transparent; }
@@ -712,16 +712,29 @@
         <div class="lockup"><p class="eyebrow">어디가 아프세요?</p><h2 class="h-md" id="bodyTitle">아픈 부위를 누르면, 받을 수 있는 치료를 보여드립니다.</h2><p class="lead">사고 뒤 통증은 부위마다 쓰이는 치료가 다릅니다. 부위를 고르면 흔한 증상, 권장 치료, 통상 기간, 자동차보험 적용을 정리해 드립니다.</p></div>
         <div class="body-grid">
           <div class="figure">
-            <svg viewBox="0 0 200 400" role="group" aria-label="인체 부위 선택" id="bodySvg">
-              <path class="outline" d="M100 14a26 26 0 1 1 0 52a26 26 0 1 1 0-52zM88 66h24v18M44 108l8-20 36-4h24l36 4 8 20M70 106h60v110H70zM40 108h22v122H40zM138 108h22v122h-22zM72 216h26v130H72zM102 216h26v130h-26zM68 346h30v22H68zM102 346h30v22h-30z"/>
-              <path class="part" data-part="head" tabindex="0" role="button" aria-pressed="false" aria-label="머리 · 두통·어지럼" d="M100 14a26 26 0 1 1 0 52a26 26 0 1 1 0-52z"/>
-              <path class="part" data-part="neck" tabindex="0" role="button" aria-pressed="true" aria-label="목·어깨" d="M88 66h24v18l36 4 8 20-26-2H70l-26 2 8-20 36-4z"/>
-              <path class="part" data-part="chest" tabindex="0" role="button" aria-pressed="false" aria-label="가슴·갈비 (안전벨트)" d="M70 106h60v50H70z"/>
-              <path class="part" data-part="back" tabindex="0" role="button" aria-pressed="false" aria-label="허리·골반" d="M70 156h60v60H70z"/>
-              <path class="part" data-part="arm" tabindex="0" role="button" aria-pressed="false" aria-label="손목·팔" d="M40 108h22v122H40zM138 108h22v122h-22z"/>
-              <path class="part" data-part="leg" tabindex="0" role="button" aria-pressed="false" aria-label="무릎·다리" d="M72 216h26v130H72zM102 216h26v130h-26z"/>
-              <path class="part" data-part="foot" tabindex="0" role="button" aria-pressed="false" aria-label="발목·발" d="M68 346h30v22H68zM102 346h30v22h-30z"/>
-              <text class="cap" x="100" y="392" text-anchor="middle">정면 · 부위를 누르세요</text>
+            <svg viewBox="0 0 200 420" role="group" aria-label="인체 부위 선택" id="bodySvg">
+              <defs>
+                <clipPath id="silClip">
+                  <circle cx="100" cy="34" r="24"/>
+                  <path d="M70 66h60a10 10 0 0 1 10 10v104a10 10 0 0 1-10 10H70a10 10 0 0 1-10-10V76a10 10 0 0 1 10-10z"/>
+                  <rect x="60" y="182" width="80" height="40" rx="12"/>
+                  <rect x="38" y="72" width="22" height="156" rx="11" transform="rotate(7 49 72)"/>
+                  <rect x="140" y="72" width="22" height="156" rx="11" transform="rotate(-7 151 72)"/>
+                  <rect x="65" y="214" width="32" height="176" rx="13"/><rect x="103" y="214" width="32" height="176" rx="13"/>
+                  <rect x="60" y="384" width="40" height="20" rx="9"/><rect x="100" y="384" width="40" height="20" rx="9"/>
+                </clipPath>
+              </defs>
+              <g class="sil"><circle cx="100" cy="34" r="24"/><path d="M70 66h60a10 10 0 0 1 10 10v104a10 10 0 0 1-10 10H70a10 10 0 0 1-10-10V76a10 10 0 0 1 10-10z"/><rect x="60" y="182" width="80" height="40" rx="12"/><rect x="38" y="72" width="22" height="156" rx="11" transform="rotate(7 49 72)"/><rect x="140" y="72" width="22" height="156" rx="11" transform="rotate(-7 151 72)"/><rect x="65" y="214" width="32" height="176" rx="13"/><rect x="103" y="214" width="32" height="176" rx="13"/><rect x="60" y="384" width="40" height="20" rx="9"/><rect x="100" y="384" width="40" height="20" rx="9"/></g>
+              <g clip-path="url(#silClip)">
+                <rect class="part" data-part="head" tabindex="0" role="button" aria-pressed="false" aria-label="머리 · 두통·어지럼" x="60" y="0" width="80" height="58"/>
+                <rect class="part" data-part="neck" tabindex="0" role="button" aria-pressed="true" aria-label="목·어깨" x="58" y="54" width="84" height="46"/>
+                <rect class="part" data-part="chest" tabindex="0" role="button" aria-pressed="false" aria-label="상체 · 가슴·갈비뼈" x="60" y="100" width="80" height="50"/>
+                <rect class="part" data-part="back" tabindex="0" role="button" aria-pressed="false" aria-label="허리·골반" x="60" y="150" width="80" height="72"/>
+                <path class="part" data-part="arm" tabindex="0" role="button" aria-pressed="false" aria-label="손목·팔" d="M0 66h60v170H0zM140 66h60v170h-60z"/>
+                <rect class="part" data-part="leg" tabindex="0" role="button" aria-pressed="false" aria-label="무릎·다리" x="60" y="222" width="80" height="162"/>
+                <rect class="part" data-part="foot" tabindex="0" role="button" aria-pressed="false" aria-label="발목·발" x="55" y="384" width="90" height="36"/>
+              </g>
+              <text class="cap" x="100" y="416" text-anchor="middle">정면 · 부위를 누르세요</text>
             </svg>
             <div class="partlist" id="partList" role="group" aria-label="부위 목록"></div>
           </div>
@@ -1652,7 +1665,7 @@ if (typeof MARBLE !== 'undefined') document.documentElement.style.setProperty('-
 const PARTS = [
   { k:'head', name:'머리 · 두통·어지럼', short:'머리', sym:'사고 뒤 지속되는 두통, 어지럼, 멍한 느낌, 목 뒤가 당기면서 올라오는 통증. 목 근육 긴장과 함께 오는 경우가 많습니다.', treats:['약침','추나요법','한약(첩약)','물리치료'], dur:'통상 2~4주 · 증상에 따라 조정', ins:'자동차보험 적용 · 본인부담 0원', warn:'구토, 의식 저하, 한쪽 팔다리 힘 빠짐, 말이 어눌해지면 한의원보다 먼저 응급실·신경과 검사가 필요합니다.' },
   { k:'neck', name:'목·어깨', short:'목·어깨', sym:'후미추돌 뒤 가장 흔한 부위입니다. 목이 잘 안 돌아가고 뻣뻣하며, 어깨 위쪽이 뭉치고 무겁습니다. 다음 날 더 심해지는 경우가 많습니다.', treats:['추나요법','약침','물리치료','한약(첩약)','부항·뜸'], dur:'통상 2~4주 · 주 2~3회', ins:'자동차보험 적용 · 본인부담 0원', warn:'팔 저림이나 감각 이상이 함께 있으면 영상 검사로 신경 압박 여부를 먼저 확인합니다.' },
-  { k:'chest', name:'가슴·갈비 (안전벨트)', short:'가슴·갈비', sym:'안전벨트가 지나간 자리의 통증과 멍, 숨을 크게 쉴 때 아픈 느낌. 타박에 의한 근육·연골 부위 통증이 흔합니다.', treats:['약침','물리치료','한약(첩약)','부항·뜸'], dur:'통상 2~3주', ins:'자동차보험 적용 · 본인부담 0원', warn:'갈비뼈 골절 가능성을 먼저 영상으로 확인합니다. 골절이 배제된 뒤 추나 등 수기 치료를 결정합니다.' },
+  { k:'chest', name:'상체 · 가슴·갈비뼈', short:'상체', sym:'안전벨트가 지나간 자리의 통증과 멍, 숨을 크게 쉴 때 아픈 느낌. 타박에 의한 근육·연골 부위 통증이 흔합니다.', treats:['약침','물리치료','한약(첩약)','부항·뜸'], dur:'통상 2~3주', ins:'자동차보험 적용 · 본인부담 0원', warn:'갈비뼈 골절 가능성을 먼저 영상으로 확인합니다. 골절이 배제된 뒤 추나 등 수기 치료를 결정합니다.' },
   { k:'back', name:'허리·골반', short:'허리·골반', sym:'앉았다 일어날 때 허리가 뻐근하고, 오래 앉아 있기 어렵습니다. 골반이 한쪽으로 틀어진 느낌이 들 수 있습니다.', treats:['추나요법','약침','물리치료','한약(첩약)','부항·뜸','inpatient'], dur:'통상 3~4주 · 심하면 단기 입원 고려', ins:'자동차보험 적용 · 본인부담 0원 · 입원 시 다인실 병실료 포함', warn:'다리로 내려가는 통증이나 저림, 대소변 이상이 있으면 즉시 영상 검사가 필요합니다.' },
   { k:'arm', name:'손목·팔', short:'손목·팔', sym:'핸들을 잡고 있다 충격을 받으면 손목·팔꿈치·어깨 앞쪽이 아픕니다. 물건을 잡거나 비틀 때 통증이 있습니다.', treats:['약침','물리치료','부항·뜸','스킨이펙터'], dur:'통상 2~3주', ins:'자동차보험 적용 · 본인부담 0원 · 스킨이펙터는 한의원별 확인', warn:'손목이 붓고 특정 지점을 누를 때 심하게 아프면 골절·인대 손상 검사를 먼저 받습니다.' },
   { k:'leg', name:'무릎·다리', short:'무릎·다리', sym:'대시보드나 브레이크를 밟은 채 충격을 받아 무릎 앞쪽이 아프거나 붓습니다. 계단 오르내릴 때 불편합니다.', treats:['약침','물리치료','부항·뜸','추나요법'], dur:'통상 2~4주', ins:'자동차보험 적용 · 본인부담 0원', warn:'무릎이 붓고 굽히기 어렵거나 힘이 빠지면 인대·연골 손상 검사를 먼저 받습니다.' },
