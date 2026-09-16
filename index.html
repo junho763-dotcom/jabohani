@@ -623,6 +623,14 @@
   .wm { font-family: "Noto Sans KR", Inter, sans-serif; letter-spacing: -.05em; white-space: nowrap; }
   .wm b { font-weight: 900; } .wm i { font-style: normal; font-weight: 300; } .wm .dot { font-weight: 900; color: #7fd1b0; }
   .hero .display .wm { font-size: 1.12em; line-height: 1; }
+
+  .linechart .l3 { stroke: #14483a; stroke-width: 2; fill: none; stroke-dasharray: 6 5; stroke-linejoin: round; stroke-linecap: round; opacity: .85; }
+  .linechart .m3 { fill: #fff; stroke: #14483a; stroke-width: 2; }
+  .lg span.s3::before { background: repeating-linear-gradient(90deg, #14483a 0 4px, transparent 4px 7px); }
+  /* 약침 커서 */
+  html, body { cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M3 3L20 20' stroke='%2314483a' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M19 19l8 8' stroke='%2314483a' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M21 23l2-2M23 25l2-2M25 27l2-2' stroke='%237fd1b0' stroke-width='1.2'/%3E%3Ccircle cx='3.5' cy='3.5' r='2' fill='%237fd1b0'/%3E%3C/svg%3E") 3 3, auto; }
+  a, button, .chip, .cmp, .part, [role="button"], select, label.sw, .th, .idx-row, .glance a { cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='4' cy='4' r='3.5' fill='none' stroke='%237fd1b0' stroke-width='1.5'/%3E%3Cpath d='M5 5L20 20' stroke='%2314483a' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M19 19l8 8' stroke='%2314483a' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M21 23l2-2M23 25l2-2M25 27l2-2' stroke='%237fd1b0' stroke-width='1.2'/%3E%3Ccircle cx='4' cy='4' r='1.6' fill='%237fd1b0'/%3E%3C/svg%3E") 4 4, pointer; }
+  input, textarea { cursor: text; }
 </style>
 
 <a class="skip" href="#main">본문으로 건너가기</a>
@@ -673,7 +681,33 @@
 </section>
 
 
-    <section class="sec tips" id="home-tips" aria-labelledby="tipsTitle">
+    <section class="sec" id="home-data" aria-labelledby="dataTitle">
+      <div class="wrap">
+        <div class="lockup"><p class="eyebrow">숫자로 보는 후유증 · 데모</p><h2 class="h-md" id="dataTitle">제대로 치료하지 않으면, 통증은 돌아옵니다.</h2><p class="lead">사고 직후엔 누구나 조금 나아지는 것처럼 느낍니다. 하지만 치료 없이 두면 목·허리 통증은 몇 주 뒤 다시 올라와 만성 통증(후유증)으로 굳는 경우가 많습니다. 초기 2주의 치료가 12주 뒤를 결정합니다. 아래 수치는 실제 통계가 아닌 예시입니다.</p></div>
+        <div class="data-grid">
+          <div>
+            <div class="chart-h"><span class="t">치료 여부에 따른 통증 변화 (VAS 0~10)</span><span class="meta">예시 · 사고 뒤 12주</span></div>
+            <div id="lineChart"></div>
+            <div class="lg"><span>통원 치료 (주 2~3회)</span><span class="s2">입원 뒤 통원 전환</span><span class="s3">치료 없이 방치</span></div>
+            <p class="meta" style="margin-top:12px">예시 곡선입니다. 방치 곡선의 재상승은 근육 긴장이 굳어 만성 통증으로 이어지는 흐름을 나타낸 것이며, 실제 경과는 부상 정도·나이·치료 빈도에 따라 다릅니다.</p>
+          </div>
+          <div class="minis">
+            <div class="mini"><h4>만성 통증(후유증)으로 이어진 비율 <span class="meta">예시</span></h4><div id="miniChronic"></div></div>
+            <div class="mini"><h4>통증이 시작되는 시점 <span class="meta">예시</span></h4><div id="miniOnset"></div></div>
+            <div class="mini"><h4>많이 호소하는 부위 <span class="meta">예시</span></h4><div id="miniPart"></div></div>
+            
+          </div>
+        </div>
+        <div class="tl">
+          <div><div class="w">사고 직후<b>0~72시간</b></div><h4>급성기</h4><p>진찰과 필요한 영상 검사로 골절 등을 확인합니다. 보험사 대인 접수를 요청하고, 통증 부위를 기록해 두세요.</p></div>
+          <div><div class="w">치료 집중<b>1~2주</b></div><h4>염증·긴장 완화</h4><p>추나·약침·물리치료를 주 2~3회 병행합니다. 통증이 심하면 단기 입원을 고려합니다.</p></div>
+          <div><div class="w">회복<b>2~4주</b></div><h4>가동 범위 회복</h4><p>통증이 줄면 회차를 조정하고 일상 복귀를 준비합니다. 진료확인서로 통원 일수를 남깁니다.</p></div>
+          <div><div class="w">마무리<b>4주 이후</b></div><h4>만성화 예방 · 합의 준비</h4><p>남은 증상이 있으면 치료를 이어가고, 치료가 끝난 뒤 항목별로 합의를 진행합니다.</p></div>
+        </div>
+        <p class="meta" style="margin-top:16px">타임라인은 일반적인 흐름의 예시이며, 시기와 치료 구성은 한의사의 판단에 따릅니다.</p>
+      </div>
+    </section>
+    <section class="sec rule tips" id="home-tips" aria-labelledby="tipsTitle">
       <div class="wrap">
         <div class="lockup"><p class="eyebrow">자동차보험, 알고 가면 다릅니다</p><h2 class="h-md" id="tipsTitle">보험사가 먼저 말해주지 않는 네 가지.</h2><p class="lead">접수번호 하나로 진료비가 0원이 되고, 합의는 치료가 끝난 뒤에 하는 것이 원칙입니다. 아래 숫자와 예시를 기억해 두세요.</p></div>
         <div class="slab num">
@@ -791,31 +825,7 @@
 
 
 
-    <section class="sec rule" id="home-data" aria-labelledby="dataTitle">
-      <div class="wrap">
-        <div class="lockup"><p class="eyebrow">숫자로 보는 회복 · 데모</p><h2 class="h-md" id="dataTitle">사고 뒤 4주, 통증은 이렇게 내려갑니다.</h2><p class="lead">교통사고 경상 환자의 통증 점수(0~10) 변화를 예시로 그렸습니다. 목·허리 염좌는 대부분 수주 안에 호전되지만, 초기 2주의 치료 밀도가 회복 속도를 좌우하는 경우가 많습니다. 아래 수치는 실제 통계가 아닌 예시입니다.</p></div>
-        <div class="data-grid">
-          <div>
-            <div class="chart-h"><span class="t">통증 점수 변화 (VAS 0~10)</span><span class="meta">예시 · 치료 시작 뒤 주 단위</span></div>
-            <div id="lineChart"></div>
-            <div class="lg"><span>통원 치료 (주 2~3회)</span><span class="s2">입원 뒤 통원 전환</span></div>
-            <p class="meta" style="margin-top:12px">예시 곡선입니다. 실제 회복은 부상 정도, 나이, 치료 빈도에 따라 다르며 한의사가 경과를 보고 회차를 조정합니다.</p>
-          </div>
-          <div class="minis">
-            <div class="mini"><h4>통증이 시작되는 시점 <span class="meta">예시</span></h4><div id="miniOnset"></div></div>
-            <div class="mini"><h4>많이 호소하는 부위 <span class="meta">예시</span></h4><div id="miniPart"></div></div>
-            <div class="mini"><h4>함께 받는 치료 <span class="meta">예시 · 통원 1회 기준</span></h4><div id="miniTreat"></div></div>
-          </div>
-        </div>
-        <div class="tl">
-          <div><div class="w">사고 직후<b>0~72시간</b></div><h4>급성기</h4><p>진찰과 필요한 영상 검사로 골절 등을 확인합니다. 보험사 대인 접수를 요청하고, 통증 부위를 기록해 두세요.</p></div>
-          <div><div class="w">치료 집중<b>1~2주</b></div><h4>염증·긴장 완화</h4><p>추나·약침·물리치료를 주 2~3회 병행합니다. 통증이 심하면 단기 입원을 고려합니다.</p></div>
-          <div><div class="w">회복<b>2~4주</b></div><h4>가동 범위 회복</h4><p>통증이 줄면 회차를 조정하고 일상 복귀를 준비합니다. 진료확인서로 통원 일수를 남깁니다.</p></div>
-          <div><div class="w">마무리<b>4주 이후</b></div><h4>만성화 예방 · 합의 준비</h4><p>남은 증상이 있으면 치료를 이어가고, 치료가 끝난 뒤 항목별로 합의를 진행합니다.</p></div>
-        </div>
-        <p class="meta" style="margin-top:16px">타임라인은 일반적인 흐름의 예시이며, 시기와 치료 구성은 한의사의 판단에 따릅니다.</p>
-      </div>
-    </section>
+
     <section class="sec rule" id="home-find" aria-labelledby="homeFindTitle">
       <div class="wrap g75">
         <div><p class="eyebrow">한의원 찾기</p><h2 class="h-md" id="homeFindTitle" style="margin-top:12px">지역별 입점 한의원을 비교하고 예약합니다.</h2><p class="lead" style="margin-top:16px;max-width:30em">시·구를 고르고 치료 항목과 조건으로 걸러 보세요. 최대 3곳을 비교함에 담아 한 표로 볼 수 있습니다.</p><a class="btn primary" href="#/find" style="margin-top:32px">한의원 찾기</a></div>
@@ -1704,20 +1714,22 @@ renderSettle('#settleChart'); renderSettle('#settleChart2');
 /* 회복 곡선 (예시) */
 (function lineChart() {
   const el = $('#lineChart'); if (!el) return;
-  const W = 640, H = 280, L = 36, R = 96, T = 16, B = 36; const xs = [0,1,2,3,4];
-  const A = [7.5, 6.0, 4.5, 3.2, 2.2], Bv = [8.5, 5.5, 3.8, 2.6, 1.8];
-  const x = i => L + i * (W - L - R) / 4, y = v => T + (10 - v) * (H - T - B) / 10;
+  const W = 640, H = 300, L = 36, R = 120, T = 16, B = 40; const xs = [0,2,4,6,8,10,12];
+  const A = [7.5, 6.0, 4.5, 3.2, 2.2, 1.6, 1.2], Bv = [8.5, 5.5, 3.8, 2.6, 1.8, 1.3, 1.0], C = [7.5, 6.6, 6.0, 5.7, 5.9, 6.4, 6.9];
+  const x = i => L + i * (W - L - R) / 6, y = v => T + (10 - v) * (H - T - B) / 10;
   const path = arr => arr.map((v, i) => `${i ? 'L' : 'M'}${x(i)},${y(v)}`).join(' ');
-  const area = arr => `${path(arr)} L${x(4)},${y(0)} L${x(0)},${y(0)} Z`;
+  const area = arr => `${path(arr)} L${x(6)},${y(0)} L${x(0)},${y(0)} Z`;
   const grid = [0,2,4,6,8,10].map(v => `<line class="grid" x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}"/><text x="${L - 8}" y="${y(v) + 4}" text-anchor="end">${v}</text>`).join('');
-  const xl = xs.map(i => `<text x="${x(i)}" y="${H - 12}" text-anchor="middle">${i === 0 ? '시작' : i + '주'}</text>`).join('');
-  const dots = (arr, c) => arr.map((v, i) => `<circle class="${c}" cx="${x(i)}" cy="${y(v)}" r="4"><title>${i === 0 ? '치료 시작' : i + '주'} · 통증 ${v}</title></circle>`).join('');
-  el.innerHTML = `<svg class="linechart" viewBox="0 0 ${W} ${H}" role="img" aria-label="통원 치료와 입원 뒤 통원 전환의 4주 통증 점수 변화 예시">${grid}<line class="axis" x1="${L}" x2="${W - R}" y1="${y(0)}" y2="${y(0)}"/>${xl}<path class="a2" d="${area(Bv)}"/><path class="a1" d="${area(A)}"/><path class="l2" d="${path(Bv)}"/><path class="l1" d="${path(A)}"/>${dots(Bv, 'm2')}${dots(A, 'm1')}<text class="lab" x="${x(4) + 12}" y="${y(A[4]) + 4}">통원 ${A[4]}</text><text class="lab" x="${x(4) + 12}" y="${y(Bv[4]) + 16}">입원→통원 ${Bv[4]}</text><text class="lab" x="${x(0) + 8}" y="${y(Bv[0]) - 8}">시작 ${Bv[0]}</text></svg>`;
+  const xl = xs.map((w, i) => `<text x="${x(i)}" y="${H - 14}" text-anchor="middle">${w === 0 ? '사고' : w + '주'}</text>`).join('');
+  const dots = (arr, c) => arr.map((v, i) => `<circle class="${c}" cx="${x(i)}" cy="${y(v)}" r="4"><title>${xs[i] === 0 ? '사고 직후' : xs[i] + '주'} · 통증 ${v}</title></circle>`).join('');
+  const band = `<rect x="${x(4)}" y="${T}" width="${x(6) - x(4)}" height="${H - T - B}" fill="rgba(20,72,58,.05)"/><text x="${(x(4) + x(6)) / 2}" y="${T + 14}" text-anchor="middle" class="lab" style="fill:var(--slate)">후유증 구간</text>`;
+  el.innerHTML = `<svg class="linechart" viewBox="0 0 ${W} ${H}" role="img" aria-label="치료 여부에 따른 12주 통증 점수 변화 예시: 통원 치료와 입원 뒤 통원은 내려가고, 치료 없이 방치하면 8주 이후 다시 올라갑니다">${band}${grid}<line class="axis" x1="${L}" x2="${W - R}" y1="${y(0)}" y2="${y(0)}"/>${xl}<path class="a1" d="${area(A)}"/><path class="l3" d="${path(C)}"/><path class="l2" d="${path(Bv)}"/><path class="l1" d="${path(A)}"/>${dots(C, 'm3')}${dots(Bv, 'm2')}${dots(A, 'm1')}<text class="lab" x="${x(6) + 12}" y="${y(C[6]) + 4}">방치 ${C[6]} · 만성화</text><text class="lab" x="${x(6) + 12}" y="${y(A[6]) + 4}">통원 ${A[6]}</text><text class="lab" x="${x(6) + 12}" y="${y(Bv[6]) + 16}">입원→통원 ${Bv[6]}</text></svg>`;
 })();
 const miniBars = (sel, rows) => { const el = $(sel); if (!el) return; const max = Math.max(...rows.map(r => r[1])); el.innerHTML = rows.map(([k, v]) => `<div class="mbar"><span>${k}</span><span class="t"><i style="width:${v / max * 100}%"></i></span><span class="v num">${v}%</span></div>`).join(''); };
+miniBars('#miniChronic', [['2주 안에 치료 시작', 15], ['4주 뒤 치료 시작', 35], ['치료 없이 방치', 55]]);
 miniBars('#miniOnset', [['사고 당일', 40], ['다음 날', 35], ['2~3일 뒤', 20], ['그 이후', 5]]);
 miniBars('#miniPart', [['목·어깨', 45], ['허리', 30], ['두통·어지럼', 12], ['무릎·손목', 8], ['기타', 5]]);
-miniBars('#miniTreat', [['물리치료', 95], ['추나요법', 90], ['약침', 85], ['한약', 60], ['부항·뜸', 55]]);
+
 const STACK = [ ['위자료', 45, 's1', '상해 급수·치료 기간 기준'], ['휴업손해', 30, 's2', '쉰 기간 × 소득'], ['향후치료비', 15, 's3', '합의서에 명시해야 인정'], ['교통비·기타', 10, 's4', '통원 일수 기준'] ];
 if ($('#stackBar')) { $('#stackBar').innerHTML = STACK.map(([n, v, c]) => `<span class="${c}" style="width:${v}%" title="${n} ${v}%"></span>`).join(''); $('#stackLegend').innerHTML = STACK.map(([n, v, c, d]) => `<div><span><span class="sw ${c}" style="background:${c==='s1'?'var(--ink)':c==='s2'?'#3f6a5b':c==='s3'?'#7fa093':'#c3d3cb'}"></span><b>${n}</b></span><span class="pct num">${v}%</span><span class="meta">${d}</span></div>`).join(''); }
 $('#glanceFind').textContent = `입점 ${CLINICS.length}곳 · ${Object.keys(REGIONS).join('·')}`;
