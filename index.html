@@ -514,13 +514,65 @@
   .foot .logo .dot { color: #7fd1b0; }
   .display, .h-md, .h-sm, .idx-row .nm, .glance .nm, .row .nm, .card h3, .slab .big { color: #0f3d30; }
   .hero .display, .phead .display, .dark-strip .display { color: #fff; }
+
+  /* ===== brand: bracket wordmark ===== */
+  .logo { font-family: "Noto Sans KR", Inter, sans-serif; font-weight: 700; font-size: 19px; letter-spacing: -.04em; display: inline-flex; align-items: center; gap: .1em; line-height: 1; }
+  .logo .br { font-weight: 300; color: #7fd1b0; letter-spacing: 0; font-size: 1.15em; transform: translateY(-.03em); }
+  .foot .logo { font-size: 20px; }
+  /* ===== highlighter on section headlines ===== */
+  .hl { background-image: linear-gradient(transparent 56%, rgba(127,209,176,.55) 56%, rgba(127,209,176,.55) 94%, transparent 94%); -webkit-box-decoration-break: clone; box-decoration-break: clone; padding: 0 .12em; margin-left: -.12em; }
+  /* ===== pictograms ===== */
+  .pic { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+  .hero .chips { max-width: 760px; }
+  .hero .chip { gap: 8px; padding-left: 12px; }
+  .hero .chip .pic { width: 16px; height: 16px; opacity: .9; }
+  .glance a { grid-template-columns: 32px 200px 1fr auto 20px; }
+  .glance .pic { color: var(--slate); }
+  .glance a:hover .pic { color: var(--ink); }
+  .idx-row .nm { display: inline-flex; align-items: center; gap: 12px; }
+  .idx-row .nm .pic { color: var(--slate); width: 24px; height: 24px; }
+  .rail .nm { display: inline-flex; align-items: center; gap: 6px; } .rail .nm .pic { width: 16px; height: 16px; color: var(--slate); }
+  @media (max-width: 767px) { .glance a { grid-template-columns: 24px 1fr 20px; } .glance .nm { grid-column: 2; } .glance .one, .glance .st { grid-column: 2; } .glance .pic { grid-row: 1; align-self: center; width: 20px; height: 20px; } .glance .i { grid-column: 3; grid-row: 1 / span 3; } .hero .chip { height: 34px; } }
+
+  /* ===== 숫자로 보는 회복 (데모 데이터 섹션) ===== */
+  .data-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 24px 48px; align-items: start; }
+  @media (max-width: 1023px) { .data-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .linechart { width: 100%; height: auto; display: block; }
+  .linechart text { font-family: var(--font); fill: var(--slate); font-size: 12px; }
+  .linechart .grid { stroke: var(--hair); stroke-width: 1; }
+  .linechart .axis { stroke: var(--hair-soft); stroke-width: 1; }
+  .linechart .l1 { stroke: #14483a; stroke-width: 2; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+  .linechart .l2 { stroke: #7fa093; stroke-width: 2; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+  .linechart .a1 { fill: rgba(20,72,58,.08); } .linechart .a2 { fill: rgba(127,160,147,.10); }
+  .linechart .m1 { fill: #14483a; stroke: #fff; stroke-width: 2; } .linechart .m2 { fill: #7fa093; stroke: #fff; stroke-width: 2; }
+  .linechart .lab { fill: var(--ink); font-weight: 500; font-size: 12px; }
+  .lg { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 12px; font-size: 13px; color: var(--graphite); }
+  .lg span::before { content: ""; display: inline-block; width: 14px; height: 2px; margin-right: 8px; vertical-align: middle; background: #14483a; }
+  .lg span.s2::before { background: #7fa093; }
+  .minis { display: grid; gap: 28px; }
+  .mini h4 { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 10px; display: flex; justify-content: space-between; gap: 12px; }
+  .mini h4 .meta { font-weight: 400; }
+  .mbar { display: grid; grid-template-columns: 96px 1fr 44px; gap: 12px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--hair); font-size: 13px; color: var(--graphite); }
+  .mbar:last-child { border-bottom: 0; }
+  .mbar .t { height: 10px; background: var(--tint); border-radius: 3px; overflow: hidden; }
+  .mbar .t i { display: block; height: 100%; background: #14483a; border-radius: 3px; }
+  .mbar .v { text-align: right; color: var(--ink); font-weight: 500; }
+  .tl { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 56px; border-top: 1px solid var(--ink); }
+  .tl > div { padding: 24px 24px 8px 0; border-right: 1px solid var(--hair); position: relative; }
+  .tl > div + div { padding-left: 24px; }
+  .tl > div:last-child { border-right: 0; }
+  .tl .w { font-size: 12px; font-weight: 500; letter-spacing: .2px; color: var(--slate); }
+  .tl .w b { font-size: 22px; font-weight: 400; letter-spacing: -.5px; color: var(--ink); display: block; margin-top: 4px; }
+  .tl h4 { font-size: 16px; font-weight: 500; color: var(--ink); margin: 14px 0 6px; }
+  .tl p { font-size: 14px; color: var(--graphite); line-height: 1.55; margin: 0; }
+  @media (max-width: 767px) { .tl { grid-template-columns: 1fr 1fr; } .tl > div:nth-child(2) { border-right: 0; } .tl > div:nth-child(-n+2) { border-bottom: 1px solid var(--hair); } .tl > div:nth-child(3) { padding-left: 0; } }
 </style>
 
 <a class="skip" href="#main">본문으로 건너가기</a>
 
 <header class="nav" id="top">
   <div class="wrap nav-in">
-    <a class="logo" href="#/">한방에<span class="dot">.</span></a>
+    <a class="logo" href="#/"><span class="br">[</span>한방에<span class="br">]</span></a>
     <nav class="menu" aria-label="주요 메뉴">
       <a href="#/">홈</a>
       <a href="#/find">한의원 찾기</a>
@@ -558,12 +610,7 @@
       <input id="q" type="search" placeholder="지역, 한의원, 치료 항목" autocomplete="off">
       <button class="btn primary" type="submit">검색</button>
     </form>
-    <div class="chips dark" id="hotChips" aria-label="자주 찾는 조건">
-      <button class="chip" type="button" data-hot="추나요법">추나요법</button>
-      <button class="chip" type="button" data-hot="약침">약침</button>
-      <button class="chip" type="button" data-hot="inpatient">입원 가능</button>
-      <button class="chip" type="button" data-hot="night">야간 진료</button>
-    </div>
+    <div class="chips dark" id="hotChips" aria-label="치료 항목과 조건으로 바로 찾기"></div>
     <p class="colophon num" id="colophon"></p>
   </div>
 </section>
@@ -606,11 +653,11 @@
       <div class="wrap">
         <div class="lockup"><p class="eyebrow">한눈에 보기</p><h2 class="h-md" id="glanceTitle">한방에서 할 수 있는 것.</h2></div>
         <ol class="glance">
-          <li><a href="#/find"><span class="nm">한의원 찾기</span><span class="one">시·구별 입점 한의원을 치료 항목과 조건으로 걸러 비교하고 예약합니다.</span><span class="st num" id="glanceFind"></span><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" transform="rotate(-90 12 12)"/></svg></a></li>
-          <li><a href="#program"><span class="nm">치료 프로그램</span><span class="one">추나·약침·태반주사·이펙터·물리치료·한약·입원까지 8가지 치료의 내용, 보험 적용, 제공 한의원.</span><span class="st">8종 · 자보 적용 표시</span><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" transform="rotate(-90 12 12)"/></svg></a></li>
-          <li><a href="#/guide"><span class="nm">보험 가이드</span><span class="one">접수번호 받기부터 항목별 적용 원칙, 합의 요령과 합의금 예시까지.</span><span class="st">3단계 · 적용 표 · 합의 요령</span><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" transform="rotate(-90 12 12)"/></svg></a></li>
-          <li><a href="#/reviews"><span class="nm">후기</span><span class="one">진료를 마친 분만 남기는 후기. 사고 유형과 치료 기간이 함께 기록됩니다.</span><span class="st num" id="glanceReviews"></span><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" transform="rotate(-90 12 12)"/></svg></a></li>
-          <li><a href="#/partner"><span class="nm">한의원 입점</span><span class="one">예약 관리, 자동차보험 적용 표, 한의원 정보 등록 화면을 데모로 확인하고 문의합니다.</span><span class="st">오픈 기간 무료</span><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" transform="rotate(-90 12 12)"/></svg></a></li>
+          <li><a href="#/find"><svg class="pic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span class="nm">한의원 찾기</span><span class="one">시·구별 입점 한의원을 치료 항목과 조건으로 걸러 비교하고 예약합니다.</span><span class="st num" id="glanceFind"></span><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" transform="rotate(-90 12 12)"/></svg></a></li>
+          <li><a href="#program"><svg class="pic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20c0-8 6-14 16-16-1 10-7 16-16 16z"/><path d="M4 20c4-6 8-9 12-11"/></svg><span class="nm">치료 프로그램</span><span class="one">추나·약침·태반주사·이펙터·물리치료·한약·입원까지 8가지 치료의 내용, 보험 적용, 제공 한의원.</span><span class="st">8종 · 자보 적용 표시</span><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" transform="rotate(-90 12 12)"/></svg></a></li>
+          <li><a href="#/guide"><svg class="pic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><span class="nm">보험 가이드</span><span class="one">접수번호 받기부터 항목별 적용 원칙, 합의 요령과 합의금 예시까지.</span><span class="st">3단계 · 적용 표 · 합의 요령</span><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" transform="rotate(-90 12 12)"/></svg></a></li>
+          <li><a href="#/reviews"><svg class="pic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg><span class="nm">후기</span><span class="one">진료를 마친 분만 남기는 후기. 사고 유형과 치료 기간이 함께 기록됩니다.</span><span class="st num" id="glanceReviews"></span><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" transform="rotate(-90 12 12)"/></svg></a></li>
+          <li><a href="#/partner"><svg class="pic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5l8-3 8 3v16"/><path d="M9 9h2M13 9h2M9 13h2M13 13h2M10 21v-4h4v4"/></svg><span class="nm">한의원 입점</span><span class="one">예약 관리, 자동차보험 적용 표, 한의원 정보 등록 화면을 데모로 확인하고 문의합니다.</span><span class="st">오픈 기간 무료</span><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" transform="rotate(-90 12 12)"/></svg></a></li>
         </ol>
       </div>
     </section>
@@ -650,6 +697,32 @@
     </section>
 
 
+
+    <section class="sec rule" id="home-data" aria-labelledby="dataTitle">
+      <div class="wrap">
+        <div class="lockup"><p class="eyebrow">숫자로 보는 회복 · 데모</p><h2 class="h-md" id="dataTitle">사고 뒤 4주, 통증은 이렇게 내려갑니다.</h2><p class="lead">교통사고 경상 환자의 통증 점수(0~10) 변화를 예시로 그렸습니다. 목·허리 염좌는 대부분 수주 안에 호전되지만, 초기 2주의 치료 밀도가 회복 속도를 좌우하는 경우가 많습니다. 아래 수치는 실제 통계가 아닌 예시입니다.</p></div>
+        <div class="data-grid">
+          <div>
+            <div class="chart-h"><span class="t">통증 점수 변화 (VAS 0~10)</span><span class="meta">예시 · 치료 시작 뒤 주 단위</span></div>
+            <div id="lineChart"></div>
+            <div class="lg"><span>통원 치료 (주 2~3회)</span><span class="s2">입원 뒤 통원 전환</span></div>
+            <p class="meta" style="margin-top:12px">예시 곡선입니다. 실제 회복은 부상 정도, 나이, 치료 빈도에 따라 다르며 한의사가 경과를 보고 회차를 조정합니다.</p>
+          </div>
+          <div class="minis">
+            <div class="mini"><h4>통증이 시작되는 시점 <span class="meta">예시</span></h4><div id="miniOnset"></div></div>
+            <div class="mini"><h4>많이 호소하는 부위 <span class="meta">예시</span></h4><div id="miniPart"></div></div>
+            <div class="mini"><h4>함께 받는 치료 <span class="meta">예시 · 통원 1회 기준</span></h4><div id="miniTreat"></div></div>
+          </div>
+        </div>
+        <div class="tl">
+          <div><div class="w">사고 직후<b>0~72시간</b></div><h4>급성기</h4><p>진찰과 필요한 영상 검사로 골절 등을 확인합니다. 보험사 대인 접수를 요청하고, 통증 부위를 기록해 두세요.</p></div>
+          <div><div class="w">치료 집중<b>1~2주</b></div><h4>염증·긴장 완화</h4><p>추나·약침·물리치료를 주 2~3회 병행합니다. 통증이 심하면 단기 입원을 고려합니다.</p></div>
+          <div><div class="w">회복<b>2~4주</b></div><h4>가동 범위 회복</h4><p>통증이 줄면 회차를 조정하고 일상 복귀를 준비합니다. 진료확인서로 통원 일수를 남깁니다.</p></div>
+          <div><div class="w">마무리<b>4주 이후</b></div><h4>만성화 예방 · 합의 준비</h4><p>남은 증상이 있으면 치료를 이어가고, 치료가 끝난 뒤 항목별로 합의를 진행합니다.</p></div>
+        </div>
+        <p class="meta" style="margin-top:16px">타임라인은 일반적인 흐름의 예시이며, 시기와 치료 구성은 한의사의 판단에 따릅니다.</p>
+      </div>
+    </section>
     <section class="sec rule" id="home-find" aria-labelledby="homeFindTitle">
       <div class="wrap g75">
         <div><p class="eyebrow">한의원 찾기</p><h2 class="h-md" id="homeFindTitle" style="margin-top:12px">지역별 입점 한의원을 비교하고 예약합니다.</h2><p class="lead" style="margin-top:16px;max-width:30em">시·구를 고르고 치료 항목과 조건으로 걸러 보세요. 최대 3곳을 비교함에 담아 한 표로 볼 수 있습니다.</p><a class="btn primary" href="#/find" style="margin-top:32px">한의원 찾기</a></div>
@@ -951,7 +1024,7 @@
       <div><h4>고객센터</h4><a href="#" data-auth>1600-0000 (준비 중)</a><a href="#" data-auth>help@hanbange.kr</a></div>
     </div>
     <div class="bot">
-      <span class="logo">한방에<span class="dot">.</span></span>
+      <span class="logo"><span class="br">[</span>한방에<span class="br">]</span></span>
       <p class="meta">한방에는 통신판매중개자로서 진료의 당사자가 아니며, 진료·보험 적용 여부는 각 한의원과 보험사의 기준을 따릅니다. 본 페이지는 서비스 기획용 프로토타입이며, 사진은 AI 생성 데모입니다. 사업자 정보 준비 중.</p>
     </div>
   </div>
@@ -1117,6 +1190,23 @@ const insLabel = key => { const n = insSummary(key); if (n.ok === CLINICS.length
 const bedTag = c => c.beds === null ? '<span class="tag ask">입원 확인 중</span>' : c.beds > 0 ? `<span class="tag yes">입원 가능 · ${c.beds}병상</span>` : '<span class="tag ask">통원 전용</span>';
 const treatText = c => c.treats.map(t => t.replace('(첩약)', '')).join(' · ');
 
+/* 픽토그램 (단색 라인, 24 viewBox) */
+const PIC = {
+  '추나요법': '<path d="M12 3v18"/><circle cx="12" cy="7" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="17" r="2"/>',
+  '약침': '<path d="M16 4l4 4M18 6L8 16M6 18l-2 2M6 14l4 4M11 13l2 2"/>',
+  '태반주사': '<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>',
+  '스킨이펙터': '<circle cx="7" cy="9" r="1.2"/><circle cx="12" cy="9" r="1.2"/><circle cx="17" cy="9" r="1.2"/><circle cx="7" cy="15" r="1.2"/><circle cx="12" cy="15" r="1.2"/><circle cx="17" cy="15" r="1.2"/>',
+  '라인이펙터': '<path d="M4 16c4-8 8 8 12 0 1.5-3 3-3 4-2"/><circle cx="4" cy="16" r="1.2"/>',
+  '물리치료': '<path d="M13 2L5 14h6l-1 8 8-12h-6l1-8z"/>',
+  '한약(첩약)': '<path d="M4 20c0-8 6-14 16-16-1 10-7 16-16 16z"/><path d="M4 20c4-6 8-9 12-11"/>',
+  'inpatient': '<path d="M3 18V8M3 12h18v6M3 16h18"/><path d="M6 12V9h5v3"/>',
+  'night': '<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>',
+  'weekend': '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/>',
+  'parking': '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/>',
+  'pickup': '<path d="M3 13l2-5a2 2 0 0 1 2-1h10a2 2 0 0 1 2 1l2 5v5H3z"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/>',
+};
+const pic = k => PIC[k] ? `<svg class="pic" viewBox="0 0 24 24" aria-hidden="true">${PIC[k]}</svg>` : '';
+
 /* ======================= 상태 ======================= */
 const state = { city:'전체', district:'전체', filters:new Set(), q:'', sort:'name', compare:new Set(), cat:null, pushed:false, lastTrigger:null, page:null };
 const PAGES = { home:'한방에', find:'한의원 찾기 · 한방에', guide:'보험 가이드 · 한방에', reviews:'후기 쓰기 · 한방에', partner:'입점 문의 · 한방에' };
@@ -1153,10 +1243,10 @@ const parseHash = () => { const m = location.hash.match(/^#\/cat\/(.+)$/); if (!
 const catCounts = key => { const yes = CLINICS.filter(c => catStatus(c, key) === 'yes'), ask = CLINICS.filter(c => catStatus(c, key) === 'ask'); return { yes, ask }; };
 
 function renderIndex() {
-  $('#catIndex').innerHTML = CATS.map((c, i) => { const n = catCounts(c.key), ins = insLabel(c.key); return `<li><button class="idx-row" type="button" data-cat="${esc(c.key)}" aria-label="${esc(c.title)} 세부 보기"><span class="n num">${pad2(i + 1)}</span><span class="nm">${esc(c.title)}</span><span class="one">${esc(c.one)}</span><span class="st num"><b>${ins.short}</b><span>${n.yes.length ? `제공 ${n.yes.length}곳` : `확인 중 ${n.ask.length}곳`}</span></span>${I.chev}</button></li>`; }).join('');
+  $('#catIndex').innerHTML = CATS.map((c, i) => { const n = catCounts(c.key), ins = insLabel(c.key); return `<li><button class="idx-row" type="button" data-cat="${esc(c.key)}" aria-label="${esc(c.title)} 세부 보기"><span class="n num">${pad2(i + 1)}</span><span class="nm">${pic(c.key)}${esc(c.title)}</span><span class="one">${esc(c.one)}</span><span class="st num"><b>${ins.short}</b><span>${n.yes.length ? `제공 ${n.yes.length}곳` : `확인 중 ${n.ask.length}곳`}</span></span>${I.chev}</button></li>`; }).join('');
 }
 function renderRail() {
-  $('#catRail').innerHTML = CATS.map((c, i) => `<button type="button" role="tab" id="tab-${c.slug}" aria-selected="${c.key === state.cat}" aria-controls="catPanel" tabindex="${c.key === state.cat ? 0 : -1}" data-cat="${esc(c.key)}"><span class="n num">${pad2(i + 1)}</span><span class="nm">${esc(c.title)}</span><span class="st">${insLabel(c.key).short}</span></button>`).join('');
+  $('#catRail').innerHTML = CATS.map((c, i) => `<button type="button" role="tab" id="tab-${c.slug}" aria-selected="${c.key === state.cat}" aria-controls="catPanel" tabindex="${c.key === state.cat ? 0 : -1}" data-cat="${esc(c.key)}"><span class="n num">${pad2(i + 1)}</span><span class="nm">${pic(c.key)}${esc(c.title)}</span><span class="st">${insLabel(c.key).short}</span></button>`).join('');
 }
 function crowHtml(c, st) {
   return `<div class="crow ${st}" data-id="${c.id}" tabindex="-1">
@@ -1477,12 +1567,33 @@ $('#partnerFormEl').addEventListener('submit', e => {
 /* ======================= 초기화 ======================= */
 $('#colophon').textContent = `입점 한의원 ${CLINICS.length}곳 · ${Object.keys(REGIONS).join(' · ')} · 진료 확인 후기 ${CLINICS.reduce((a, c) => a + c.rvs.length, 0)}개 · 사진은 AI 생성 데모`;
 if (typeof MARBLE !== 'undefined') document.documentElement.style.setProperty('--marble', `url(${MARBLE})`);
+/* 히어로 조건 칩 12개 (픽토그램 포함) */
+$('#hotChips').innerHTML = [...FILTERS_T, ...FILTERS_C].map(([k, l]) => `<button class="chip" type="button" data-hot="${esc(k)}" aria-pressed="false">${pic(k)}${l}</button>`).join('');
+/* 섹션 대제목 형광펜 */
+$$('.h-md').forEach(h => { if (h.closest('.phead, .hero, .dark-strip, .foot, .sheet, .modal')) return; if (h.querySelector('.hl')) return; h.innerHTML = `<span class="hl">${h.innerHTML}</span>`; });
 renderIndex(); renderFind(); renderCbar();
 /* 합의금 범위 예시 (데모값, 만원) — 단일 계열 범위 차트 */
 const SETTLE = [ { k:'통원 1주 이내', sub:'진단 2주 이내 · 경상', min:30, max:80 }, { k:'통원 2~3주', sub:'주 2~3회 통원', min:60, max:150 }, { k:'통원 4주 이상', sub:'경과 관찰 포함', min:100, max:250 }, { k:'입원 3~7일 + 통원', sub:'급성기 단기 입원', min:150, max:300 }, { k:'입원 2주 이상', sub:'집중 치료 · 휴업손해 포함', min:250, max:500 } ];
 const SET_MAX = 500;
 function renderSettle(sel) { const el = $(sel); if (!el) return; el.innerHTML = SETTLE.map(r => `<div class="rrow" title="${r.k}: ${r.min}~${r.max}만원 (예시)"><span class="lbl">${r.k}<small>${r.sub}</small></span><span class="rtrack" aria-hidden="true"><span class="rbar" style="left:${r.min / SET_MAX * 100}%;width:${(r.max - r.min) / SET_MAX * 100}%"></span></span><span class="val num">${r.min}~${r.max}만원</span></div>`).join('') + `<div class="raxis"><span></span><span class="ticks num">${[0,100,200,300,400,500].map(t => `<span>${t}</span>`).join('')}</span><span class="meta" style="text-align:right">예시값</span></div>`; }
 renderSettle('#settleChart'); renderSettle('#settleChart2');
+/* 회복 곡선 (예시) */
+(function lineChart() {
+  const el = $('#lineChart'); if (!el) return;
+  const W = 640, H = 280, L = 36, R = 96, T = 16, B = 36; const xs = [0,1,2,3,4];
+  const A = [7.5, 6.0, 4.5, 3.2, 2.2], Bv = [8.5, 5.5, 3.8, 2.6, 1.8];
+  const x = i => L + i * (W - L - R) / 4, y = v => T + (10 - v) * (H - T - B) / 10;
+  const path = arr => arr.map((v, i) => `${i ? 'L' : 'M'}${x(i)},${y(v)}`).join(' ');
+  const area = arr => `${path(arr)} L${x(4)},${y(0)} L${x(0)},${y(0)} Z`;
+  const grid = [0,2,4,6,8,10].map(v => `<line class="grid" x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}"/><text x="${L - 8}" y="${y(v) + 4}" text-anchor="end">${v}</text>`).join('');
+  const xl = xs.map(i => `<text x="${x(i)}" y="${H - 12}" text-anchor="middle">${i === 0 ? '시작' : i + '주'}</text>`).join('');
+  const dots = (arr, c) => arr.map((v, i) => `<circle class="${c}" cx="${x(i)}" cy="${y(v)}" r="4"><title>${i === 0 ? '치료 시작' : i + '주'} · 통증 ${v}</title></circle>`).join('');
+  el.innerHTML = `<svg class="linechart" viewBox="0 0 ${W} ${H}" role="img" aria-label="통원 치료와 입원 뒤 통원 전환의 4주 통증 점수 변화 예시">${grid}<line class="axis" x1="${L}" x2="${W - R}" y1="${y(0)}" y2="${y(0)}"/>${xl}<path class="a2" d="${area(Bv)}"/><path class="a1" d="${area(A)}"/><path class="l2" d="${path(Bv)}"/><path class="l1" d="${path(A)}"/>${dots(Bv, 'm2')}${dots(A, 'm1')}<text class="lab" x="${x(4) + 12}" y="${y(A[4]) + 4}">통원 ${A[4]}</text><text class="lab" x="${x(4) + 12}" y="${y(Bv[4]) + 16}">입원→통원 ${Bv[4]}</text><text class="lab" x="${x(0) + 8}" y="${y(Bv[0]) - 8}">시작 ${Bv[0]}</text></svg>`;
+})();
+const miniBars = (sel, rows) => { const el = $(sel); if (!el) return; const max = Math.max(...rows.map(r => r[1])); el.innerHTML = rows.map(([k, v]) => `<div class="mbar"><span>${k}</span><span class="t"><i style="width:${v / max * 100}%"></i></span><span class="v num">${v}%</span></div>`).join(''); };
+miniBars('#miniOnset', [['사고 당일', 40], ['다음 날', 35], ['2~3일 뒤', 20], ['그 이후', 5]]);
+miniBars('#miniPart', [['목·어깨', 45], ['허리', 30], ['두통·어지럼', 12], ['무릎·손목', 8], ['기타', 5]]);
+miniBars('#miniTreat', [['물리치료', 95], ['추나요법', 90], ['약침', 85], ['한약', 60], ['부항·뜸', 55]]);
 const STACK = [ ['위자료', 45, 's1', '상해 급수·치료 기간 기준'], ['휴업손해', 30, 's2', '쉰 기간 × 소득'], ['향후치료비', 15, 's3', '합의서에 명시해야 인정'], ['교통비·기타', 10, 's4', '통원 일수 기준'] ];
 if ($('#stackBar')) { $('#stackBar').innerHTML = STACK.map(([n, v, c]) => `<span class="${c}" style="width:${v}%" title="${n} ${v}%"></span>`).join(''); $('#stackLegend').innerHTML = STACK.map(([n, v, c, d]) => `<div><span><span class="sw ${c}" style="background:${c==='s1'?'var(--ink)':c==='s2'?'#3f6a5b':c==='s3'?'#7fa093':'#c3d3cb'}"></span><b>${n}</b></span><span class="pct num">${v}%</span><span class="meta">${d}</span></div>`).join(''); }
 $('#glanceFind').textContent = `입점 ${CLINICS.length}곳 · ${Object.keys(REGIONS).join('·')}`;
