@@ -659,7 +659,7 @@
   .orbit .oc:hover { border-color: var(--ink); transform: translate(-50%, -50%) scale(1.04); }
   .orbit .oc .pic { width: 16px; height: 16px; color: var(--slate); }
   .orbit .oc .st { font-size: 11px; color: var(--stone); font-weight: 400; margin-left: 2px; }
-  .kv .core { position: absolute; left: 50%; top: 50%; transform: translate(-50%, 52px); font-size: 12px; color: var(--slate); letter-spacing: .2px; white-space: nowrap; }
+  .kv .core { position: absolute; left: 50%; top: 50%; transform: translate(-50%, 56px); font-size: 22px; color: #0f3d30; white-space: nowrap; }
   @media (max-width: 1023px) { .hero-grid { grid-template-columns: 1fr; } .kv { max-width: 440px; } }
   @media (max-width: 767px) { .hero.kv-hero { padding: 40px 0 48px; } .kv { max-width: 340px; } .orbit .oc { height: 30px; font-size: 12px; padding: 0 10px 0 8px; gap: 6px; } .orbit .oc .st { display: none; } }
 
@@ -1747,7 +1747,7 @@ renderBody('neck');
     ['inpatient', '입원 상담', '병상 확인', '#/cat/inpatient'], ['shield', '보험 접수 안내', '0원', '#/guide'], ['calendar', '온라인 예약', '12곳', '#/find'], ['settle', '합의 가이드', '요령 6', '#/guide'],
   ];
   const R = 44; // % radius from center
-  $('#orbit').innerHTML = items.map(([ic, l, st, href], i) => { const ang = -90 + i * 45; const x = 50 + R * Math.cos(ang * Math.PI / 180), y = 50 + R * Math.sin(ang * Math.PI / 180); return `<a class="oc" href="${href}" style="left:${x.toFixed(1)}%;top:${y.toFixed(1)}%">${pic(ic)}${l}<span class="st">${st}</span></a>`; }).join('') + '<span class="core">한방에가 지원하는 것</span>';
+  $('#orbit').innerHTML = items.map(([ic, l, st, href], i) => { const ang = -90 + i * 45; const x = 50 + R * Math.cos(ang * Math.PI / 180), y = 50 + R * Math.sin(ang * Math.PI / 180); return `<a class="oc" href="${href}" style="left:${x.toFixed(1)}%;top:${y.toFixed(1)}%">${pic(ic)}${l}<span class="st">${st}</span></a>`; }).join('') + '<span class="core wm"><b>한방</b><i>에</i><span class="dot">.</span></span>';
 })();
 /* 히어로 조건 칩 12개 (픽토그램 포함) */
 $('#hotChips').innerHTML = [...FILTERS_T, ...FILTERS_C].map(([k, l]) => `<button class="chip" type="button" data-hot="${esc(k)}" aria-pressed="false">${pic(k)}${l}</button>`).join('');
