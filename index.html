@@ -696,6 +696,46 @@
   .ins-chart .rtrack { height: 22px; } .ins-chart .rbar { top: 6px; height: 10px; }
   @media (max-width: 1023px) { .ins-charts { grid-template-columns: 1fr; } }
   @media (max-width: 767px) { .ins-chart .rrow { grid-template-columns: 1fr; } .ins-chart .raxis { grid-template-columns: 1fr; } }
+
+  /* ===== page-header asides ===== */
+  .phead-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 32px 56px; align-items: center; }
+  .phead.has-aside { padding: 56px 0 56px; }
+  .pa-card { background: #fff; border: 1px solid var(--hair); border-radius: 16px; padding: 24px; box-shadow: 0 16px 48px rgba(20,72,58,.08); }
+  /* find: region cloud */
+  .pa-map { position: relative; aspect-ratio: 1.15; padding: 0; overflow: hidden; background: radial-gradient(circle at 50% 50%, #fff 0, #fff 40%, #f7f9f5 100%); }
+  .pa-map .rc { position: absolute; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 8px; border-radius: 9999px; background: #fff; border: 1px solid var(--hair-soft); color: var(--ink); font-weight: 500; white-space: nowrap; cursor: pointer; transition: border-color .12s, transform .12s; box-shadow: 0 6px 18px rgba(20,72,58,.06); }
+  .pa-map .rc:hover { border-color: var(--ink); transform: translate(-50%, -50%) scale(1.04); }
+  .pa-map .rc .n { display: inline-grid; place-items: center; border-radius: 9999px; background: var(--ink); color: #fff; font-weight: 600; }
+  .pa-map .rc.city { height: 56px; padding: 0 22px 0 8px; font-size: 18px; } .pa-map .rc.city .n { width: 40px; height: 40px; font-size: 15px; }
+  .pa-map .rc.d { height: 36px; padding: 0 14px 0 6px; font-size: 13px; } .pa-map .rc.d .n { width: 24px; height: 24px; font-size: 11px; }
+  .pa-map .rc.d.far .n { background: var(--slate); }
+  .pa-map .cap { position: absolute; left: 16px; bottom: 12px; font-size: 12px; color: var(--stone); }
+  .pa-map .link { position: absolute; height: 1px; background: var(--hair-soft); transform-origin: 0 0; }
+  /* guide */
+  .pa-guide .big { font-size: 64px; font-weight: 500; letter-spacing: -2px; line-height: 1; color: #0f3d30; } .pa-guide .big small { font-size: 24px; letter-spacing: -.5px; margin-left: 4px; color: var(--graphite); }
+  .pa-guide .l { font-size: 14px; color: var(--slate); margin-top: 6px; }
+  .flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin: 24px 0 0; padding: 0; list-style: none; position: relative; }
+  .flow::before { content: ""; position: absolute; left: 12%; right: 12%; top: 14px; height: 1px; background: var(--hair-soft); }
+  .flow li { display: grid; justify-items: center; text-align: center; gap: 4px; position: relative; }
+  .flow .n { width: 28px; height: 28px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 12px; font-weight: 600; display: grid; place-items: center; box-shadow: 0 0 0 6px #fff; }
+  .flow b { font-size: 14px; font-weight: 600; color: var(--ink); margin-top: 6px; } .flow li > span:last-child { font-size: 12px; color: var(--slate); }
+  .mini-kv { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--hair); display: flex; justify-content: space-between; gap: 12px; align-items: center; font-size: 13px; color: var(--graphite); }
+  /* review */
+  .pa-review .r1 { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; } .pa-review .who { font-weight: 600; color: var(--ink); }
+  .pa-review .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .pa-review .q { margin: 0; font-size: 15px; line-height: 1.6; color: var(--graphite); }
+  .pa-review .r2 { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--hair); display: flex; justify-content: space-between; font-size: 12px; color: var(--slate); }
+  /* partner kpi */
+  .pa-kpi { padding: 0; overflow: hidden; }
+  .pa-kpi .bar { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--hair); font-size: 13px; font-weight: 600; color: var(--ink); }
+  .pa-kpi .kpis { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--hair); }
+  .pa-kpi .kpis > div { padding: 12px 16px; border-right: 1px solid var(--hair); } .pa-kpi .kpis > div:last-child { border-right: 0; }
+  .pa-kpi .kpis .l { font-size: 11px; color: var(--slate); } .pa-kpi .kpis .v { font-size: 22px; font-weight: 500; color: var(--ink); letter-spacing: -.5px; }
+  .pa-kpi .rowsm > div { display: grid; grid-template-columns: 48px 56px 1fr auto; gap: 10px; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--hair); font-size: 13px; color: var(--graphite); }
+  .pa-kpi .rowsm > div:last-child { border-bottom: 0; } .pa-kpi .rowsm b { color: var(--ink); font-weight: 600; }
+  .dark-strip.phead-dark .g75 { align-items: center; }
+  @media (max-width: 1023px) { .phead-grid { grid-template-columns: 1fr; } .pa-map { aspect-ratio: 1.3; } }
+  @media (max-width: 767px) { .pa-card { padding: 18px; } .pa-map .rc.city { height: 44px; font-size: 15px; } .pa-map .rc.d { height: 30px; font-size: 12px; } .pa-guide .big { font-size: 48px; } .pa-kpi .rowsm > div { grid-template-columns: 44px 48px 1fr auto; font-size: 12px; } }
 </style>
 
 <a class="skip" href="#main">본문으로 건너가기</a>
@@ -887,8 +927,8 @@
 
   <!-- ===== FIND ===== -->
   <div class="page" data-page="find" hidden>
-    <section class="phead"><div class="wrap"><p class="eyebrow">한의원 찾기</p><h1 class="display" id="findPageTitle" tabindex="-1">지역별 입점 한의원</h1><p class="lead">시·구를 고르고 치료 항목과 조건으로 걸러 보세요. 확인 전 항목은 "확인 중"으로 표시합니다.</p>
-    <form class="search" id="searchForm2" role="search"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg><label class="sr" for="q2">검색어</label><input id="q2" type="search" placeholder="지역, 한의원, 치료 항목" autocomplete="off"><button class="btn primary" type="submit">검색</button></form></div></section>
+    <section class="phead has-aside"><div class="wrap phead-grid"><div class="pt"><p class="eyebrow">한의원 찾기</p><h1 class="display" id="findPageTitle" tabindex="-1">지역별 입점 한의원</h1><p class="lead">시·구를 고르고 치료 항목과 조건으로 걸러 보세요. 확인 전 항목은 "확인 중"으로 표시합니다.</p>
+    <form class="search" id="searchForm2" role="search"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg><label class="sr" for="q2">검색어</label><input id="q2" type="search" placeholder="지역, 한의원, 치료 항목" autocomplete="off"><button class="btn primary" type="submit">검색</button></form></div><div class="pa"><div class="pa-card pa-map" id="regionCloud" aria-label="지역별 입점 한의원 수"></div></div></div></section>
     <section class="sec" id="find" aria-labelledby="findTitle">
     <div class="wrap">
       <div class="lockup" hidden>
@@ -921,7 +961,11 @@
 
   <!-- ===== GUIDE ===== -->
   <div class="page" data-page="guide" hidden>
-    <section class="phead"><div class="wrap"><p class="eyebrow">보험 가이드</p><h1 class="display" id="guidePageTitle" tabindex="-1">자동차보험, 이것만 알면 됩니다.</h1><p class="lead">접수번호를 받는 방법부터 항목별 적용 원칙, 입원과 통원의 차이까지. 최종 판단은 보험사와 한의원의 기준을 따릅니다.</p></div></section>
+    <section class="phead has-aside"><div class="wrap phead-grid"><div class="pt"><p class="eyebrow">보험 가이드</p><h1 class="display" id="guidePageTitle" tabindex="-1">자동차보험, 이것만 알면 됩니다.</h1><p class="lead">접수번호를 받는 방법부터 항목별 적용 원칙, 입원과 통원의 차이까지. 최종 판단은 보험사와 한의원의 기준을 따릅니다.</p></div><div class="pa"><div class="pa-card pa-guide">
+  <div class="big num">0<small>원</small></div><div class="l">자동차보험 접수 시 본인부담</div>
+  <ol class="flow"><li><span class="n">1</span><b>접수번호</b><span>보험사 대인 접수</span></li><li><span class="n">2</span><b>한의원 예약</b><span>접수 전이어도 가능</span></li><li><span class="n">3</span><b>0원 치료</b><span>진료비는 보험사 청구</span></li></ol>
+  <div class="mini-kv"><span>추나 · 약침 · 한약 · 물리치료 · 입원</span><span class="tag yes">자보 적용</span></div>
+</div></div></div></section>
     <section class="sec" id="guide-insurers" aria-labelledby="guideInsTitle">
       <div class="wrap">
         <div class="lockup"><p class="eyebrow">보험사별 합의금 · 데모</p><h2 class="h-md" id="guideInsTitle">보험사마다 합의 기준이 다릅니다.</h2><p class="lead">자동차보험 상해급수(1~14급) 기준으로 합의금 범위를 보험사별로 모아 보여드릴 자리입니다. 한의원 치료 대상은 대부분 12~14급 경상이며, 골절 등 9~11급은 병원 협진이 필요합니다. 아래 숫자는 실제 통계가 아닌 자리표시 예시이며, 진료를 마친 분들의 익명 합의 사례가 쌓이면 실제 값으로 교체됩니다. 동부화재는 2017년부터 DB손해보험입니다.</p></div>
@@ -1019,7 +1063,12 @@
 
   <!-- ===== REVIEWS ===== -->
   <div class="page" data-page="reviews" hidden>
-    <section class="phead"><div class="wrap"><p class="eyebrow">후기 쓰기</p><h1 class="display" id="reviewsPageTitle" tabindex="-1">진료를 마친 분의 기록이<br>다음 환자의 선택을 돕습니다.</h1><p class="lead">진료를 완료한 예약에만 후기를 남길 수 있습니다. 사고 유형, 치료 부위, 치료 기간을 함께 기록하며, 첫 후기에는 5,000P를 드립니다.</p></div></section>
+    <section class="phead has-aside"><div class="wrap phead-grid"><div class="pt"><p class="eyebrow">후기 쓰기</p><h1 class="display" id="reviewsPageTitle" tabindex="-1">진료를 마친 분의 기록이<br>다음 환자의 선택을 돕습니다.</h1><p class="lead">진료를 완료한 예약에만 후기를 남길 수 있습니다. 사고 유형, 치료 부위, 치료 기간을 함께 기록하며, 첫 후기에는 5,000P를 드립니다.</p></div><div class="pa"><div class="pa-card pa-review" aria-label="후기 게시 형태 예시">
+  <div class="r1"><span class="who">홍*동 <span class="tag demo">예시</span></span><span class="meta num">만족도 5 / 5</span></div>
+  <div class="tags"><span class="tag fill">후미추돌</span><span class="tag fill">목·어깨</span><span class="tag fill">통원 3주</span><span class="tag yes">진료 확인됨</span></div>
+  <p class="q">정차 중 뒤에서 받혀 다음 날부터 목이 안 돌아갔습니다. 첫날 진찰 뒤 추나와 약침을 받았고, 접수번호를 알려드리니 결제는 한 번도 없었습니다.</p>
+  <div class="r2"><span>도움이 됐어요 12</span><span>진료 확인 뒤 게시</span></div>
+</div></div></div></section>
     <section class="sec" id="reviews" aria-labelledby="reviewsFormTitle">
       <div class="wrap g57">
         <div>
@@ -1088,7 +1137,12 @@
       <p class="lead">온라인 예약이 들어오면 확정 문자가 자동으로 나가고, 보험사 접수번호와 입원 상담 요청이 한 화면에 모입니다. 치료 항목과 병상 정보는 한의원이 직접 등록합니다.</p>
       <div class="cta"><a class="btn on-dark" href="#partnerForm">입점 문의</a><a class="tlink on-dark" href="#/guide">보험 적용 표 보기 →</a></div>
     </div>
-    <dl class="dark-dl">
+    <div class="pa-card pa-kpi" aria-label="파트너 화면 예시">
+      <div class="bar"><span class="t">오늘 예약 · 데모</span><span class="tag demo">데모</span></div>
+      <div class="kpis num"><div><div class="l">예약</div><div class="v">14</div></div><div><div class="l">신규 접수</div><div class="v">5</div></div><div><div class="l">입원 상담</div><div class="v">2</div></div><div><div class="l">노쇼</div><div class="v">0</div></div></div>
+      <div class="rowsm"><div><span class="num">09:30</span><b>김*진</b><span>후미추돌 · 목·어깨</span><span class="pill ink">확정</span></div><div><span class="num">10:00</span><b>박*수</b><span>측면충돌 · 허리</span><span class="pill">확인 대기</span></div><div><span class="num">10:30</span><b>이*아</b><span>후미추돌 · 두통</span><span class="pill ink">확정</span></div></div>
+    </div>
+    <dl class="dark-dl" hidden>
       <div><dt>입점 비용</dt><dd>오픈 기간 무료. 예약 건당 수수료 없음.</dd></div>
       <div><dt>예약 관리</dt><dd>예약 확인·확정 문자·노쇼 알림. 전화 예약도 같은 화면에 기록.</dd></div>
       <div><dt>정보 등록</dt><dd>치료 항목, 자동차보험 적용 표, 병상 수, 진료시간을 한의원이 직접 등록·수정.</dd></div>
@@ -1791,6 +1845,18 @@ renderBody('neck');
   const ch = $('#insurerCharts'); if (!ch) return;
   ch.innerHTML = cols.map(([c, d, max], ci) => { const [a0, b0] = base[ci]; const ticks = [0, max / 5, max * 2 / 5, max * 3 / 5, max * 4 / 5, max].map(v => Math.round(v));
     return `<div class="ins-chart"><div class="chart-h"><span class="t">${c}</span><span class="meta">예시 · 만원</span></div><p class="meta" style="margin:-6px 0 10px">${d}</p><div class="rchart">${rows.map(([n, sub, adj]) => `<div class="rrow" title="${n}: ${a0 + adj}~${b0 + adj}만원 (예시)"><span class="lbl">${n}</span><span class="rtrack" aria-hidden="true"><span class="rbar" style="left:${(a0 + adj) / max * 100}%;width:${(b0 - a0) / max * 100}%"></span></span><span class="val num">${a0 + adj}~${b0 + adj}</span></div>`).join('')}<div class="raxis"><span></span><span class="ticks num">${ticks.map(t => `<span>${t}</span>`).join('')}</span><span></span></div></div></div>`; }).join('');
+})();
+/* 한의원 찾기 헤더: 지역 클러스터 */
+(function regionCloud() {
+  const el = $('#regionCloud'); if (!el) return;
+  const cnt = (city, d) => CLINICS.filter(c => c.city === city && (!d || c.district === d)).length;
+  const nodes = [
+    ['서울', null, 44, 46, 'city'], ['서초구', '서울', 24, 22, 'd'], ['송파구', '서울', 68, 22, 'd'], ['중구', '서울', 78, 44, 'd'], ['강남구', '서울', 18, 46, 'd'], ['마포구', '서울', 22, 70, 'd'], ['성동구', '서울', 66, 68, 'd'], ['관악구', '서울', 44, 80, 'd'],
+    ['대구', '북구', 86, 74, 'd far'], ['대전', '서구', 88, 90, 'd far'],
+  ];
+  const links = nodes.filter(n => n[4] === 'd').map(([, , x, y]) => { const dx = x - 44, dy = y - 46; const len = Math.hypot(dx, dy), ang = Math.atan2(dy, dx) * 180 / Math.PI; return `<span class="link" style="left:44%;top:46%;width:${len}%;transform:rotate(${ang}deg)"></span>`; }).join('');
+  el.innerHTML = links + nodes.map(([name, parent, x, y, cls]) => { const isCity = cls === 'city'; const far = cls.includes('far'); const c = isCity ? cnt(name) : far ? cnt(name, parent) : cnt('서울', name); const label = far ? `${name} ${parent}` : name; const city = isCity ? name : far ? name : '서울', dist = isCity ? '전체' : far ? parent : name; return `<button class="rc ${cls}" type="button" data-city="${city}" data-dist="${dist}" style="left:${x}%;top:${y}%" aria-label="${label} 입점 ${c}곳 보기"><span class="n num">${c}</span>${label}</button>`; }).join('') + '<span class="cap">숫자는 입점 한의원 수 · 누르면 해당 지역으로</span>';
+  el.addEventListener('click', e => { const b = e.target.closest('[data-city]'); if (!b) return; state.city = b.dataset.city; state.district = b.dataset.dist; renderFind(); smoothTo($('#find'), navH()); });
 })();
 /* 히어로 조건 칩 12개 (픽토그램 포함) */
 $('#hotChips').innerHTML = [...FILTERS_T, ...FILTERS_C].map(([k, l]) => `<button class="chip" type="button" data-hot="${esc(k)}" aria-pressed="false">${pic(k)}${l}</button>`).join('');
