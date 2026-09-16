@@ -2,14 +2,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>한방에</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+KR:wght@300;400;500;600;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;900&display=swap">
 <style>
+  @font-face { font-family: "Wanted Sans Variable"; font-weight: 100 900; font-style: normal; font-display: swap; src: url("fonts/WantedSansVariable.woff2") format("woff2-variations"), url("fonts/WantedSansVariable.woff2") format("woff2"); }
   /* ============ tokens (Runway monochrome) ============ */
   :root {
     --black: #0f4a39; --ink: #14483a; --ink-soft: #1a5a48; --graphite: #2e6a54; --slate: #4f8270; --stone: #86a899;
     --hair: #d9e3db; --hair-soft: #bccdc3; --cool: #cfdcd6; --tint: #e9efe9; --canvas: #f4f6f1; --paper: #ffffff; --scrim: #1a1a1a; --footer: #0b3a2c; --marble: none;
     --w72: rgba(255,255,255,.72); --w55: rgba(255,255,255,.55); --w40: rgba(255,255,255,.4); --w16: rgba(255,255,255,.16);
-    --font: "Inter", "Noto Sans KR", -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
+    --font: "Wanted Sans Variable", "Wanted Sans", -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
     --nav-h: 64px; --wrap: 1280px; --gutter: 24px;
     color-scheme: light;
   }
@@ -516,7 +517,7 @@
   .hero .display, .phead .display, .dark-strip .display { color: #fff; }
 
   /* ===== brand: bracket wordmark ===== */
-  .logo { font-family: "Noto Sans KR", Inter, sans-serif; font-size: 22px; letter-spacing: -.05em; display: inline-flex; align-items: baseline; line-height: 1; }
+  .logo { font-family: "Noto Sans KR", sans-serif; font-size: 22px; letter-spacing: -.05em; display: inline-flex; align-items: baseline; line-height: 1; }
   .logo b { font-weight: 900; } .logo i { font-style: normal; font-weight: 300; } .logo .dot { font-weight: 900; color: #7fd1b0; margin-left: .02em; }
   .logo .br { display: none; }
   .foot .logo { font-size: 20px; }
@@ -620,7 +621,7 @@
   .mbar .t { background: #e2ebe3; }
   .rtrack { background-image: repeating-linear-gradient(90deg, var(--hair-soft) 0 1px, transparent 1px 20%); }
   .toast { background: #0f4a39; }
-  .wm { font-family: "Noto Sans KR", Inter, sans-serif; letter-spacing: -.05em; white-space: nowrap; }
+  .wm { font-family: "Noto Sans KR", sans-serif; letter-spacing: -.05em; white-space: nowrap; }
   .wm b { font-weight: 900; } .wm i { font-style: normal; font-weight: 300; } .wm .dot { font-weight: 900; color: #7fd1b0; }
   .hero .display .wm { font-size: 1.12em; line-height: 1; }
 
@@ -685,6 +686,7 @@
   table.insurers th, table.insurers td { white-space: nowrap; }
   table.insurers td.n0 { color: var(--stone); }
   table.insurers .cnt { display: inline-block; margin-left: 6px; font-size: 11px; color: var(--stone); border: 1px solid var(--hair-soft); border-radius: 9999px; padding: 0 6px; }
+  .phead .display .hl, .dark-strip.phead-dark .display .hl { -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 </style>
 
 <a class="skip" href="#main">본문으로 건너가기</a>
@@ -1774,6 +1776,7 @@ renderBody('neck');
 /* 히어로 조건 칩 12개 (픽토그램 포함) */
 $('#hotChips').innerHTML = [...FILTERS_T, ...FILTERS_C].map(([k, l]) => `<button class="chip" type="button" data-hot="${esc(k)}" aria-pressed="false">${pic(k)}${l}</button>`).join('');
 /* 섹션 대제목 형광펜 */
+$$('.phead .display, .dark-strip.phead-dark .display').forEach(h => { if (!h.querySelector('.hl')) h.innerHTML = `<span class="hl">${h.innerHTML}</span>`; });
 $$('.h-md').forEach(h => { if (h.closest('.phead, .hero, .dark-strip, .foot, .sheet, .modal')) return; if (h.querySelector('.hl')) return; h.innerHTML = `<span class="hl">${h.innerHTML}</span>`; });
 renderIndex(); renderFind(); renderCbar();
 /* 합의금 범위 예시 (데모값, 만원) — 단일 계열 범위 차트 */
