@@ -627,9 +627,45 @@
   .linechart .l3 { stroke: #14483a; stroke-width: 2; fill: none; stroke-dasharray: 6 5; stroke-linejoin: round; stroke-linecap: round; opacity: .85; }
   .linechart .m3 { fill: #fff; stroke: #14483a; stroke-width: 2; }
   .lg span.s3::before { background: repeating-linear-gradient(90deg, #14483a 0 4px, transparent 4px 7px); }
-  /* 약침 커서 */
-  html, body { cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M3 3L20 20' stroke='%2314483a' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M19 19l8 8' stroke='%2314483a' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M21 23l2-2M23 25l2-2M25 27l2-2' stroke='%237fd1b0' stroke-width='1.2'/%3E%3Ccircle cx='3.5' cy='3.5' r='2' fill='%237fd1b0'/%3E%3C/svg%3E") 3 3, auto; }
-  a, button, .chip, .cmp, .part, [role="button"], select, label.sw, .th, .idx-row, .glance a { cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='4' cy='4' r='3.5' fill='none' stroke='%237fd1b0' stroke-width='1.5'/%3E%3Cpath d='M5 5L20 20' stroke='%2314483a' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M19 19l8 8' stroke='%2314483a' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M21 23l2-2M23 25l2-2M25 27l2-2' stroke='%237fd1b0' stroke-width='1.2'/%3E%3Ccircle cx='4' cy='4' r='1.6' fill='%237fd1b0'/%3E%3C/svg%3E") 4 4, pointer; }
+
+  .figure svg { max-width: 240px; }
+  .figure .sil { fill: #14483a; }
+  .figure .hs { cursor: pointer; outline: none; }
+  .figure .hs .dot { fill: rgba(127,209,176,.55); stroke: #f4f6f1; stroke-width: 10; transition: fill .12s; }
+  .figure .hs .ring { fill: transparent; stroke: transparent; stroke-width: 14; transition: stroke .12s; }
+  .figure .hs:hover .dot, .figure .hs:focus-visible .dot { fill: #7fd1b0; }
+  .figure .hs[aria-pressed="true"] .dot { fill: #7fd1b0; }
+  .figure .hs[aria-pressed="true"] .ring { stroke: rgba(127,209,176,.45); }
+  .figure .part { display: none; }
+  .figure .cap { display: none; }
+
+  /* ===== key-visual hero (ivory, image right, orbit chips) ===== */
+  .hero.kv-hero { background: #f4f4ed !important; background-image: none !important; color: var(--ink); border-bottom: 1px solid var(--hair); padding: 56px 0 64px; isolation: auto; }
+  .hero.kv-hero::before { display: none; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 32px 48px; align-items: center; }
+  .hero.kv-hero .eyebrow { color: var(--slate); }
+  .hero.kv-hero .display { color: #0f3d30; max-width: none; }
+  .hero.kv-hero .lead { color: var(--graphite); }
+  .hero.kv-hero .search { border: 1px solid var(--hair-soft); box-shadow: 0 12px 40px rgba(20,72,58,.08); }
+  .hero.kv-hero .search:focus-within { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .hero.kv-hero .chip { background: #fff; border-color: var(--hair-soft); color: var(--graphite); }
+  .hero.kv-hero .chip:hover { border-color: var(--ink); }
+  .hero.kv-hero .chip[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .hero.kv-hero .colophon { border-top-color: var(--hair); color: var(--stone); }
+  .kv { position: relative; aspect-ratio: 1; max-width: 560px; width: 100%; margin: 0 auto; }
+  .kv img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 58%, transparent 78%); mask-image: radial-gradient(circle at 50% 50%, #000 58%, transparent 78%); }
+  .orbit { position: absolute; inset: 0; }
+  .orbit .oc { position: absolute; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px 0 10px; border-radius: 9999px; background: #fff; border: 1px solid var(--hair-soft); color: var(--ink); font-size: 13px; font-weight: 500; white-space: nowrap; box-shadow: 0 6px 20px rgba(20,72,58,.08); text-decoration: none; transition: border-color .12s, transform .12s; }
+  .orbit .oc:hover { border-color: var(--ink); transform: translate(-50%, -50%) scale(1.04); }
+  .orbit .oc .pic { width: 16px; height: 16px; color: var(--slate); }
+  .orbit .oc .st { font-size: 11px; color: var(--stone); font-weight: 400; margin-left: 2px; }
+  .kv .core { position: absolute; left: 50%; top: 50%; transform: translate(-50%, 52px); font-size: 12px; color: var(--slate); letter-spacing: .2px; white-space: nowrap; }
+  @media (max-width: 1023px) { .hero-grid { grid-template-columns: 1fr; } .kv { max-width: 440px; } }
+  @media (max-width: 767px) { .hero.kv-hero { padding: 40px 0 48px; } .kv { max-width: 340px; } .orbit .oc { height: 30px; font-size: 12px; padding: 0 10px 0 8px; gap: 6px; } .orbit .oc .st { display: none; } }
+
+  /* 약침 커서 — 은색 침 3개가 한 점으로 모이는 화살표형 */
+  html, body { cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='s' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ffffff'/%3E%3Cstop offset='.5' stop-color='%23b9bdc2'/%3E%3Cstop offset='1' stop-color='%23eef0f2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M3 3L28 28' stroke='%236f757c' stroke-width='2.4' stroke-linecap='round' opacity='.3'/%3E%3Cpath d='M3 3L28 28' stroke='url(%23s)' stroke-width='1.4' stroke-linecap='round'/%3E%3Cpath d='M28 28L37 37' stroke='%237d5f3c' stroke-width='4.4' stroke-linecap='round'/%3E%3Cpath d='M28 28L37 37' stroke='%23c9a071' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='37' cy='37' r='2.3' fill='%23a8814f' stroke='%237d5f3c' stroke-width='.8'/%3E%3Cpath d='M3 3L34 18' stroke='%236f757c' stroke-width='2.4' stroke-linecap='round' opacity='.3'/%3E%3Cpath d='M3 3L34 18' stroke='url(%23s)' stroke-width='1.4' stroke-linecap='round'/%3E%3Cpath d='M34 18L44 22' stroke='%237d5f3c' stroke-width='4.4' stroke-linecap='round'/%3E%3Cpath d='M34 18L44 22' stroke='%23c9a071' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='44' cy='22' r='2.3' fill='%23a8814f' stroke='%237d5f3c' stroke-width='.8'/%3E%3Cpath d='M3 3L18 34' stroke='%236f757c' stroke-width='2.4' stroke-linecap='round' opacity='.3'/%3E%3Cpath d='M3 3L18 34' stroke='url(%23s)' stroke-width='1.4' stroke-linecap='round'/%3E%3Cpath d='M18 34L22 44' stroke='%237d5f3c' stroke-width='4.4' stroke-linecap='round'/%3E%3Cpath d='M18 34L22 44' stroke='%23c9a071' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='22' cy='44' r='2.3' fill='%23a8814f' stroke='%237d5f3c' stroke-width='.8'/%3E%3C/svg%3E") 3 3, auto; }
+  a, button, .chip, .cmp, .hs, [role="button"], select, label.sw, .th, .idx-row, .glance a, .oc { cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='s' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ffffff'/%3E%3Cstop offset='.5' stop-color='%23b9bdc2'/%3E%3Cstop offset='1' stop-color='%23eef0f2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M3 3L28 28' stroke='%236f757c' stroke-width='2.4' stroke-linecap='round' opacity='.3'/%3E%3Cpath d='M3 3L28 28' stroke='url(%23s)' stroke-width='1.4' stroke-linecap='round'/%3E%3Cpath d='M28 28L37 37' stroke='%237d5f3c' stroke-width='4.4' stroke-linecap='round'/%3E%3Cpath d='M28 28L37 37' stroke='%23c9a071' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='37' cy='37' r='2.3' fill='%23a8814f' stroke='%237d5f3c' stroke-width='.8'/%3E%3Cpath d='M3 3L34 18' stroke='%236f757c' stroke-width='2.4' stroke-linecap='round' opacity='.3'/%3E%3Cpath d='M3 3L34 18' stroke='url(%23s)' stroke-width='1.4' stroke-linecap='round'/%3E%3Cpath d='M34 18L44 22' stroke='%237d5f3c' stroke-width='4.4' stroke-linecap='round'/%3E%3Cpath d='M34 18L44 22' stroke='%23c9a071' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='44' cy='22' r='2.3' fill='%23a8814f' stroke='%237d5f3c' stroke-width='.8'/%3E%3Cpath d='M3 3L18 34' stroke='%236f757c' stroke-width='2.4' stroke-linecap='round' opacity='.3'/%3E%3Cpath d='M3 3L18 34' stroke='url(%23s)' stroke-width='1.4' stroke-linecap='round'/%3E%3Cpath d='M18 34L22 44' stroke='%237d5f3c' stroke-width='4.4' stroke-linecap='round'/%3E%3Cpath d='M18 34L22 44' stroke='%23c9a071' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='22' cy='44' r='2.3' fill='%23a8814f' stroke='%237d5f3c' stroke-width='.8'/%3E%3Ccircle cx='3.5' cy='3.5' r='3.5' fill='none' stroke='%237fd1b0' stroke-width='1.6'/%3E%3Ccircle cx='3.5' cy='3.5' r='1.3' fill='%237fd1b0'/%3E%3C/svg%3E") 3 3, pointer; }
   input, textarea { cursor: text; }
 </style>
 
@@ -664,19 +700,25 @@
 <main id="main">
   <!-- ===== HOME ===== -->
   <div class="page" data-page="home">
-    <section class="hero" aria-labelledby="heroTitle">
-  <div class="wrap">
-    <p class="eyebrow">교통사고 한의원 비교·예약 · 한방에</p>
-    <h1 class="display" id="heroTitle">교통사고 처리도,<br><span class="wm"><b>한방</b><i>에</i><span class="dot">.</span></span></h1>
-    <p class="lead">한방(韓方)으로, 한방에. 보험 접수부터 치료, 합의 준비까지 지역별 한의원을 비교하고 바로 예약합니다. 보험사 접수번호가 있으면 본인부담금은 0원입니다.</p>
-    <form class="search" id="searchForm" role="search">
-      <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg>
-      <label class="sr" for="q">검색어</label>
-      <input id="q" type="search" placeholder="지역, 한의원, 치료 항목" autocomplete="off">
-      <button class="btn primary" type="submit">검색</button>
-    </form>
-    <div class="chips dark" id="hotChips" aria-label="치료 항목과 조건으로 바로 찾기"></div>
-    <p class="colophon num" id="colophon"></p>
+    <section class="hero kv-hero" aria-labelledby="heroTitle">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <p class="eyebrow">교통사고 한의원 비교·예약 · 한방에</p>
+      <h1 class="display" id="heroTitle">교통사고 처리도,<br><span class="wm"><b>한방</b><i>에</i><span class="dot">.</span></span></h1>
+      <p class="lead">한방(韓方)으로, 한방에. 보험 접수부터 치료, 합의 준비까지 지역별 한의원을 비교하고 바로 예약합니다. 보험사 접수번호가 있으면 본인부담금은 0원입니다.</p>
+      <form class="search" id="searchForm" role="search">
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg>
+        <label class="sr" for="q">검색어</label>
+        <input id="q" type="search" placeholder="지역, 한의원, 치료 항목" autocomplete="off">
+        <button class="btn primary" type="submit">검색</button>
+      </form>
+      <div class="chips" id="hotChips" aria-label="치료 항목과 조건으로 바로 찾기"></div>
+      <p class="colophon num" id="colophon"></p>
+    </div>
+    <div class="kv" aria-label="한방에가 지원하는 것">
+      <img id="kvImg" alt="" aria-hidden="true">
+      <div class="orbit" id="orbit"></div>
+    </div>
   </div>
 </section>
 
@@ -746,29 +788,9 @@
         <div class="lockup"><p class="eyebrow">어디가 아프세요?</p><h2 class="h-md" id="bodyTitle">아픈 부위를 누르면, 받을 수 있는 치료를 보여드립니다.</h2><p class="lead">사고 뒤 통증은 부위마다 쓰이는 치료가 다릅니다. 부위를 고르면 흔한 증상, 권장 치료, 통상 기간, 자동차보험 적용을 정리해 드립니다.</p></div>
         <div class="body-grid">
           <div class="figure">
-            <svg viewBox="0 0 200 420" role="group" aria-label="인체 부위 선택" id="bodySvg">
-              <defs>
-                <clipPath id="silClip">
-                  <circle cx="100" cy="34" r="24"/>
-                  <path d="M70 66h60a10 10 0 0 1 10 10v104a10 10 0 0 1-10 10H70a10 10 0 0 1-10-10V76a10 10 0 0 1 10-10z"/>
-                  <rect x="60" y="182" width="80" height="40" rx="12"/>
-                  <rect x="38" y="72" width="22" height="156" rx="11" transform="rotate(7 49 72)"/>
-                  <rect x="140" y="72" width="22" height="156" rx="11" transform="rotate(-7 151 72)"/>
-                  <rect x="65" y="214" width="32" height="176" rx="13"/><rect x="103" y="214" width="32" height="176" rx="13"/>
-                  <rect x="60" y="384" width="40" height="20" rx="9"/><rect x="100" y="384" width="40" height="20" rx="9"/>
-                </clipPath>
-              </defs>
-              <g class="sil"><circle cx="100" cy="34" r="24"/><path d="M70 66h60a10 10 0 0 1 10 10v104a10 10 0 0 1-10 10H70a10 10 0 0 1-10-10V76a10 10 0 0 1 10-10z"/><rect x="60" y="182" width="80" height="40" rx="12"/><rect x="38" y="72" width="22" height="156" rx="11" transform="rotate(7 49 72)"/><rect x="140" y="72" width="22" height="156" rx="11" transform="rotate(-7 151 72)"/><rect x="65" y="214" width="32" height="176" rx="13"/><rect x="103" y="214" width="32" height="176" rx="13"/><rect x="60" y="384" width="40" height="20" rx="9"/><rect x="100" y="384" width="40" height="20" rx="9"/></g>
-              <g clip-path="url(#silClip)">
-                <rect class="part" data-part="head" tabindex="0" role="button" aria-pressed="false" aria-label="머리 · 두통·어지럼" x="60" y="0" width="80" height="58"/>
-                <rect class="part" data-part="neck" tabindex="0" role="button" aria-pressed="true" aria-label="목·어깨" x="58" y="54" width="84" height="46"/>
-                <rect class="part" data-part="chest" tabindex="0" role="button" aria-pressed="false" aria-label="상체 · 가슴·갈비뼈" x="60" y="100" width="80" height="50"/>
-                <rect class="part" data-part="back" tabindex="0" role="button" aria-pressed="false" aria-label="허리·골반" x="60" y="150" width="80" height="72"/>
-                <path class="part" data-part="arm" tabindex="0" role="button" aria-pressed="false" aria-label="손목·팔" d="M0 66h60v170H0zM140 66h60v170h-60z"/>
-                <rect class="part" data-part="leg" tabindex="0" role="button" aria-pressed="false" aria-label="무릎·다리" x="60" y="222" width="80" height="162"/>
-                <rect class="part" data-part="foot" tabindex="0" role="button" aria-pressed="false" aria-label="발목·발" x="55" y="384" width="90" height="36"/>
-              </g>
-              <text class="cap" x="100" y="416" text-anchor="middle">정면 · 부위를 누르세요</text>
+            <svg viewBox="0 0 1509 2048" role="group" aria-label="인체 부위 선택" id="bodySvg">
+              <path class="sil" d="M 633.181 492.427 C 645.583 491.787 662.663 492.31 675.31 492.378 L 754.877 492.692 L 834.008 492.277 C 859.601 492.186 887.384 490.796 911.988 498.901 C 935.084 506.782 959.17 523.751 974.259 542.956 C 1060.11 652.23 1105.24 789.008 1130.37 924.168 C 1139.81 976.316 1146.39 1025.43 1148.38 1078.54 C 1151.42 1159.89 1048.48 1184.34 1018.21 1108.97 C 1013.88 1098.19 1013.74 1073.76 1012.86 1061 C 1011.84 1046.81 1010.55 1032.64 1008.98 1018.5 C 998.902 932.432 977.647 827.149 939.684 748.626 C 941.414 835.687 940.121 926.377 940.144 1013.68 L 941.034 1448.54 L 941.428 1690 L 941.372 1764.34 C 941.284 1800.01 943.998 1829.96 917.174 1858.44 C 901.496 1875.17 879.75 1884.88 856.831 1885.4 C 834.05 1885.74 812.108 1876.81 796.021 1860.68 C 782.829 1847.77 774.178 1830.93 771.365 1812.69 C 768.826 1796.66 769.794 1768.88 769.863 1751.7 L 770.163 1651.38 L 769.908 1280.25 L 769.84 1224.26 C 769.865 1209.05 772.208 1187.48 763.016 1174.68 C 758.523 1168.43 749.366 1171.57 745.069 1176.57 C 735.445 1187.78 740.793 1206.85 739.546 1220.53 C 738.923 1260.11 739.206 1299.68 739.176 1339.22 L 739.089 1616.57 L 739.166 1742.3 C 739.251 1785.07 746.329 1827.89 712.672 1860.39 C 678.726 1893.16 627.072 1894.18 593.455 1860.6 C 579.346 1846.44 570.302 1828.03 567.727 1808.21 C 566.303 1796.92 566.844 1780.09 566.897 1768.27 L 567.01 1710.44 L 567.075 1504.71 L 569.932 748.234 C 534.152 815.186 509.024 937.983 500.669 1013.93 C 498.863 1030.63 497.47 1047.38 496.491 1064.16 C 494.886 1088.76 495.684 1109.79 478.729 1129.82 C 467.084 1143.84 450.323 1152.63 432.169 1154.24 C 415.234 1155.73 398.423 1150.25 385.62 1139.06 C 354.975 1112.73 360.432 1075.87 363.655 1039.72 C 376.941 890.71 415.077 738.856 490.359 608.729 C 522.801 552.654 563.249 497.279 633.181 492.427 z"/><path class="sil" d="M 752.182 163.001 C 829.926 161.327 894.395 222.818 896.397 300.554 C 898.398 378.29 837.179 443.017 759.452 445.346 C 681.261 447.688 616.063 386.024 614.05 307.824 C 612.036 229.624 673.974 164.686 752.182 163.001 z"/>
+              <g class="hs" data-part="head" tabindex="0" role="button" aria-pressed="false" aria-label="머리 · 두통·어지럼"><circle class="ring" cx="754" cy="300" r="95"/><circle class="dot" cx="754" cy="300" r="58"/></g><g class="hs" data-part="neck" tabindex="0" role="button" aria-pressed="false" aria-label="목·어깨"><circle class="ring" cx="754" cy="540" r="95"/><circle class="dot" cx="754" cy="540" r="58"/></g><g class="hs" data-part="chest" tabindex="0" role="button" aria-pressed="false" aria-label="상체 · 가슴·갈비뼈"><circle class="ring" cx="754" cy="760" r="95"/><circle class="dot" cx="754" cy="760" r="58"/></g><g class="hs" data-part="back" tabindex="0" role="button" aria-pressed="false" aria-label="허리·골반"><circle class="ring" cx="754" cy="1060" r="95"/><circle class="dot" cx="754" cy="1060" r="58"/></g><g class="hs" data-part="arm" tabindex="0" role="button" aria-pressed="false" aria-label="손목·팔"><circle class="ring" cx="415" cy="980" r="95"/><circle class="dot" cx="415" cy="980" r="58"/></g><g class="hs" data-part="arm" tabindex="0" role="button" aria-pressed="false" aria-label="손목·팔"><circle class="ring" cx="1095" cy="980" r="95"/><circle class="dot" cx="1095" cy="980" r="58"/></g><g class="hs" data-part="leg" tabindex="0" role="button" aria-pressed="false" aria-label="무릎·다리"><circle class="ring" cx="655" cy="1500" r="95"/><circle class="dot" cx="655" cy="1500" r="58"/></g><g class="hs" data-part="leg" tabindex="0" role="button" aria-pressed="false" aria-label="무릎·다리"><circle class="ring" cx="855" cy="1500" r="95"/><circle class="dot" cx="855" cy="1500" r="58"/></g><g class="hs" data-part="foot" tabindex="0" role="button" aria-pressed="false" aria-label="발목·발"><circle class="ring" cx="655" cy="1830" r="95"/><circle class="dot" cx="655" cy="1830" r="58"/></g><g class="hs" data-part="foot" tabindex="0" role="button" aria-pressed="false" aria-label="발목·발"><circle class="ring" cx="855" cy="1830" r="95"/><circle class="dot" cx="855" cy="1830" r="58"/></g>
             </svg>
             <div class="partlist" id="partList" role="group" aria-label="부위 목록"></div>
           </div>
@@ -1685,7 +1707,7 @@ const PART_PIC = { head:'<circle cx="12" cy="9" r="5"/><path d="M8 20a4 4 0 0 1 
 const CAT_SLUG = k => (catByKey(k) || {}).slug || 'chuna';
 function renderBody(key) {
   const part = PARTS.find(x => x.k === key) || PARTS[1];
-  $$('#bodySvg .part').forEach(el => el.setAttribute('aria-pressed', el.dataset.part === part.k));
+  $$('#bodySvg .hs').forEach(el => el.setAttribute('aria-pressed', el.dataset.part === part.k));
   $('#partList').innerHTML = PARTS.map(x => `<button type="button" data-part="${x.k}" aria-pressed="${x.k === part.k}"><svg class="pic" viewBox="0 0 24 24" aria-hidden="true">${PART_PIC[x.k]}</svg>${x.short}</button>`).join('');
   const chips = part.treats.map(t => { const c = catByKey(t); const st = catCounts(t); const ask = !st.yes.length; return `<a class="${ask ? 'ask' : ''}" href="#/cat/${CAT_SLUG(t)}">${pic(t)}${esc(c ? c.title : t)}<span class="st">${ask ? '한의원 확인' : `제공 ${st.yes.length}곳`}</span></a>`; }).join('');
   $('#bodyResult').innerHTML = `<div class="h"><h3>${esc(part.name)}</h3><span class="meta">권장 치료 ${part.treats.length}종</span></div>
@@ -1697,10 +1719,22 @@ function renderBody(key) {
     <div class="cta"><button class="btn primary" type="button" data-body-find="${esc(part.treats[0])}">이 부위 치료하는 한의원 찾기</button><a class="tlink muted" href="#/guide">보험 접수부터 보기 →</a></div>
     <p class="meta" style="margin-top:12px">일반적인 안내이며 진단이 아닙니다. 실제 치료 구성은 진찰 뒤 한의사가 정합니다.</p>`;
 }
-document.addEventListener('click', e => { const b = e.target.closest('#bodySvg .part, #partList [data-part]'); if (b) { renderBody(b.dataset.part); return; } const f = e.target.closest('[data-body-find]'); if (f) { state.filters = new Set([f.dataset.bodyFind]); state.city = '전체'; state.district = '전체'; renderFind(); go('/find'); } });
-$('#bodySvg').addEventListener('keydown', e => { const t = e.target.closest('.part'); if (t && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); renderBody(t.dataset.part); } });
+document.addEventListener('click', e => { const b = e.target.closest('#bodySvg .hs, #partList [data-part]'); if (b) { renderBody(b.dataset.part); return; } const f = e.target.closest('[data-body-find]'); if (f) { state.filters = new Set([f.dataset.bodyFind]); state.city = '전체'; state.district = '전체'; renderFind(); go('/find'); } });
+$('#bodySvg').addEventListener('keydown', e => { const t = e.target.closest('.hs'); if (t && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); renderBody(t.dataset.part); } });
 renderBody('neck');
 
+/* 키비주얼 + 궤도 칩 */
+(function kv() {
+  const img = $('#kvImg'); if (img && typeof KEYVISUAL !== 'undefined') img.src = KEYVISUAL;
+  PIC.shield = '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>';
+  PIC.calendar = PIC.weekend; PIC.settle = '<path d="M4 12l4 4 6-6"/><path d="M13 16l3 3 4-4"/>';
+  const items = [
+    ['추나요법', '추나요법', '자보 적용', '#/cat/chuna'], ['약침', '약침', '자보 적용', '#/cat/yakchim'], ['한약(첩약)', '한약', '자보 적용', '#/cat/herbal'], ['물리치료', '물리치료', '자보 적용', '#/cat/physio'],
+    ['inpatient', '입원 상담', '병상 확인', '#/cat/inpatient'], ['shield', '보험 접수 안내', '0원', '#/guide'], ['calendar', '온라인 예약', '12곳', '#/find'], ['settle', '합의 가이드', '요령 6', '#/guide'],
+  ];
+  const R = 44; // % radius from center
+  $('#orbit').innerHTML = items.map(([ic, l, st, href], i) => { const ang = -90 + i * 45; const x = 50 + R * Math.cos(ang * Math.PI / 180), y = 50 + R * Math.sin(ang * Math.PI / 180); return `<a class="oc" href="${href}" style="left:${x.toFixed(1)}%;top:${y.toFixed(1)}%">${pic(ic)}${l}<span class="st">${st}</span></a>`; }).join('') + '<span class="core">한방에가 지원하는 것</span>';
+})();
 /* 히어로 조건 칩 12개 (픽토그램 포함) */
 $('#hotChips').innerHTML = [...FILTERS_T, ...FILTERS_C].map(([k, l]) => `<button class="chip" type="button" data-hot="${esc(k)}" aria-pressed="false">${pic(k)}${l}</button>`).join('');
 /* 섹션 대제목 형광펜 */
