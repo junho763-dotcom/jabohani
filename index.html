@@ -2,12 +2,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>한방에</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+KR:wght@300;400;500;600;900&display=swap">
 <style>
   /* ============ tokens (Runway monochrome) ============ */
   :root {
     --black: #0f4a39; --ink: #14483a; --ink-soft: #1a5a48; --graphite: #2e6a54; --slate: #4f8270; --stone: #86a899;
-    --hair: #dfe8e3; --hair-soft: #c3d3cb; --cool: #cfdcd6; --tint: #f2f7f4; --canvas: #fff; --scrim: #1a1a1a; --footer: #0b3a2c; --marble: none;
+    --hair: #d9e3db; --hair-soft: #bccdc3; --cool: #cfdcd6; --tint: #e9efe9; --canvas: #f4f6f1; --paper: #ffffff; --scrim: #1a1a1a; --footer: #0b3a2c; --marble: none;
     --w72: rgba(255,255,255,.72); --w55: rgba(255,255,255,.55); --w40: rgba(255,255,255,.4); --w16: rgba(255,255,255,.16);
     --font: "Inter", "Noto Sans KR", -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
     --nav-h: 64px; --wrap: 1280px; --gutter: 24px;
@@ -516,8 +516,9 @@
   .hero .display, .phead .display, .dark-strip .display { color: #fff; }
 
   /* ===== brand: bracket wordmark ===== */
-  .logo { font-family: "Noto Sans KR", Inter, sans-serif; font-weight: 700; font-size: 19px; letter-spacing: -.04em; display: inline-flex; align-items: center; gap: .1em; line-height: 1; }
-  .logo .br { font-weight: 300; color: #7fd1b0; letter-spacing: 0; font-size: 1.15em; transform: translateY(-.03em); }
+  .logo { font-family: "Noto Sans KR", Inter, sans-serif; font-size: 22px; letter-spacing: -.05em; display: inline-flex; align-items: baseline; line-height: 1; }
+  .logo b { font-weight: 900; } .logo i { font-style: normal; font-weight: 300; } .logo .dot { font-weight: 900; color: #7fd1b0; margin-left: .02em; }
+  .logo .br { display: none; }
   .foot .logo { font-size: 20px; }
   /* ===== highlighter on section headlines ===== */
   .hl { background-image: linear-gradient(transparent 56%, rgba(127,209,176,.55) 56%, rgba(127,209,176,.55) 94%, transparent 94%); -webkit-box-decoration-break: clone; box-decoration-break: clone; padding: 0 .12em; margin-left: -.12em; }
@@ -566,13 +567,66 @@
   .tl h4 { font-size: 16px; font-weight: 500; color: var(--ink); margin: 14px 0 6px; }
   .tl p { font-size: 14px; color: var(--graphite); line-height: 1.55; margin: 0; }
   @media (max-width: 767px) { .tl { grid-template-columns: 1fr 1fr; } .tl > div:nth-child(2) { border-right: 0; } .tl > div:nth-child(-n+2) { border-bottom: 1px solid var(--hair); } .tl > div:nth-child(3) { padding-left: 0; } }
+
+  /* ===== 어디가 아프세요? (부위 선택) ===== */
+  .body-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 24px 56px; align-items: start; }
+  @media (max-width: 1023px) { .body-grid { grid-template-columns: 1fr; gap: 32px; } }
+  .figure { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: start; }
+  .figure svg { width: 100%; max-width: 260px; height: auto; display: block; margin: 0 auto; }
+  .figure .outline { fill: none; stroke: var(--hair-soft); stroke-width: 1.5; }
+  .figure .part { fill: transparent; stroke: var(--slate); stroke-width: 1.5; cursor: pointer; transition: fill .12s, stroke .12s; outline: none; }
+  .figure .part:hover { fill: rgba(127,209,176,.22); stroke: var(--ink); }
+  .figure .part[aria-pressed="true"] { fill: rgba(127,209,176,.6); stroke: var(--ink); }
+  .figure .part:focus-visible { stroke: var(--ink); stroke-width: 2.5; }
+  .figure .cap { font-family: var(--font); font-size: 11px; fill: var(--stone); letter-spacing: .2px; }
+  .partlist { display: grid; gap: 4px; }
+  .partlist button { display: grid; grid-template-columns: 24px 1fr; gap: 10px; align-items: center; text-align: left; padding: 10px 12px; border-radius: 8px; font-size: 15px; color: var(--graphite); border: 1px solid transparent; }
+  .partlist button .pic { width: 18px; height: 18px; color: var(--slate); }
+  .partlist button:hover { background: var(--tint); }
+  .partlist button[aria-pressed="true"] { background: rgba(127,209,176,.22); color: var(--ink); border-color: rgba(127,209,176,.6); font-weight: 500; }
+  .partlist button[aria-pressed="true"] .pic { color: var(--ink); }
+  @media (max-width: 767px) { .figure { grid-template-columns: 1fr; } .figure svg { max-width: 220px; } .partlist { grid-template-columns: repeat(2, 1fr); } .partlist button { font-size: 14px; padding: 8px 10px; } }
+  .bres { border-top: 1px solid var(--ink); padding-top: 20px; animation: fade .16s ease-out; }
+  .bres .h { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 8px; }
+  .bres h3 { font-size: 28px; font-weight: 400; letter-spacing: -.6px; line-height: 1.1; color: #0f3d30; }
+  .bres .sym { font-size: 16px; color: var(--graphite); line-height: 1.6; max-width: 34em; margin: 0 0 20px; }
+  .tchips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tchips a { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px 0 12px; border-radius: 9999px; border: 1px solid var(--hair-soft); font-size: 14px; font-weight: 500; color: var(--ink); background: var(--canvas); }
+  .tchips a:hover { border-color: var(--ink); }
+  .tchips a .pic { width: 18px; height: 18px; color: var(--slate); }
+  .tchips a .st { font-size: 11px; color: var(--stone); font-weight: 400; }
+  .tchips a.ask { color: var(--graphite); border-style: dashed; }
+  .bres dl.spec { margin-top: 20px; }
+  .bres .cta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-top: 24px; }
+  .bres .warn { margin-top: 16px; font-size: 13px; color: var(--slate); padding-left: 16px; text-indent: -16px; }
+  .bres .warn::before { content: "—"; display: inline-block; width: 16px; text-indent: 0; color: var(--stone); }
+
+  /* ===== ivory-sage canvas, white surfaces lift ===== */
+  .mock, .search, .sheet, .modal, .row .thumb .demo, .rvcard .ph div { }
+  .mock { background: var(--paper); }
+  .demo-frame { background: #e9efe9; }
+  .search { background: var(--paper); }
+  .sheet, .modal, .sheet-f, .dtabs, .nav .mmenu { background: var(--paper); }
+  .sheet-b { background: var(--paper); }
+  .idx-row:hover, .glance a:hover, .cat:hover, .row:hover, .crow:hover { background: #eef3ee; }
+  .rail button[aria-selected="true"], .cat[aria-pressed="true"] { background: #e2ebe3; }
+  .fld input, .fld select, .fld textarea { background: transparent; }
+  .chip, .tchips a, .tag { background: var(--paper); }
+  .chip[aria-pressed="true"] { background: var(--ink); }
+  .hero .chip, .phead .chip { background: transparent; }
+  .hero .chip[aria-pressed="true"] { background: #fff; }
+  .thumb { background-color: var(--cool); }
+  .stackbar { background: var(--canvas); }
+  .mbar .t { background: #e2ebe3; }
+  .rtrack { background-image: repeating-linear-gradient(90deg, var(--hair-soft) 0 1px, transparent 1px 20%); }
+  .toast { background: #0f4a39; }
 </style>
 
 <a class="skip" href="#main">본문으로 건너가기</a>
 
 <header class="nav" id="top">
   <div class="wrap nav-in">
-    <a class="logo" href="#/"><span class="br">[</span>한방에<span class="br">]</span></a>
+    <a class="logo" href="#/"><b>한방</b><i>에</i><span class="dot">.</span></a>
     <nav class="menu" aria-label="주요 메뉴">
       <a href="#/">홈</a>
       <a href="#/find">한의원 찾기</a>
@@ -646,6 +700,29 @@
             </ol>
             <div style="display:flex;gap:16px;align-items:center;margin-top:24px;flex-wrap:wrap"><a class="btn primary" href="#/guide">보험 가이드 전체 보기</a><a class="tlink muted" href="#/find">한의원 찾기 →</a></div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec rule" id="home-body" aria-labelledby="bodyTitle">
+      <div class="wrap">
+        <div class="lockup"><p class="eyebrow">어디가 아프세요?</p><h2 class="h-md" id="bodyTitle">아픈 부위를 누르면, 받을 수 있는 치료를 보여드립니다.</h2><p class="lead">사고 뒤 통증은 부위마다 쓰이는 치료가 다릅니다. 부위를 고르면 흔한 증상, 권장 치료, 통상 기간, 자동차보험 적용을 정리해 드립니다.</p></div>
+        <div class="body-grid">
+          <div class="figure">
+            <svg viewBox="0 0 200 400" role="group" aria-label="인체 부위 선택" id="bodySvg">
+              <path class="outline" d="M100 14a26 26 0 1 1 0 52a26 26 0 1 1 0-52zM88 66h24v18M44 108l8-20 36-4h24l36 4 8 20M70 106h60v110H70zM40 108h22v122H40zM138 108h22v122h-22zM72 216h26v130H72zM102 216h26v130h-26zM68 346h30v22H68zM102 346h30v22h-30z"/>
+              <path class="part" data-part="head" tabindex="0" role="button" aria-pressed="false" aria-label="머리 · 두통·어지럼" d="M100 14a26 26 0 1 1 0 52a26 26 0 1 1 0-52z"/>
+              <path class="part" data-part="neck" tabindex="0" role="button" aria-pressed="true" aria-label="목·어깨" d="M88 66h24v18l36 4 8 20-26-2H70l-26 2 8-20 36-4z"/>
+              <path class="part" data-part="chest" tabindex="0" role="button" aria-pressed="false" aria-label="가슴·갈비 (안전벨트)" d="M70 106h60v50H70z"/>
+              <path class="part" data-part="back" tabindex="0" role="button" aria-pressed="false" aria-label="허리·골반" d="M70 156h60v60H70z"/>
+              <path class="part" data-part="arm" tabindex="0" role="button" aria-pressed="false" aria-label="손목·팔" d="M40 108h22v122H40zM138 108h22v122h-22z"/>
+              <path class="part" data-part="leg" tabindex="0" role="button" aria-pressed="false" aria-label="무릎·다리" d="M72 216h26v130H72zM102 216h26v130h-26z"/>
+              <path class="part" data-part="foot" tabindex="0" role="button" aria-pressed="false" aria-label="발목·발" d="M68 346h30v22H68zM102 346h30v22h-30z"/>
+              <text class="cap" x="100" y="392" text-anchor="middle">정면 · 부위를 누르세요</text>
+            </svg>
+            <div class="partlist" id="partList" role="group" aria-label="부위 목록"></div>
+          </div>
+          <div class="bres" id="bodyResult"></div>
         </div>
       </div>
     </section>
@@ -1024,7 +1101,7 @@
       <div><h4>고객센터</h4><a href="#" data-auth>1600-0000 (준비 중)</a><a href="#" data-auth>help@hanbange.kr</a></div>
     </div>
     <div class="bot">
-      <span class="logo"><span class="br">[</span>한방에<span class="br">]</span></span>
+      <span class="logo"><b>한방</b><i>에</i><span class="dot">.</span></span>
       <p class="meta">한방에는 통신판매중개자로서 진료의 당사자가 아니며, 진료·보험 적용 여부는 각 한의원과 보험사의 기준을 따릅니다. 본 페이지는 서비스 기획용 프로토타입이며, 사진은 AI 생성 데모입니다. 사업자 정보 준비 중.</p>
     </div>
   </div>
@@ -1567,6 +1644,37 @@ $('#partnerFormEl').addEventListener('submit', e => {
 /* ======================= 초기화 ======================= */
 $('#colophon').textContent = `입점 한의원 ${CLINICS.length}곳 · ${Object.keys(REGIONS).join(' · ')} · 진료 확인 후기 ${CLINICS.reduce((a, c) => a + c.rvs.length, 0)}개 · 사진은 AI 생성 데모`;
 if (typeof MARBLE !== 'undefined') document.documentElement.style.setProperty('--marble', `url(${MARBLE})`);
+
+/* ======================= 부위 선택 → 치료 안내 ======================= */
+const PARTS = [
+  { k:'head', name:'머리 · 두통·어지럼', short:'머리', sym:'사고 뒤 지속되는 두통, 어지럼, 멍한 느낌, 목 뒤가 당기면서 올라오는 통증. 목 근육 긴장과 함께 오는 경우가 많습니다.', treats:['약침','추나요법','한약(첩약)','물리치료'], dur:'통상 2~4주 · 증상에 따라 조정', ins:'자동차보험 적용 · 본인부담 0원', warn:'구토, 의식 저하, 한쪽 팔다리 힘 빠짐, 말이 어눌해지면 한의원보다 먼저 응급실·신경과 검사가 필요합니다.' },
+  { k:'neck', name:'목·어깨', short:'목·어깨', sym:'후미추돌 뒤 가장 흔한 부위입니다. 목이 잘 안 돌아가고 뻣뻣하며, 어깨 위쪽이 뭉치고 무겁습니다. 다음 날 더 심해지는 경우가 많습니다.', treats:['추나요법','약침','물리치료','한약(첩약)','부항·뜸'], dur:'통상 2~4주 · 주 2~3회', ins:'자동차보험 적용 · 본인부담 0원', warn:'팔 저림이나 감각 이상이 함께 있으면 영상 검사로 신경 압박 여부를 먼저 확인합니다.' },
+  { k:'chest', name:'가슴·갈비 (안전벨트)', short:'가슴·갈비', sym:'안전벨트가 지나간 자리의 통증과 멍, 숨을 크게 쉴 때 아픈 느낌. 타박에 의한 근육·연골 부위 통증이 흔합니다.', treats:['약침','물리치료','한약(첩약)','부항·뜸'], dur:'통상 2~3주', ins:'자동차보험 적용 · 본인부담 0원', warn:'갈비뼈 골절 가능성을 먼저 영상으로 확인합니다. 골절이 배제된 뒤 추나 등 수기 치료를 결정합니다.' },
+  { k:'back', name:'허리·골반', short:'허리·골반', sym:'앉았다 일어날 때 허리가 뻐근하고, 오래 앉아 있기 어렵습니다. 골반이 한쪽으로 틀어진 느낌이 들 수 있습니다.', treats:['추나요법','약침','물리치료','한약(첩약)','부항·뜸','inpatient'], dur:'통상 3~4주 · 심하면 단기 입원 고려', ins:'자동차보험 적용 · 본인부담 0원 · 입원 시 다인실 병실료 포함', warn:'다리로 내려가는 통증이나 저림, 대소변 이상이 있으면 즉시 영상 검사가 필요합니다.' },
+  { k:'arm', name:'손목·팔', short:'손목·팔', sym:'핸들을 잡고 있다 충격을 받으면 손목·팔꿈치·어깨 앞쪽이 아픕니다. 물건을 잡거나 비틀 때 통증이 있습니다.', treats:['약침','물리치료','부항·뜸','스킨이펙터'], dur:'통상 2~3주', ins:'자동차보험 적용 · 본인부담 0원 · 스킨이펙터는 한의원별 확인', warn:'손목이 붓고 특정 지점을 누를 때 심하게 아프면 골절·인대 손상 검사를 먼저 받습니다.' },
+  { k:'leg', name:'무릎·다리', short:'무릎·다리', sym:'대시보드나 브레이크를 밟은 채 충격을 받아 무릎 앞쪽이 아프거나 붓습니다. 계단 오르내릴 때 불편합니다.', treats:['약침','물리치료','부항·뜸','추나요법'], dur:'통상 2~4주', ins:'자동차보험 적용 · 본인부담 0원', warn:'무릎이 붓고 굽히기 어렵거나 힘이 빠지면 인대·연골 손상 검사를 먼저 받습니다.' },
+  { k:'foot', name:'발목·발', short:'발목·발', sym:'페달을 밟은 상태의 충격이나 보행 중 사고 뒤 발목 통증과 부기. 체중을 실을 때 아픕니다.', treats:['약침','물리치료','부항·뜸'], dur:'통상 2~3주', ins:'자동차보험 적용 · 본인부담 0원', warn:'체중을 전혀 실을 수 없거나 발목뼈 돌출 부위가 심하게 아프면 골절 검사를 먼저 받습니다.' },
+];
+const PART_PIC = { head:'<circle cx="12" cy="9" r="5"/><path d="M8 20a4 4 0 0 1 8 0"/>', neck:'<path d="M9 4h6v5l6 2 1 4M9 9l-6 2-1 4"/>', chest:'<rect x="6" y="6" width="12" height="10" rx="2"/><path d="M6 11h12"/>', back:'<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M12 6v12"/>', arm:'<path d="M6 4v14M18 4v14M4 18h4M16 18h4"/>', leg:'<path d="M9 3v18M15 3v18M9 12h6"/>', foot:'<path d="M6 8v8h12v-3l-5-1V8z"/>' };
+const CAT_SLUG = k => (catByKey(k) || {}).slug || 'chuna';
+function renderBody(key) {
+  const part = PARTS.find(x => x.k === key) || PARTS[1];
+  $$('#bodySvg .part').forEach(el => el.setAttribute('aria-pressed', el.dataset.part === part.k));
+  $('#partList').innerHTML = PARTS.map(x => `<button type="button" data-part="${x.k}" aria-pressed="${x.k === part.k}"><svg class="pic" viewBox="0 0 24 24" aria-hidden="true">${PART_PIC[x.k]}</svg>${x.short}</button>`).join('');
+  const chips = part.treats.map(t => { const c = catByKey(t); const st = catCounts(t); const ask = !st.yes.length; return `<a class="${ask ? 'ask' : ''}" href="#/cat/${CAT_SLUG(t)}">${pic(t)}${esc(c ? c.title : t)}<span class="st">${ask ? '한의원 확인' : `제공 ${st.yes.length}곳`}</span></a>`; }).join('');
+  $('#bodyResult').innerHTML = `<div class="h"><h3>${esc(part.name)}</h3><span class="meta">권장 치료 ${part.treats.length}종</span></div>
+    <p class="sym">${esc(part.sym)}</p>
+    <p class="p-sub" style="margin:0 0 10px">받을 수 있는 치료 <span class="meta">· 누르면 치료 설명으로</span></p>
+    <div class="tchips">${chips}</div>
+    <dl class="spec"><div><dt>통상 기간</dt><dd>${esc(part.dur)}</dd></div><div><dt>자동차보험</dt><dd>${esc(part.ins)}</dd></div></dl>
+    <p class="warn">${esc(part.warn)}</p>
+    <div class="cta"><button class="btn primary" type="button" data-body-find="${esc(part.treats[0])}">이 부위 치료하는 한의원 찾기</button><a class="tlink muted" href="#/guide">보험 접수부터 보기 →</a></div>
+    <p class="meta" style="margin-top:12px">일반적인 안내이며 진단이 아닙니다. 실제 치료 구성은 진찰 뒤 한의사가 정합니다.</p>`;
+}
+document.addEventListener('click', e => { const b = e.target.closest('#bodySvg .part, #partList [data-part]'); if (b) { renderBody(b.dataset.part); return; } const f = e.target.closest('[data-body-find]'); if (f) { state.filters = new Set([f.dataset.bodyFind]); state.city = '전체'; state.district = '전체'; renderFind(); go('/find'); } });
+$('#bodySvg').addEventListener('keydown', e => { const t = e.target.closest('.part'); if (t && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); renderBody(t.dataset.part); } });
+renderBody('neck');
+
 /* 히어로 조건 칩 12개 (픽토그램 포함) */
 $('#hotChips').innerHTML = [...FILTERS_T, ...FILTERS_C].map(([k, l]) => `<button class="chip" type="button" data-hot="${esc(k)}" aria-pressed="false">${pic(k)}${l}</button>`).join('');
 /* 섹션 대제목 형광펜 */
