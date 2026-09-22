@@ -1,10 +1,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>한방에</title>
+<title>한방에 · 홈 리디자인 미리보기</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;900&display=swap">
 <style>
-  @font-face { font-family: "Wanted Sans Variable"; font-weight: 100 900; font-style: normal; font-display: swap; src: url("fonts/WantedSansVariable.woff2") format("woff2-variations"), url("fonts/WantedSansVariable.woff2") format("woff2"); }
+  @font-face { font-family: "Wanted Sans Variable"; font-weight: 100 900; font-style: normal; font-display: swap; src: url("../fonts/WantedSansVariable.woff2") format("woff2-variations"), url("../fonts/WantedSansVariable.woff2") format("woff2"); }
   /* ============ tokens (Runway monochrome) ============ */
   :root {
     --black: #0f4a39; --ink: #14483a; --ink-soft: #1a5a48; --graphite: #2e6a54; --slate: #4f8270; --stone: #86a899;
@@ -664,7 +664,10 @@
   @media (max-width: 1023px) { .hero-grid { grid-template-columns: 1fr; } .kv { max-width: 440px; } }
   @media (max-width: 767px) { .hero.kv-hero { padding: 40px 0 48px; } .kv { max-width: 340px; } .orbit .oc { height: 30px; font-size: 12px; padding: 0 10px 0 8px; gap: 6px; } .orbit .oc .st { display: none; } }
 
-  /* 커서: 기본 */
+  /* 약침 커서 — 은색 침 3개가 한 점으로 모이는 화살표형 */
+  html, body { cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='s' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ffffff'/%3E%3Cstop offset='.5' stop-color='%23b9bdc2'/%3E%3Cstop offset='1' stop-color='%23eef0f2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M3 3L28 28' stroke='%236f757c' stroke-width='2.4' stroke-linecap='round' opacity='.3'/%3E%3Cpath d='M3 3L28 28' stroke='url(%23s)' stroke-width='1.4' stroke-linecap='round'/%3E%3Cpath d='M28 28L37 37' stroke='%237d5f3c' stroke-width='4.4' stroke-linecap='round'/%3E%3Cpath d='M28 28L37 37' stroke='%23c9a071' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='37' cy='37' r='2.3' fill='%23a8814f' stroke='%237d5f3c' stroke-width='.8'/%3E%3Cpath d='M3 3L34 18' stroke='%236f757c' stroke-width='2.4' stroke-linecap='round' opacity='.3'/%3E%3Cpath d='M3 3L34 18' stroke='url(%23s)' stroke-width='1.4' stroke-linecap='round'/%3E%3Cpath d='M34 18L44 22' stroke='%237d5f3c' stroke-width='4.4' stroke-linecap='round'/%3E%3Cpath d='M34 18L44 22' stroke='%23c9a071' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='44' cy='22' r='2.3' fill='%23a8814f' stroke='%237d5f3c' stroke-width='.8'/%3E%3Cpath d='M3 3L18 34' stroke='%236f757c' stroke-width='2.4' stroke-linecap='round' opacity='.3'/%3E%3Cpath d='M3 3L18 34' stroke='url(%23s)' stroke-width='1.4' stroke-linecap='round'/%3E%3Cpath d='M18 34L22 44' stroke='%237d5f3c' stroke-width='4.4' stroke-linecap='round'/%3E%3Cpath d='M18 34L22 44' stroke='%23c9a071' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='22' cy='44' r='2.3' fill='%23a8814f' stroke='%237d5f3c' stroke-width='.8'/%3E%3C/svg%3E") 3 3, auto; }
+  a, button, .chip, .cmp, .hs, [role="button"], select, label.sw, .th, .idx-row, .glance a, .oc { cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='s' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ffffff'/%3E%3Cstop offset='.5' stop-color='%23b9bdc2'/%3E%3Cstop offset='1' stop-color='%23eef0f2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M3 3L28 28' stroke='%236f757c' stroke-width='2.4' stroke-linecap='round' opacity='.3'/%3E%3Cpath d='M3 3L28 28' stroke='url(%23s)' stroke-width='1.4' stroke-linecap='round'/%3E%3Cpath d='M28 28L37 37' stroke='%237d5f3c' stroke-width='4.4' stroke-linecap='round'/%3E%3Cpath d='M28 28L37 37' stroke='%23c9a071' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='37' cy='37' r='2.3' fill='%23a8814f' stroke='%237d5f3c' stroke-width='.8'/%3E%3Cpath d='M3 3L34 18' stroke='%236f757c' stroke-width='2.4' stroke-linecap='round' opacity='.3'/%3E%3Cpath d='M3 3L34 18' stroke='url(%23s)' stroke-width='1.4' stroke-linecap='round'/%3E%3Cpath d='M34 18L44 22' stroke='%237d5f3c' stroke-width='4.4' stroke-linecap='round'/%3E%3Cpath d='M34 18L44 22' stroke='%23c9a071' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='44' cy='22' r='2.3' fill='%23a8814f' stroke='%237d5f3c' stroke-width='.8'/%3E%3Cpath d='M3 3L18 34' stroke='%236f757c' stroke-width='2.4' stroke-linecap='round' opacity='.3'/%3E%3Cpath d='M3 3L18 34' stroke='url(%23s)' stroke-width='1.4' stroke-linecap='round'/%3E%3Cpath d='M18 34L22 44' stroke='%237d5f3c' stroke-width='4.4' stroke-linecap='round'/%3E%3Cpath d='M18 34L22 44' stroke='%23c9a071' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='22' cy='44' r='2.3' fill='%23a8814f' stroke='%237d5f3c' stroke-width='.8'/%3E%3Ccircle cx='3.5' cy='3.5' r='3.5' fill='none' stroke='%237fd1b0' stroke-width='1.6'/%3E%3Ccircle cx='3.5' cy='3.5' r='1.3' fill='%237fd1b0'/%3E%3C/svg%3E") 3 3, pointer; }
+  input, textarea { cursor: text; }
 
   /* ===== sub-page headers: same ivory stage as hero ===== */
   .phead, .dark-strip.phead-dark { background: #f4f4ed !important; background-image: none !important; color: var(--ink); border-bottom: 1px solid var(--hair); }
@@ -733,6 +736,50 @@
   .dark-strip.phead-dark .g75 { align-items: center; }
   @media (max-width: 1023px) { .phead-grid { grid-template-columns: 1fr; } .pa-map { aspect-ratio: 1.3; } }
   @media (max-width: 767px) { .pa-card { padding: 18px; } .pa-map .rc.city { height: 44px; font-size: 15px; } .pa-map .rc.d { height: 30px; font-size: 12px; } .pa-guide .big { font-size: 48px; } .pa-kpi .rowsm > div { grid-template-columns: 44px 48px 1fr auto; font-size: 12px; } }
+
+  /* ===== PREVIEW: playful simple home ===== */
+  .promise { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+  .promise span { display: inline-flex; align-items: baseline; gap: 8px; background: #fff; border: 1px solid var(--hair-soft); border-radius: 9999px; padding: 8px 16px 8px 12px; font-size: 13px; color: var(--graphite); }
+  .promise b { font-size: 18px; font-weight: 600; color: #0f3d30; letter-spacing: -.3px; }
+  .story { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 0; padding: 0; list-style: none; counter-reset: none; }
+  .stepc { width: 100%; text-align: left; background: #fff; border: 1px solid var(--hair); border-radius: 18px; padding: 24px; display: grid; gap: 10px; align-content: start; position: relative; min-height: 260px; transition: border-color .12s, transform .12s, background .12s; }
+  .stepc:hover { border-color: var(--ink); transform: translateY(-2px); }
+  .stepc .big { font-size: 40px; font-weight: 500; letter-spacing: -1.5px; line-height: 1; color: #0f3d30; }
+  .stepc .pic-wrap { position: absolute; right: 20px; top: 20px; width: 44px; height: 44px; border-radius: 12px; background: var(--tint); display: grid; place-items: center; } .stepc .pic { width: 22px; height: 22px; color: var(--ink); }
+  .stepc b { font-size: 20px; font-weight: 600; letter-spacing: -.3px; color: var(--ink); margin-top: 6px; }
+  .stepc .d { font-size: 15px; color: var(--graphite); line-height: 1.55; }
+  .stepc .tip { font-size: 13px; color: var(--slate); padding-top: 10px; border-top: 1px dashed var(--hair-soft); margin-top: auto; }
+  .stepc .done { position: absolute; left: 24px; bottom: 24px; display: none; font-size: 12px; font-weight: 600; color: #fff; background: var(--ink); border-radius: 9999px; padding: 3px 10px; }
+  .stepc[aria-pressed="true"] { background: rgba(127,209,176,.16); border-color: var(--mint); }
+  .stepc[aria-pressed="true"] .done { display: inline-block; } .stepc[aria-pressed="true"] .tip { visibility: hidden; }
+  .flips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .flip { position: relative; text-align: left; background: #fff; border: 1px solid var(--hair); border-radius: 16px; min-height: 150px; padding: 22px; display: grid; align-content: center; transition: border-color .12s; }
+  .flip:hover { border-color: var(--ink); }
+  .flip .q { font-size: 22px; font-weight: 500; letter-spacing: -.4px; color: #0f3d30; }
+  .flip .q::after { content: "누르면 답"; display: block; font-size: 12px; color: var(--stone); margin-top: 10px; font-weight: 400; }
+  .flip .a { display: none; gap: 6px; }
+  .flip .a b { display: block; font-size: 26px; font-weight: 600; letter-spacing: -.6px; color: #0f3d30; margin-bottom: 6px; }
+  .flip .a { font-size: 14px; color: var(--graphite); line-height: 1.55; }
+  .flip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); }
+  .flip[aria-pressed="true"] .q { display: none; } .flip[aria-pressed="true"] .a { display: block; color: rgba(255,255,255,.85); } .flip[aria-pressed="true"] .a b { color: #fff; }
+  .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .tier { background: #fff; border: 1px solid var(--hair); border-radius: 16px; padding: 22px; display: grid; gap: 8px; }
+  .tier .tg { font-size: 12px; font-weight: 600; letter-spacing: .2px; color: var(--slate); }
+  .tier b { font-size: 34px; font-weight: 500; letter-spacing: -1.2px; color: #0f3d30; line-height: 1; } .tier b small { font-size: 14px; letter-spacing: 0; margin-left: 4px; color: var(--graphite); }
+  .tier .d { font-size: 14px; color: var(--graphite); line-height: 1.5; }
+  .tier .fit { margin-top: 8px; font-size: 12px; font-weight: 600; color: var(--ink); background: rgba(127,209,176,.25); border-radius: 9999px; padding: 4px 10px; justify-self: start; }
+  .tier.dim .fit { background: var(--tint); color: var(--slate); }
+  .remember { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; background: var(--tint); border-radius: 12px; padding: 14px 16px; font-size: 14px; color: var(--graphite); }
+  .remember .lbl { font-weight: 600; color: var(--ink); margin-right: 4px; } .remember span:not(.lbl)::before { content: "✓ "; color: var(--ink); }
+  .quick { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .qk { text-align: left; background: #fff; border: 1px solid var(--hair); border-radius: 16px; padding: 18px; display: grid; gap: 6px; transition: border-color .12s, background .12s; }
+  .qk .pic { width: 24px; height: 24px; color: var(--slate); margin-bottom: 8px; }
+  .qk b { font-size: 16px; font-weight: 600; color: var(--ink); } .qk .d { font-size: 13px; color: var(--slate); }
+  .qk:hover { border-color: var(--ink); }
+  .qk[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); } .qk[aria-pressed="true"] b, .qk[aria-pressed="true"] .pic { color: #fff; } .qk[aria-pressed="true"] .d { color: rgba(255,255,255,.75); }
+  .quick-cta { display: flex; gap: 16px; align-items: center; margin-top: 20px; flex-wrap: wrap; }
+  @media (max-width: 1023px) { .story, .flips, .tiers { grid-template-columns: 1fr 1fr; } .quick { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 767px) { .story, .flips, .tiers { grid-template-columns: 1fr; } .quick { grid-template-columns: 1fr 1fr; } .stepc { min-height: 0; } .flip { min-height: 120px; } }
 </style>
 
 <a class="skip" href="#main">본문으로 건너가기</a>
@@ -771,7 +818,7 @@
     <div class="hero-text">
       <p class="eyebrow">교통사고 한의원 비교·예약 · 한방에</p>
       <h1 class="display" id="heroTitle">교통사고 처리도,<br><span class="wm"><b>한방</b><i>에</i><span class="dot">.</span></span></h1>
-      <p class="lead">한방(韓方)으로, 한방에. 보험 접수부터 치료, 합의 준비까지 지역별 한의원을 비교하고 바로 예약합니다. 보험사 접수번호가 있으면 본인부담금은 0원입니다.</p>
+      <p class="lead">접수부터 치료, 합의 준비까지. 복잡한 건 한방에가 정리하고, 당신은 고르고 예약만 하면 됩니다.</p><div class="promise"><span><b>0원</b>본인부담</span><span><b>1분</b>온라인 예약</span><span><b>확인된</b>정보만 표시</span></div>
       <form class="search" id="searchForm" role="search">
         <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg>
         <label class="sr" for="q">검색어</label>
@@ -788,10 +835,51 @@
   </div>
 </section>
 
+    <section class="sec story-sec" id="home-story" aria-labelledby="storyTitle">
+      <div class="wrap">
+        <div class="lockup"><p class="eyebrow">지금 뭐부터?</p><h2 class="h-md" id="storyTitle">사고 났어요. 딱 세 가지만 하면 됩니다.</h2><p class="lead">카드를 누르면 완료 표시가 됩니다. 어디까지 했는지 체크해 보세요.</p></div>
+        <ol class="story" id="story">
+          <li><button type="button" class="stepc" data-step="1"><span class="num big">01</span><span class="pic-wrap"><svg class="pic" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.6a2 2 0 0 1-.5 2.1L8.1 9.7a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.7a2 2 0 0 1 1.7 2z"/></svg></span><b>보험사에 전화 한 통</b><span class="d">상대 차 보험사에 "대인 접수요" 한마디. 접수번호가 문자로 옵니다.</span><span class="tip">본인 과실이어도 내 보험사의 자기신체사고로 접수 가능</span><span class="done">완료</span></button></li>
+          <li><button type="button" class="stepc" data-step="2"><span class="num big">02</span><span class="pic-wrap"><svg class="pic" viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></span><b>한의원 골라서 예약</b><span class="d">지역·치료 항목으로 걸러 1분에 예약. 접수번호 없어도 됩니다.</span><span class="tip">입원이 필요하면 예약할 때 "입원 상담"만 켜두세요</span><span class="done">완료</span></button></li>
+          <li><button type="button" class="stepc" data-step="3"><span class="num big">03</span><span class="pic-wrap"><svg class="pic" viewBox="0 0 24 24"><path d="M4 20c0-8 6-14 16-16-1 10-7 16-16 16z"/><path d="M4 20c4-6 8-9 12-11"/></svg></span><b>0원으로 치료받기</b><span class="d">진료비는 한의원이 보험사에 청구. 결제창이 안 뜨는 게 정상입니다.</span><span class="tip">교통비·휴업손해는 보험사에 따로 청구</span><span class="done">완료</span></button></li>
+        </ol>
+        <p class="meta" id="storyMeta">0 / 3 완료 · 카드를 눌러 체크</p>
+      </div>
+    </section>
+
+    <section class="sec rule" id="home-faq" aria-labelledby="faqTitle">
+      <div class="wrap">
+        <div class="lockup"><p class="eyebrow">제일 많이 묻는 것</p><h2 class="h-md" id="faqTitle">궁금한 카드를 뒤집어 보세요.</h2></div>
+        <div class="flips" id="flips">
+          <button type="button" class="flip" aria-pressed="false"><span class="q">돈 내야 해요?</span><span class="a"><b>0원</b>접수번호만 있으면 한의원이 보험사에 청구합니다. 결제 없음.</span></button>
+          <button type="button" class="flip" aria-pressed="false"><span class="q">합의는 언제?</span><span class="a"><b>치료 끝난 뒤</b>합의서에 서명하면 추가 치료비 청구가 어렵습니다. 통증 남았으면 치료 먼저.</span></button>
+          <button type="button" class="flip" aria-pressed="false"><span class="q">추나 몇 번까지?</span><span class="a"><b>제한 없음</b>건강보험의 연 20회 제한은 자보 진료에 적용되지 않습니다. 한의사 판단.</span></button>
+          <button type="button" class="flip" aria-pressed="false"><span class="q">접수번호가 없는데요?</span><span class="a"><b>그래도 진료 OK</b>먼저 치료받고 접수번호는 나중에 알려도 됩니다.</span></button>
+          <button type="button" class="flip" aria-pressed="false"><span class="q">입원 vs 통원?</span><span class="a"><b>통증이 정합니다</b>일상이 어려우면 단기 입원, 아니면 야간·주말 통원. 둘 다 자보 적용.</span></button>
+          <button type="button" class="flip" aria-pressed="false"><span class="q">과실 있으면 치료비도 깎여요?</span><span class="a"><b>아니요</b>과실은 합의금에만 반영. 대인 접수된 치료비는 보험사가 부담.</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec rule" id="home-body" aria-labelledby="bodyTitle">
+      <div class="wrap">
+        <div class="lockup"><p class="eyebrow">어디가 아프세요?</p><h2 class="h-md" id="bodyTitle">아픈 부위를 누르면, 받을 수 있는 치료를 보여드립니다.</h2><p class="lead">사고 뒤 통증은 부위마다 쓰이는 치료가 다릅니다. 부위를 고르면 흔한 증상, 권장 치료, 통상 기간, 자동차보험 적용을 정리해 드립니다.</p></div>
+        <div class="body-grid">
+          <div class="figure">
+            <svg viewBox="0 0 1509 2048" role="group" aria-label="인체 부위 선택" id="bodySvg">
+              <path class="sil" d="M 633.181 492.427 C 645.583 491.787 662.663 492.31 675.31 492.378 L 754.877 492.692 L 834.008 492.277 C 859.601 492.186 887.384 490.796 911.988 498.901 C 935.084 506.782 959.17 523.751 974.259 542.956 C 1060.11 652.23 1105.24 789.008 1130.37 924.168 C 1139.81 976.316 1146.39 1025.43 1148.38 1078.54 C 1151.42 1159.89 1048.48 1184.34 1018.21 1108.97 C 1013.88 1098.19 1013.74 1073.76 1012.86 1061 C 1011.84 1046.81 1010.55 1032.64 1008.98 1018.5 C 998.902 932.432 977.647 827.149 939.684 748.626 C 941.414 835.687 940.121 926.377 940.144 1013.68 L 941.034 1448.54 L 941.428 1690 L 941.372 1764.34 C 941.284 1800.01 943.998 1829.96 917.174 1858.44 C 901.496 1875.17 879.75 1884.88 856.831 1885.4 C 834.05 1885.74 812.108 1876.81 796.021 1860.68 C 782.829 1847.77 774.178 1830.93 771.365 1812.69 C 768.826 1796.66 769.794 1768.88 769.863 1751.7 L 770.163 1651.38 L 769.908 1280.25 L 769.84 1224.26 C 769.865 1209.05 772.208 1187.48 763.016 1174.68 C 758.523 1168.43 749.366 1171.57 745.069 1176.57 C 735.445 1187.78 740.793 1206.85 739.546 1220.53 C 738.923 1260.11 739.206 1299.68 739.176 1339.22 L 739.089 1616.57 L 739.166 1742.3 C 739.251 1785.07 746.329 1827.89 712.672 1860.39 C 678.726 1893.16 627.072 1894.18 593.455 1860.6 C 579.346 1846.44 570.302 1828.03 567.727 1808.21 C 566.303 1796.92 566.844 1780.09 566.897 1768.27 L 567.01 1710.44 L 567.075 1504.71 L 569.932 748.234 C 534.152 815.186 509.024 937.983 500.669 1013.93 C 498.863 1030.63 497.47 1047.38 496.491 1064.16 C 494.886 1088.76 495.684 1109.79 478.729 1129.82 C 467.084 1143.84 450.323 1152.63 432.169 1154.24 C 415.234 1155.73 398.423 1150.25 385.62 1139.06 C 354.975 1112.73 360.432 1075.87 363.655 1039.72 C 376.941 890.71 415.077 738.856 490.359 608.729 C 522.801 552.654 563.249 497.279 633.181 492.427 z"/><path class="sil" d="M 752.182 163.001 C 829.926 161.327 894.395 222.818 896.397 300.554 C 898.398 378.29 837.179 443.017 759.452 445.346 C 681.261 447.688 616.063 386.024 614.05 307.824 C 612.036 229.624 673.974 164.686 752.182 163.001 z"/>
+              <g class="hs" data-part="head" tabindex="0" role="button" aria-pressed="false" aria-label="머리 · 두통·어지럼"><circle class="ring" cx="754" cy="300" r="95"/><circle class="dot" cx="754" cy="300" r="58"/></g><g class="hs" data-part="neck" tabindex="0" role="button" aria-pressed="false" aria-label="목·어깨"><circle class="ring" cx="754" cy="540" r="95"/><circle class="dot" cx="754" cy="540" r="58"/></g><g class="hs" data-part="chest" tabindex="0" role="button" aria-pressed="false" aria-label="상체 · 가슴·갈비뼈"><circle class="ring" cx="754" cy="760" r="95"/><circle class="dot" cx="754" cy="760" r="58"/></g><g class="hs" data-part="back" tabindex="0" role="button" aria-pressed="false" aria-label="허리·골반"><circle class="ring" cx="754" cy="1060" r="95"/><circle class="dot" cx="754" cy="1060" r="58"/></g><g class="hs" data-part="arm" tabindex="0" role="button" aria-pressed="false" aria-label="손목·팔"><circle class="ring" cx="415" cy="980" r="95"/><circle class="dot" cx="415" cy="980" r="58"/></g><g class="hs" data-part="arm" tabindex="0" role="button" aria-pressed="false" aria-label="손목·팔"><circle class="ring" cx="1095" cy="980" r="95"/><circle class="dot" cx="1095" cy="980" r="58"/></g><g class="hs" data-part="leg" tabindex="0" role="button" aria-pressed="false" aria-label="무릎·다리"><circle class="ring" cx="655" cy="1500" r="95"/><circle class="dot" cx="655" cy="1500" r="58"/></g><g class="hs" data-part="leg" tabindex="0" role="button" aria-pressed="false" aria-label="무릎·다리"><circle class="ring" cx="855" cy="1500" r="95"/><circle class="dot" cx="855" cy="1500" r="58"/></g><g class="hs" data-part="foot" tabindex="0" role="button" aria-pressed="false" aria-label="발목·발"><circle class="ring" cx="655" cy="1830" r="95"/><circle class="dot" cx="655" cy="1830" r="58"/></g><g class="hs" data-part="foot" tabindex="0" role="button" aria-pressed="false" aria-label="발목·발"><circle class="ring" cx="855" cy="1830" r="95"/><circle class="dot" cx="855" cy="1830" r="58"/></g>
+            </svg>
+            <div class="partlist" id="partList" role="group" aria-label="부위 목록"></div>
+          </div>
+          <div class="bres" id="bodyResult"></div>
+        </div>
+      </div>
+    </section>
 
     <section class="sec" id="home-data" aria-labelledby="dataTitle">
       <div class="wrap">
-        <div class="lockup"><p class="eyebrow">숫자로 보는 후유증 · 데모</p><h2 class="h-md" id="dataTitle">제대로 치료하지 않으면, 통증은 돌아옵니다.</h2><p class="lead">사고 직후엔 누구나 조금 나아지는 것처럼 느낍니다. 하지만 치료 없이 두면 목·허리 통증은 몇 주 뒤 다시 올라와 만성 통증(후유증)으로 굳는 경우가 많습니다. 초기 2주의 치료가 12주 뒤를 결정합니다. 아래 수치는 실제 통계가 아닌 예시입니다.</p></div>
+        <div class="lockup"><p class="eyebrow">치료 안 하면요? · 데모</p><h2 class="h-md" id="dataTitle">"좀 참으면 낫겟지"가 제일 위험합니다.</h2><p class="lead">처음 2주는 다 나아지는 것처럼 느껴집니다. 그런데 치료 없이 두면 8주쯤부터 통증이 되돌아옵니다. 점선이 그 그림입니다. 예시값입니다.</p></div>
         <div class="data-grid">
           <div>
             <div class="chart-h"><span class="t">치료 여부에 따른 통증 변화 (VAS 0~10)</span><span class="meta">예시 · 사고 뒤 12주</span></div>
@@ -815,73 +903,33 @@
         <p class="meta" style="margin-top:16px">타임라인은 일반적인 흐름의 예시이며, 시기와 치료 구성은 한의사의 판단에 따릅니다.</p>
       </div>
     </section>
-    <section class="sec rule tips" id="home-tips" aria-labelledby="tipsTitle">
+
+    <section class="sec rule" id="home-tier" aria-labelledby="tierTitle">
       <div class="wrap">
-        <div class="lockup"><p class="eyebrow">자동차보험, 알고 가면 다릅니다</p><h2 class="h-md" id="tipsTitle">보험사가 먼저 말해주지 않는 네 가지.</h2><p class="lead">접수번호 하나로 진료비가 0원이 되고, 합의는 치료가 끝난 뒤에 하는 것이 원칙입니다. 아래 숫자와 예시를 기억해 두세요.</p></div>
-        <div class="slab num">
-          <div><div class="big">0<small>원</small></div><div class="l">자보 접수 시 본인부담</div><div class="d">진찰·추나·약침·한약·물리치료·입원 병실료까지. 진료비는 한의원이 보험사에 청구합니다.</div></div>
-          <div><div class="big">20<small>회 제한 없음</small></div><div class="l">추나요법 회차</div><div class="d">건강보험의 연 20회 제한은 자동차보험 진료에 적용되지 않습니다. 회차는 한의사 판단과 보험사 심사에 따릅니다.</div></div>
-          <div><div class="big">치료 뒤</div><div class="l">합의 시점</div><div class="d">합의서에 서명하면 그 사고의 치료비 청구는 원칙적으로 끝납니다. 통증이 남아 있으면 치료를 이어가세요.</div></div>
-          <div><div class="big">+2<small>항목</small></div><div class="l">따로 청구하는 것</div><div class="d">통원 교통비와 휴업손해는 한의원이 아니라 보험사에 직접 청구합니다. 통원 일수와 소득 증빙을 모아두세요.</div></div>
+        <div class="lockup"><p class="eyebrow">합의금, 감만 잡기 · 데모</p><h2 class="h-md" id="tierTitle">내 사고는 어느 칸일까요.</h2><p class="lead">자동차보험 상해급수 기준 세 칸입니다. 한의원 치료 대상은 대부분 왼쭉 두 칸. 숫자는 예시값이고, 자세한 건 보험 가이드에서.</p></div>
+        <div class="tiers">
+          <div class="tier"><span class="tg">상해 14급</span><b class="num">50~120<small>만원</small></b><span class="d">염좌·타박 · 진단 2주<br>통원 2~3주</span><span class="fit">한의원 치료 대상</span></div>
+          <div class="tier"><span class="tg">상해 12~13급</span><b class="num">150~300<small>만원</small></b><span class="d">진단 3주 · 뇌진탕<br>통원 3~4주 또는 입원 3~7일</span><span class="fit">한의원 치료 대상</span></div>
+          <div class="tier dim"><span class="tg">상해 9~11급</span><b class="num">250~500<small>만원</small></b><span class="d">골절·인대 파열<br>입원 1~2주 이상</span><span class="fit">병원 협진 필요</span></div>
         </div>
-        <div class="tips-grid">
-          <div>
-            <div class="chart-h"><span class="t">치료 형태별 합의금 범위</span><span class="meta">예시값 · 만원 · 경상 12~14급 기준</span></div>
-            <div class="rchart" id="settleChart" role="img" aria-label="치료 형태별 합의금 범위 예시 차트"></div>
-            <div class="stack">
-              <div class="chart-h"><span class="t">합의금은 무엇으로 구성되나</span><span class="meta">예시 비율</span></div>
-              <div class="stackbar" role="img" aria-label="합의금 구성 비율 예시: 위자료 45%, 휴업손해 30%, 향후치료비 15%, 교통비·기타 10%" id="stackBar"></div>
-              <div class="legend" id="stackLegend"></div>
-            </div>
-            <p class="meta rnote">익명 사례를 참고한 예시값(데모)입니다. 실제 금액과 비율은 과실 비율·소득·치료 기간·보험사에 따라 크게 다르며, 한방에는 합의를 대행하거나 금액을 보장하지 않습니다.</p>
-          </div>
-          <div class="tips-side">
-            <p class="eyebrow" style="margin-bottom:4px">합의 요령 핵심</p>
-            <ol class="steps">
-              <li><span class="n num">01</span><div><h3 class="h-sm">치료가 끝나기 전엔 합의하지 않기</h3><p class="body">보험사가 재촉해도 "치료 중"이라고 답하면 됩니다. 합의 뒤 추가 치료비는 청구가 어렵습니다.</p></div></li>
-              <li><span class="n num">02</span><div><h3 class="h-sm">첫 제시액은 시작점</h3><p class="body">위자료·휴업손해·향후치료비·교통비 항목별 산출 근거를 요구하고, 통화 내용은 문자로 남기세요.</p></div></li>
-              <li><span class="n num">03</span><div><h3 class="h-sm">기록이 금액을 만듭니다</h3><p class="body">진단서, 진료확인서(통원 일수), 교통비 영수증, 소득 증빙. 한의원 서류는 예약 때 미리 요청하세요.</p></div></li>
-              <li><span class="n num">04</span><div><h3 class="h-sm">과실이 있어도 치료비는 별개</h3><p class="body">과실 비율은 합의금에 반영되지만, 대인 접수된 치료비는 보험사가 부담합니다.</p></div></li>
-            </ol>
-            <div style="display:flex;gap:16px;align-items:center;margin-top:24px;flex-wrap:wrap"><a class="btn primary" href="#/guide">보험 가이드 전체 보기</a><a class="tlink muted" href="#/find">한의원 찾기 →</a></div>
-          </div>
-        </div>
+        <div class="remember"><span class="lbl">합의 전 이것만</span><span>치료 끝나기 전엔 서명 안 하기</span><span>첫 제시액은 시작점</span><span>진단서·통원일수·영수증 모아두기</span><a class="tlink" href="#/guide">보험사별 예시 보기 →</a></div>
       </div>
     </section>
 
-    <section class="sec rule" id="home-body" aria-labelledby="bodyTitle">
+    <section class="sec rule" id="home-quick" aria-labelledby="quickTitle">
       <div class="wrap">
-        <div class="lockup"><p class="eyebrow">어디가 아프세요?</p><h2 class="h-md" id="bodyTitle">아픈 부위를 누르면, 받을 수 있는 치료를 보여드립니다.</h2><p class="lead">사고 뒤 통증은 부위마다 쓰이는 치료가 다릅니다. 부위를 고르면 흔한 증상, 권장 치료, 통상 기간, 자동차보험 적용을 정리해 드립니다.</p></div>
-        <div class="body-grid">
-          <div class="figure">
-            <svg viewBox="0 0 1509 2048" role="group" aria-label="인체 부위 선택" id="bodySvg">
-              <path class="sil" d="M 633.181 492.427 C 645.583 491.787 662.663 492.31 675.31 492.378 L 754.877 492.692 L 834.008 492.277 C 859.601 492.186 887.384 490.796 911.988 498.901 C 935.084 506.782 959.17 523.751 974.259 542.956 C 1060.11 652.23 1105.24 789.008 1130.37 924.168 C 1139.81 976.316 1146.39 1025.43 1148.38 1078.54 C 1151.42 1159.89 1048.48 1184.34 1018.21 1108.97 C 1013.88 1098.19 1013.74 1073.76 1012.86 1061 C 1011.84 1046.81 1010.55 1032.64 1008.98 1018.5 C 998.902 932.432 977.647 827.149 939.684 748.626 C 941.414 835.687 940.121 926.377 940.144 1013.68 L 941.034 1448.54 L 941.428 1690 L 941.372 1764.34 C 941.284 1800.01 943.998 1829.96 917.174 1858.44 C 901.496 1875.17 879.75 1884.88 856.831 1885.4 C 834.05 1885.74 812.108 1876.81 796.021 1860.68 C 782.829 1847.77 774.178 1830.93 771.365 1812.69 C 768.826 1796.66 769.794 1768.88 769.863 1751.7 L 770.163 1651.38 L 769.908 1280.25 L 769.84 1224.26 C 769.865 1209.05 772.208 1187.48 763.016 1174.68 C 758.523 1168.43 749.366 1171.57 745.069 1176.57 C 735.445 1187.78 740.793 1206.85 739.546 1220.53 C 738.923 1260.11 739.206 1299.68 739.176 1339.22 L 739.089 1616.57 L 739.166 1742.3 C 739.251 1785.07 746.329 1827.89 712.672 1860.39 C 678.726 1893.16 627.072 1894.18 593.455 1860.6 C 579.346 1846.44 570.302 1828.03 567.727 1808.21 C 566.303 1796.92 566.844 1780.09 566.897 1768.27 L 567.01 1710.44 L 567.075 1504.71 L 569.932 748.234 C 534.152 815.186 509.024 937.983 500.669 1013.93 C 498.863 1030.63 497.47 1047.38 496.491 1064.16 C 494.886 1088.76 495.684 1109.79 478.729 1129.82 C 467.084 1143.84 450.323 1152.63 432.169 1154.24 C 415.234 1155.73 398.423 1150.25 385.62 1139.06 C 354.975 1112.73 360.432 1075.87 363.655 1039.72 C 376.941 890.71 415.077 738.856 490.359 608.729 C 522.801 552.654 563.249 497.279 633.181 492.427 z"/><path class="sil" d="M 752.182 163.001 C 829.926 161.327 894.395 222.818 896.397 300.554 C 898.398 378.29 837.179 443.017 759.452 445.346 C 681.261 447.688 616.063 386.024 614.05 307.824 C 612.036 229.624 673.974 164.686 752.182 163.001 z"/>
-              <g class="hs" data-part="head" tabindex="0" role="button" aria-pressed="false" aria-label="머리 · 두통·어지럼"><circle class="ring" cx="754" cy="300" r="95"/><circle class="dot" cx="754" cy="300" r="58"/></g><g class="hs" data-part="neck" tabindex="0" role="button" aria-pressed="false" aria-label="목·어깨"><circle class="ring" cx="754" cy="540" r="95"/><circle class="dot" cx="754" cy="540" r="58"/></g><g class="hs" data-part="chest" tabindex="0" role="button" aria-pressed="false" aria-label="상체 · 가슴·갈비뼈"><circle class="ring" cx="754" cy="760" r="95"/><circle class="dot" cx="754" cy="760" r="58"/></g><g class="hs" data-part="back" tabindex="0" role="button" aria-pressed="false" aria-label="허리·골반"><circle class="ring" cx="754" cy="1060" r="95"/><circle class="dot" cx="754" cy="1060" r="58"/></g><g class="hs" data-part="arm" tabindex="0" role="button" aria-pressed="false" aria-label="손목·팔"><circle class="ring" cx="415" cy="980" r="95"/><circle class="dot" cx="415" cy="980" r="58"/></g><g class="hs" data-part="arm" tabindex="0" role="button" aria-pressed="false" aria-label="손목·팔"><circle class="ring" cx="1095" cy="980" r="95"/><circle class="dot" cx="1095" cy="980" r="58"/></g><g class="hs" data-part="leg" tabindex="0" role="button" aria-pressed="false" aria-label="무릎·다리"><circle class="ring" cx="655" cy="1500" r="95"/><circle class="dot" cx="655" cy="1500" r="58"/></g><g class="hs" data-part="leg" tabindex="0" role="button" aria-pressed="false" aria-label="무릎·다리"><circle class="ring" cx="855" cy="1500" r="95"/><circle class="dot" cx="855" cy="1500" r="58"/></g><g class="hs" data-part="foot" tabindex="0" role="button" aria-pressed="false" aria-label="발목·발"><circle class="ring" cx="655" cy="1830" r="95"/><circle class="dot" cx="655" cy="1830" r="58"/></g><g class="hs" data-part="foot" tabindex="0" role="button" aria-pressed="false" aria-label="발목·발"><circle class="ring" cx="855" cy="1830" r="95"/><circle class="dot" cx="855" cy="1830" r="58"/></g>
-            </svg>
-            <div class="partlist" id="partList" role="group" aria-label="부위 목록"></div>
-          </div>
-          <div class="bres" id="bodyResult"></div>
+        <div class="lockup"><p class="eyebrow">3초 고르기</p><h2 class="h-md" id="quickTitle">나한테 중요한 것만 켜고, 찾기.</h2></div>
+        <div class="quick" id="quick">
+          <button type="button" class="qk" data-f="inpatient" aria-pressed="false"><svg class="pic" viewBox="0 0 24 24"><path d="M3 18V8M3 12h18v6M3 16h18"/><path d="M6 12V9h5v3"/></svg><b>입원 가능</b><span class="d">통증 심할 때</span></button>
+          <button type="button" class="qk" data-f="night" aria-pressed="false"><svg class="pic" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><b>야간 진료</b><span class="d">퇴근 후</span></button>
+          <button type="button" class="qk" data-f="weekend" aria-pressed="false"><svg class="pic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg><b>주말 진료</b><span class="d">평일이 바쁠 때</span></button>
+          <button type="button" class="qk" data-f="pickup" aria-pressed="false"><svg class="pic" viewBox="0 0 24 24"><path d="M3 13l2-5a2 2 0 0 1 2-1h10a2 2 0 0 1 2 1l2 5v5H3z"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg><b>픽업 차량</b><span class="d">운전이 어려울 때</span></button>
+          <button type="button" class="qk" data-f="태반주사" aria-pressed="false"><svg class="pic" viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg><b>태반주사</b><span class="d">회복 더딜 때</span></button>
         </div>
+        <div class="quick-cta"><button class="btn primary" type="button" id="quickGo">이 조건으로 한의원 찾기</button><span class="meta" id="quickMeta">조건 없이 전체 12곳</span></div>
       </div>
     </section>
-    <section class="sec rule" id="home-glance" aria-labelledby="glanceTitle">
-      <div class="wrap">
-        <div class="lockup"><p class="eyebrow">한눈에 보기</p><h2 class="h-md" id="glanceTitle">한방에서 할 수 있는 것.</h2></div>
-        <ol class="glance">
-          <li><a href="#/find"><svg class="pic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span class="nm">한의원 찾기</span><span class="one">시·구별 입점 한의원을 치료 항목과 조건으로 걸러 비교하고 예약합니다.</span><span class="st num" id="glanceFind"></span><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" transform="rotate(-90 12 12)"/></svg></a></li>
-          <li><a href="#program"><svg class="pic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20c0-8 6-14 16-16-1 10-7 16-16 16z"/><path d="M4 20c4-6 8-9 12-11"/></svg><span class="nm">치료 프로그램</span><span class="one">추나·약침·태반주사·이펙터·물리치료·한약·입원까지 8가지 치료의 내용, 보험 적용, 제공 한의원.</span><span class="st">8종 · 자보 적용 표시</span><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" transform="rotate(-90 12 12)"/></svg></a></li>
-          <li><a href="#/guide"><svg class="pic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><span class="nm">보험 가이드</span><span class="one">접수번호 받기부터 항목별 적용 원칙, 합의 요령과 합의금 예시까지.</span><span class="st">3단계 · 적용 표 · 합의 요령</span><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" transform="rotate(-90 12 12)"/></svg></a></li>
-          <li><a href="#/reviews"><svg class="pic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg><span class="nm">후기</span><span class="one">진료를 마친 분만 남기는 후기. 사고 유형과 치료 기간이 함께 기록됩니다.</span><span class="st num" id="glanceReviews"></span><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" transform="rotate(-90 12 12)"/></svg></a></li>
-          <li><a href="#/partner"><svg class="pic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5l8-3 8 3v16"/><path d="M9 9h2M13 9h2M9 13h2M13 13h2M10 21v-4h4v4"/></svg><span class="nm">한의원 입점</span><span class="one">예약 관리, 자동차보험 적용 표, 한의원 정보 등록 화면을 데모로 확인하고 문의합니다.</span><span class="st">오픈 기간 무료</span><svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" transform="rotate(-90 12 12)"/></svg></a></li>
-        </ol>
-      </div>
-    </section>
-    <section class="sec rule" id="home-steps" aria-labelledby="homeStepsTitle">
-      <div class="wrap">
-        <div class="lockup"><p class="eyebrow">이용 안내</p><h2 class="h-md" id="homeStepsTitle">사고 직후, 세 단계면 됩니다.</h2></div>
-        <div class="g75"><ol class="steps" id="stepsHome"></ol><div class="side-note"><p class="body">자동차보험이 어디까지 적용되는지, 접수번호가 없을 때는 어떻게 하는지는 보험 가이드에 정리했습니다.</p><a class="btn ghost" href="#/guide" style="margin-top:16px">보험 가이드 보기</a></div></div>
-      </div>
-    </section>
+
     <section class="sec" id="program" aria-labelledby="programTitle">
     <div class="wrap">
       <div class="lockup">
@@ -898,21 +946,6 @@
       </div>
     </div>
   </section>
-
-    <section class="sec rule" id="home-why" aria-labelledby="whyTitle">
-      <div class="wrap">
-        <div class="lockup"><p class="eyebrow">왜 한의원인가</p><h2 class="h-md" id="whyTitle">사고 뒤 통증에 한의원 치료를 고르는 이유.</h2><p class="lead">교통사고 부상의 대부분은 목·허리의 연부조직 손상입니다. 수술이나 강한 진통제 없이 통증과 긴장을 다루는 치료가 중심이 됩니다.</p></div>
-        <ol class="steps why">
-          <li><span class="n num">01</span><div><h3 class="h-sm">비수술·비약물 중심의 회복</h3><p class="body">추나로 관절과 근육의 정렬을 다루고, 약침·물리치료로 국소 통증을, 한약으로 몸 전반의 회복을 돕습니다. 효과와 회차는 개인 상태에 따라 다르며 한의사가 판단합니다.</p></div></li>
-          <li><span class="n num">02</span><div><h3 class="h-sm">자동차보험이 그대로 적용</h3><p class="body">진찰, 추나, 약침, 한약, 물리치료, 입원 병실료까지 자동차보험 진료 항목입니다. 보험사 접수번호가 있으면 본인부담 없이 치료받습니다.</p></div></li>
-          <li><span class="n num">03</span><div><h3 class="h-sm">입원과 통원을 상태에 맞게</h3><p class="body">통증이 심하면 단기 입원으로 집중 치료를, 직장인은 야간·주말 통원을 고를 수 있습니다. 입원 시 다인실 병실료와 식대도 자동차보험으로 처리됩니다.</p></div></li>
-          <li><span class="n num">04</span><div><h3 class="h-sm">합의에 필요한 기록이 남습니다</h3><p class="body">진단서와 진료확인서를 발급받아 통원 일수와 치료 경과를 증명할 수 있습니다. 필요하면 병원 영상 검사와 병행합니다.</p></div></li>
-        </ol>
-      </div>
-    </section>
-
-
-
 
     <section class="sec rule" id="home-find" aria-labelledby="homeFindTitle">
       <div class="wrap g75">
@@ -1267,7 +1300,7 @@
   <button type="button" data-tab="my"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>MY</button>
 </nav>
 
-<script src="photos.js"></script>
+<script src="../photos.js"></script>
 <script>
 /* ======================= 데이터 ======================= */
 const REGIONS = { '서울': ['강남구','서초구','송파구','중구','마포구','성동구','관악구'], '대구': ['북구'], '대전': ['서구'] };
@@ -1862,6 +1895,17 @@ $('#hotChips').innerHTML = [...FILTERS_T, ...FILTERS_C].map(([k, l]) => `<button
 $$('.phead .display, .dark-strip.phead-dark .display').forEach(h => { if (!h.querySelector('.hl')) h.innerHTML = `<span class="hl">${h.innerHTML}</span>`; });
 $$('.h-md').forEach(h => { if (h.closest('.phead, .hero, .dark-strip, .foot, .sheet, .modal')) return; if (h.querySelector('.hl')) return; h.innerHTML = `<span class="hl">${h.innerHTML}</span>`; });
 renderIndex(); renderFind(); renderCbar();
+
+/* PREVIEW interactions */
+(function preview() {
+  const story = $('#story'); if (story) { story.addEventListener('click', e => { const b = e.target.closest('.stepc'); if (!b) return; b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true'); const n = $$('.stepc[aria-pressed="true"]', story).length; $('#storyMeta').textContent = n === 3 ? '3 / 3 완료 · 이제 한의원만 고르면 됩니다' : `${n} / 3 완료 · 카드를 눌러 체크`; }); }
+  const flips = $('#flips'); if (flips) flips.addEventListener('click', e => { const b = e.target.closest('.flip'); if (b) b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true'); });
+  const quick = $('#quick'); if (quick) {
+    const sync = () => { const ks = $$('.qk[aria-pressed="true"]', quick).map(b => b.dataset.f); const scope = CLINICS.filter(c => ks.every(k => filterStatus(c, k) === 'yes')).length; const ask = CLINICS.filter(c => ks.every(k => filterStatus(c, k) !== 'no') && ks.some(k => filterStatus(c, k) === 'ask')).length; $('#quickMeta').textContent = ks.length ? `${ks.map(k => FILTER_LABEL[k]).join(' · ')} · 확인된 ${scope}곳${ask ? ` · 확인 중 ${ask}곳` : ''}` : `조건 없이 전체 ${CLINICS.length}곳`; };
+    quick.addEventListener('click', e => { const b = e.target.closest('.qk'); if (!b) return; b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true'); sync(); });
+    $('#quickGo').addEventListener('click', () => { state.filters = new Set($$('.qk[aria-pressed="true"]', quick).map(b => b.dataset.f)); state.city = '전체'; state.district = '전체'; renderFind(); go('/find'); });
+  }
+})();
 /* 합의금 범위 예시 (데모값, 만원) — 단일 계열 범위 차트 */
 const SETTLE = [ { k:'통원 1주 이내', sub:'진단 2주 이내 · 경상', min:30, max:80 }, { k:'통원 2~3주', sub:'주 2~3회 통원', min:60, max:150 }, { k:'통원 4주 이상', sub:'경과 관찰 포함', min:100, max:250 }, { k:'입원 3~7일 + 통원', sub:'급성기 단기 입원', min:150, max:300 }, { k:'입원 2주 이상', sub:'집중 치료 · 휴업손해 포함', min:250, max:500 } ];
 const SET_MAX = 500;
