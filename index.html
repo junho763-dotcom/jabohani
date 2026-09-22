@@ -733,6 +733,51 @@
   .dark-strip.phead-dark .g75 { align-items: center; }
   @media (max-width: 1023px) { .phead-grid { grid-template-columns: 1fr; } .pa-map { aspect-ratio: 1.3; } }
   @media (max-width: 767px) { .pa-card { padding: 18px; } .pa-map .rc.city { height: 44px; font-size: 15px; } .pa-map .rc.d { height: 30px; font-size: 12px; } .pa-guide .big { font-size: 48px; } .pa-kpi .rowsm > div { grid-template-columns: 44px 48px 1fr auto; font-size: 12px; } }
+
+  /* ===== 빠른 문진 (chat) ===== */
+  .hero-cta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 28px; margin-bottom: -16px; }
+  .hero-cta .btn.lg { height: 52px; padding: 0 26px; font-size: 15px; }
+  .chat-wrap { padding: 48px 0 120px; }
+  .chat-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 32px 56px; align-items: start; }
+  .chat-side { position: sticky; top: calc(var(--nav-h) + 24px); }
+  .chat-side .display { font-size: 36px; margin-top: 12px; color: #0f3d30; }
+  .chat-side .lead { margin-top: 16px; }
+  .chat-progress { display: flex; align-items: center; gap: 12px; margin: 24px 0 12px; }
+  .chat-progress .bar { flex: 1; height: 6px; background: var(--tint); border-radius: 3px; overflow: hidden; }
+  .chat-progress .bar i { display: block; height: 100%; width: 0; background: var(--ink); border-radius: 3px; transition: width .3s ease; }
+  .chat { background: #fff; border: 1px solid var(--hair); border-radius: 20px; padding: 20px; min-height: 520px; display: grid; gap: 6px; align-content: start; }
+  .msg { display: flex; gap: 10px; align-items: flex-end; animation: fade .18s ease-out; }
+  .msg .av { width: 32px; height: 32px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; font-size: 12px; font-weight: 900; flex: 0 0 auto; position: relative; }
+  .msg .av::after { content: ""; position: absolute; right: -1px; bottom: -1px; width: 9px; height: 9px; border-radius: 50%; background: var(--mint, #7fd1b0); border: 2px solid #fff; }
+  .msg .bubble { max-width: 82%; padding: 12px 15px; border-radius: 18px 18px 18px 6px; background: var(--tint); color: var(--ink); font-size: 15px; line-height: 1.55; }
+  .msg .bubble .sub { display: block; font-size: 12.5px; color: var(--slate); margin-top: 4px; }
+  .msg.me { justify-content: flex-end; }
+  .msg.me .bubble { background: var(--ink); color: #fff; border-radius: 18px 18px 6px 18px; }
+  .msg.wide .bubble { max-width: 100%; width: 100%; background: #fff; border: 1px solid var(--hair); }
+  .opts { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 14px 42px; animation: fade .18s ease-out; }
+  .opt { height: 40px; padding: 0 16px; border-radius: 9999px; border: 1px solid var(--hair-soft); background: #fff; color: var(--ink); font-size: 14px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; transition: border-color .12s, background .12s; }
+  .opt:hover { border-color: var(--ink); }
+  .opt[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .opt .pic { width: 16px; height: 16px; color: var(--slate); } .opt[aria-pressed="true"] .pic { color: #fff; }
+  .opts .go { height: 40px; padding: 0 18px; }
+  .typing { display: inline-flex; gap: 4px; padding: 4px 2px; }
+  .typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--slate); animation: blink 1s infinite; } .typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+  @keyframes blink { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
+  .res { display: grid; gap: 18px; }
+  .res h4 { font-size: 13px; font-weight: 600; letter-spacing: .2px; color: var(--slate); margin: 0 0 8px; }
+  .res .sum { display: flex; flex-wrap: wrap; gap: 6px; }
+  .res .tchips a { height: 36px; font-size: 13px; }
+  .res .crow { padding: 10px 0; }
+  .res .know li { padding: 8px 0 8px 26px; position: relative; font-size: 14px; color: var(--graphite); line-height: 1.5; border-bottom: 1px solid var(--hair); }
+  .res .know li:last-child { border-bottom: 0; }
+  .res .know li::before { content: counter(k); counter-increment: k; position: absolute; left: 0; top: 9px; width: 18px; height: 18px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 11px; font-weight: 600; display: grid; place-items: center; }
+  .res .know { counter-reset: k; list-style: none; margin: 0; padding: 0; }
+  .res .know b { color: var(--ink); font-weight: 600; }
+  .res .acts { display: flex; gap: 10px; flex-wrap: wrap; padding-top: 6px; }
+  .res .warnbox { background: var(--tint); border-radius: 12px; padding: 12px 14px; font-size: 13px; color: var(--graphite); }
+  .res .warnbox b { color: var(--ink); }
+  @media (max-width: 1023px) { .chat-grid { grid-template-columns: 1fr; } .chat-side { position: static; } .chat-side .display { font-size: 30px; } .chat { min-height: 0; } }
+  @media (max-width: 767px) { .chat-wrap { padding: 24px 0 120px; } .chat { padding: 14px; border-radius: 16px; } .msg .bubble { max-width: 90%; } .opts { margin-left: 0; } .hero-cta .btn.lg { width: 100%; } }
 </style>
 
 <a class="skip" href="#main">본문으로 건너가기</a>
@@ -742,6 +787,7 @@
     <a class="logo" href="#/"><b>한방</b><i>에</i><span class="dot">.</span></a>
     <nav class="menu" aria-label="주요 메뉴">
       <a href="#/">홈</a>
+      <a href="#/chat">빠른 문진</a>
       <a href="#/find">한의원 찾기</a>
       <a href="#/guide">보험 가이드</a>
       <a href="#/reviews">후기 쓰기</a>
@@ -755,6 +801,7 @@
     </div>
   </div>
   <div class="mmenu" id="mobileMenu" data-open="false">
+    <a href="#/chat">빠른 문진</a>
     <a href="#/find">한의원 찾기</a>
     <a href="#/guide">보험 가이드</a>
     <a href="#/reviews">후기 쓰기</a>
@@ -772,6 +819,7 @@
       <p class="eyebrow">교통사고 한의원 비교·예약 · 한방에</p>
       <h1 class="display" id="heroTitle">교통사고 처리도,<br><span class="wm"><b>한방</b><i>에</i><span class="dot">.</span></span></h1>
       <p class="lead">한방(韓方)으로, 한방에. 보험 접수부터 치료, 합의 준비까지 지역별 한의원을 비교하고 바로 예약합니다. 보험사 접수번호가 있으면 본인부담금은 0원입니다.</p>
+      <div class="hero-cta"><a class="btn primary lg" href="#/chat"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>30초 문진으로 한의원 추천 받기</a><span class="meta">7가지만 고르면 치료·한의원·처리 순서를 정리해 드립니다</span></div>
       <form class="search" id="searchForm" role="search">
         <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg>
         <label class="sr" for="q">검색어</label>
@@ -918,6 +966,24 @@
       <div class="wrap g75">
         <div><p class="eyebrow">한의원 찾기</p><h2 class="h-md" id="homeFindTitle" style="margin-top:12px">지역별 입점 한의원을 비교하고 예약합니다.</h2><p class="lead" style="margin-top:16px;max-width:30em">시·구를 고르고 치료 항목과 조건으로 걸러 보세요. 최대 3곳을 비교함에 담아 한 표로 볼 수 있습니다.</p><a class="btn primary" href="#/find" style="margin-top:32px">한의원 찾기</a></div>
         <dl class="spec" id="homeFindStats"></dl>
+      </div>
+    </section>
+  </div>
+
+
+  <!-- ===== CHAT ===== -->
+  <div class="page" data-page="chat" hidden>
+    <section class="chat-wrap">
+      <div class="wrap chat-grid">
+        <aside class="chat-side">
+          <p class="eyebrow">빠른 문진 · 30초</p>
+          <h1 class="display" id="chatPageTitle" tabindex="-1">몇 가지만 고르면<br>알아서 정리해 드립니다.</h1>
+          <p class="lead">다친 부위, 사고 경위, 통증 정도, 보험 접수 상태, 지역. 답을 누르기만 하면 받을 치료와 가까운 한의원, 지금 해야 할 처리 순서가 나옵니다.</p>
+          <div class="chat-progress"><div class="bar"><i id="chatBar"></i></div><span class="meta num" id="chatStep">0 / 7</span></div>
+          <p class="meta">진단이 아니라 안내입니다. 어지럼·구토·마비·의식 저하가 있으면 문진보다 응급실이 먼저입니다.</p>
+          <button class="tlink muted" type="button" id="chatRestart" style="margin-top:8px">처음부터 다시 →</button>
+        </aside>
+        <div class="chat" id="chat" role="log" aria-live="polite"></div>
       </div>
     </section>
   </div>
@@ -1263,7 +1329,7 @@
   <button type="button" class="on" data-tab="top"><svg class="i" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg>홈</button>
   <button type="button" data-tab="find"><svg class="i" viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>찾기</button>
   <button type="button" data-tab="compare"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="16" rx="1"/><rect x="14" y="4" width="7" height="16" rx="1"/></svg>비교<span class="dot" id="tabDot" hidden></span></button>
-  <button type="button" data-tab="my"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>예약</button>
+  <button type="button" data-tab="chat"><svg class="i" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>문진</button>
   <button type="button" data-tab="my"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>MY</button>
 </nav>
 
@@ -1427,7 +1493,7 @@ const pic = k => PIC[k] ? `<svg class="pic" viewBox="0 0 24 24" aria-hidden="tru
 
 /* ======================= 상태 ======================= */
 const state = { city:'전체', district:'전체', filters:new Set(), q:'', sort:'name', compare:new Set(), cat:null, pushed:false, lastTrigger:null, page:null };
-const PAGES = { home:'한방에', find:'한의원 찾기 · 한방에', guide:'보험 가이드 · 한방에', reviews:'후기 쓰기 · 한방에', partner:'입점 문의 · 한방에' };
+const PAGES = { home:'한방에', chat:'빠른 문진 · 한방에', find:'한의원 찾기 · 한방에', guide:'보험 가이드 · 한방에', reviews:'후기 쓰기 · 한방에', partner:'입점 문의 · 한방에' };
 const go = path => { if (location.hash === '#' + path) route(); else location.hash = '#' + path; };
 function route() {
   const h = location.hash || '#/'; const catKey = parseHash(); let page = catKey ? 'home' : (h.replace(/^#\/?/, '').split(/[/?]/)[0] || 'home'); if (!PAGES[page]) page = 'home';
@@ -1760,7 +1826,7 @@ document.addEventListener('click', e => {
   if (!href.startsWith('#/')) { const t = $(href); if (t) { e.preventDefault(); smoothTo(t, navH() + 16); } }
 });
 $('#menuBtn').addEventListener('click', () => { const m = $('#mobileMenu'); const open = m.dataset.open !== 'true'; m.dataset.open = open; $('#menuBtn').setAttribute('aria-expanded', open); $('#menuBtn').setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기'); });
-$('#tabbar').addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if (!b) return; const k = b.dataset.tab; if (k === 'home') go('/'); else if (k === 'find') go('/find'); else if (k === 'compare') state.compare.size >= 2 ? openCompare() : toast('목록에서 "비교함에 담기"를 눌러 2곳 이상 담아 주세요'); else toast('로그인 뒤 사용할 수 있는 화면입니다 (프로토타입)'); });
+$('#tabbar').addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if (!b) return; const k = b.dataset.tab; if (k === 'home') go('/'); else if (k === 'find') go('/find'); else if (k === 'chat') go('/chat'); else if (k === 'compare') state.compare.size >= 2 ? openCompare() : toast('목록에서 "비교함에 담기"를 눌러 2곳 이상 담아 주세요'); else toast('로그인 뒤 사용할 수 있는 화면입니다 (프로토타입)'); });
 const mq = matchMedia('(max-width: 767px)'); const applyTab = () => document.body.classList.toggle('has-tabbar', mq.matches); mq.addEventListener('change', applyTab); applyTab();
 
 /* 폼 공통: 단일/복수 선택 칩 */
@@ -1856,6 +1922,99 @@ renderBody('neck');
   el.innerHTML = links + nodes.map(([name, parent, x, y, cls]) => { const isCity = cls === 'city'; const far = cls.includes('far'); const c = isCity ? cnt(name) : far ? cnt(name, parent) : cnt('서울', name); const label = far ? `${name} ${parent}` : name; const city = isCity ? name : far ? name : '서울', dist = isCity ? '전체' : far ? parent : name; return `<button class="rc ${cls}" type="button" data-city="${city}" data-dist="${dist}" style="left:${x}%;top:${y}%" aria-label="${label} 입점 ${c}곳 보기"><span class="n num">${c}</span>${label}</button>`; }).join('') + '<span class="cap">숫자는 입점 한의원 수 · 누르면 해당 지역으로</span>';
   el.addEventListener('click', e => { const b = e.target.closest('[data-city]'); if (!b) return; state.city = b.dataset.city; state.district = b.dataset.dist; renderFind(); smoothTo($('#find'), navH()); });
 })();
+
+/* ======================= 빠른 문진 (채팅형 추천) ======================= */
+(function chat() {
+  const box = $('#chat'); if (!box) return;
+  const ACC = [['rear', '후미추돌 (뒤에서 받힘)'], ['side', '측면충돌'], ['multi', '다중추돌'], ['walk', '보행 중 사고'], ['bike', '자전거·이륜차'], ['etc', '기타·잘 모름']];
+  const WHEN = [['today', '오늘'], ['yday', '어제'], ['days', '2~3일 전'], ['week', '1주 이상 전']];
+  const PAIN = [['mild', '뻐근한 정도, 일상은 가능'], ['mod', '일상은 되지만 계속 아파요'], ['severe', '움직이기 힘들 정도예요']];
+  const INS = [['have', '접수번호 있어요'], ['soon', '접수 예정이에요'], ['dunno', '어떻게 하는지 몰라요'], ['fault', '내 과실이라 고민이에요']];
+  const COND = [['night', '야간 진료'], ['weekend', '주말 진료'], ['pickup', '픽업 차량'], ['parking', '주차'], ['none', '특별히 없어요']];
+  const Q = [
+    { id: 'part', q: '어디를 다치셨나요?', sub: '가장 불편한 곳 하나만 골라 주세요.', opts: () => PARTS.map(p => [p.k, p.short, PART_PIC[p.k]]) },
+    { id: 'acc', q: '교통사고는 어떻게 나신 건가요?', opts: () => ACC },
+    { id: 'when', q: '사고는 언제였나요?', opts: () => WHEN },
+    { id: 'pain', q: '지금 통증은 어느 정도인가요?', opts: () => PAIN },
+    { id: 'ins', q: '보험사 접수는 하셨나요?', sub: '상대 차 보험사에 대인 접수를 하면 접수번호가 문자로 옵니다.', opts: () => INS },
+    { id: 'city', q: '어느 지역 한의원이 편하세요?', opts: () => Object.keys(REGIONS).map(c => [c, `${c} · 입점 ${CLINICS.filter(x => x.city === c).length}곳`]) },
+    { id: 'dist', q: c => `${c} 어디가 좋으세요?`, opts: a => [['전체', `${a.city} 전체`], ...REGIONS[a.city].map(d => [d, `${d} ${CLINICS.filter(x => x.city === a.city && x.district === d).length}`])] },
+    { id: 'cond', q: '꼭 필요한 조건이 있나요?', sub: '여러 개 골라도 됩니다.', multi: true, opts: () => COND },
+  ];
+  const TOTAL = Q.length - 1; // dist counts with city
+  let ans = {}, step = 0, busy = false;
+  const label = (id, v) => { const src = { part: PARTS.map(p => [p.k, p.short]), acc: ACC, when: WHEN, pain: PAIN, ins: INS, cond: COND }[id]; if (!src) return v; const f = src.find(x => x[0] === v); return f ? f[1] : v; };
+  const bot = (html, wide) => { const m = document.createElement('div'); m.className = 'msg' + (wide ? ' wide' : ''); m.innerHTML = `<span class="av" aria-hidden="true">한</span><div class="bubble">${html}</div>`; box.appendChild(m); return m; };
+  const me = text => { const m = document.createElement('div'); m.className = 'msg me'; m.innerHTML = `<div class="bubble">${esc(text)}</div>`; box.appendChild(m); };
+  const progress = () => { const n = Math.min(step, TOTAL); $('#chatBar').style.width = (n / TOTAL * 100) + '%'; $('#chatStep').textContent = `${n} / ${TOTAL}`; };
+  const scrollBottom = () => { const r = box.getBoundingClientRect(); if (r.bottom > innerHeight - 80) window.scrollTo({ top: window.scrollY + (r.bottom - innerHeight) + 120, behavior: 'smooth' }); };
+  const wait = ms => new Promise(r => setTimeout(r, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : ms));
+  async function ask() {
+    const q = Q[step]; if (!q) return result();
+    if (q.id === 'dist' && !REGIONS[ans.city]) { step++; return ask(); }
+    busy = true; const t = bot('<span class="typing"><i></i><i></i><i></i></span>'); scrollBottom(); await wait(420);
+    t.querySelector('.bubble').innerHTML = `${esc(typeof q.q === 'function' ? q.q(ans.city) : q.q)}${q.sub ? `<span class="sub">${esc(q.sub)}</span>` : ''}`;
+    const opts = document.createElement('div'); opts.className = 'opts'; opts.dataset.id = q.id;
+    opts.innerHTML = q.opts(ans).map(([v, l, pic]) => `<button class="opt" type="button" data-v="${esc(v)}" aria-pressed="false">${pic ? `<svg class="pic" viewBox="0 0 24 24" aria-hidden="true">${pic}</svg>` : ''}${esc(l)}</button>`).join('') + (q.multi ? '<button class="btn primary go" type="button" data-go>선택 완료</button>' : '');
+    box.appendChild(opts); busy = false; scrollBottom();
+  }
+  box.addEventListener('click', e => {
+    if (busy) return;
+    const opts = e.target.closest('.opts'); if (!opts) return handleResult(e);
+    const q = Q.find(x => x.id === opts.dataset.id); const b = e.target.closest('.opt');
+    if (q.multi) {
+      if (b) { if (b.dataset.v === 'none') { $$('.opt', opts).forEach(x => x.setAttribute('aria-pressed', x === b)); } else { b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true'); $('.opt[data-v="none"]', opts)?.setAttribute('aria-pressed', 'false'); } return; }
+      if (!e.target.closest('[data-go]')) return;
+      const vs = $$('.opt[aria-pressed="true"]', opts).map(x => x.dataset.v).filter(v => v !== 'none'); ans[q.id] = vs; opts.remove(); me(vs.length ? vs.map(v => label(q.id, v)).join(', ') : '특별히 없어요');
+    } else { if (!b) return; ans[q.id] = b.dataset.v; opts.remove(); me(b.textContent.trim()); }
+    step++; progress(); ask();
+  });
+  function pick(city, dist, conds, needBed) {
+    const scope = CLINICS.filter(c => c.city === city && (dist === '전체' || c.district === dist));
+    const score = c => { let sc = 0; conds.forEach(k => { const st = condStatus(c, k); sc += st === 'yes' ? 3 : st === 'ask' ? 1 : -5; }); if (needBed) sc += c.beds > 0 ? 3 : c.beds === null ? 1 : -2; return sc; };
+    return scope.map(c => [score(c), c]).sort((a, b) => b[0] - a[0] || a[1].name.localeCompare(b[1].name, 'ko')).map(x => x[1]);
+  }
+  function result() {
+    progress(); busy = true;
+    const part = PARTS.find(p => p.k === ans.part) || PARTS[1]; const severe = ans.pain === 'severe'; const conds = (ans.cond || []).filter(v => v !== 'none');
+    const list = pick(ans.city, ans.dist || '전체', conds, severe); const top = list.slice(0, 3);
+    const treats = [...part.treats]; if (severe && !treats.includes('inpatient')) treats.push('inpatient');
+    const know = [];
+    if (['today', 'yday'].includes(ans.when)) know.push('<b>오늘 안에 진찰</b>부터. 사고 직후엔 통증이 덜 느껴지고 다음 날 심해지는 경우가 많습니다. 진찰 기록이 이후 보험 처리의 출발점입니다.');
+    if (ans.when === 'week') know.push('<b>사고 뒤 1주가 지났어도</b> 지금부터 치료 기록을 남기면 됩니다. 늦었다고 미루면 만성화 위험만 커집니다.');
+    if (ans.ins === 'have') know.push('예약할 때 <b>접수번호</b>를 입력하면 진료비는 한의원이 보험사에 청구합니다. 본인부담 0원.');
+    if (ans.ins === 'soon' || ans.ins === 'dunno') know.push('<b>상대 차 보험사 콜센터</b>에 "대인 접수 요청"이라고 말하면 접수번호가 문자로 옵니다. 사고 일시·장소·상대 차량 번호를 준비하세요. 접수 전이어도 예약·진료는 가능합니다.');
+    if (ans.ins === 'fault') know.push('<b>내 과실이어도</b> 내 보험사의 자기신체사고(자손) 담보로 접수해 치료받을 수 있습니다. 과실은 합의금에만 반영되고, 접수된 치료비는 보험사가 부담합니다.');
+    if (ans.acc === 'walk' || ans.acc === 'bike') know.push('보행·이륜차 사고는 <b>상대 차량 보험사</b>에 대인 접수합니다. 경찰 신고 번호가 있으면 접수가 빨라집니다.');
+    if (ans.acc === 'multi') know.push('다중추돌은 <b>과실 정리가 늦어질 수 있어</b> 어느 보험사든 먼저 접수해 치료를 시작하고, 보험사 간 정리는 뒤에 맡기세요.');
+    if (severe) know.push('통증이 심하면 <b>단기 입원</b>을 고려하세요. 예약 폼에서 "입원 상담"을 켜두면 병상 확인 뒤 한의원이 연락합니다. 다인실 병실료·식대는 자보 적용.');
+    know.push('<b>합의는 치료가 끝난 뒤에</b>. 보험사가 먼저 제시하는 금액은 시작점이고, 진단서·통원확인서·영수증이 협상 근거가 됩니다.');
+    const cnt = { yes: CLINICS.filter(c => catStatus(c, part.treats[0]) === 'yes').length };
+    const html = `<div class="res">
+      <div><h4>정리하면</h4><div class="sum"><span class="tag yes">${esc(part.short)}</span><span class="tag fill">${esc(label('acc', ans.acc))}</span><span class="tag fill">${esc(label('when', ans.when))}</span><span class="tag fill">${esc(label('pain', ans.pain))}</span><span class="tag fill">${esc(label('ins', ans.ins))}</span><span class="tag fill">${esc(ans.city)} ${esc(ans.dist === '전체' || !ans.dist ? '전체' : ans.dist)}</span>${conds.map(v => `<span class="tag fill">${esc(label('cond', v))}</span>`).join('')}</div></div>
+      <div><h4>받을 수 있는 치료 · 누르면 설명으로</h4><div class="tchips">${treats.map(t => { const c = catByKey(t); const st = catCounts(t); const ask = !st.yes.length; return `<a class="${ask ? 'ask' : ''}" href="#/cat/${CAT_SLUG(t)}">${pic(t)}${esc(c ? c.title : t)}<span class="st">${ask ? '한의원 확인' : `제공 ${st.yes.length}곳`}</span></a>`; }).join('')}</div><p class="meta" style="margin-top:8px">${esc(part.sym)}</p></div>
+      <div><h4>추천 한의원 · ${esc(ans.city)} ${esc(ans.dist && ans.dist !== '전체' ? ans.dist : '전체')} ${list.length}곳 중 ${top.length}곳</h4>${top.length ? top.map(c => crowHtml(c, catStatus(c, part.treats[0]))).join('') : '<p class="meta">이 지역엔 아직 입점 한의원이 없습니다. 인접 지역을 선택해 보세요.</p>'}${conds.length ? '<p class="meta" style="margin-top:8px">선택한 조건(야간·주말·픽업·주차)은 한의원 확인 전이라 "확인 중"으로 표시됩니다. 전화로 먼저 확인하실 수 있습니다.</p>' : ''}</div>
+      <div><h4>지금 해야 할 것</h4><ol class="know">${know.map(k => `<li>${k}</li>`).join('')}</ol></div>
+      <div class="warnbox"><b>먼저 병원에 가야 하는 경우</b> — ${esc(part.warn)}</div>
+      <div class="acts"><button class="btn primary" type="button" data-more-find>이 조건으로 한의원 더 보기</button><a class="btn ghost" href="#/guide">보험 처리 노하우 더 보기</a><a class="btn ghost" href="#/cat/${CAT_SLUG(part.treats[0])}">치료 자세히</a><button class="tlink muted" type="button" data-restart>처음부터 다시</button></div>
+      <p class="meta">이 문진은 일반적인 안내이며 진단이 아닙니다. 실제 치료 구성은 진찰 뒤 한의사가 정합니다.</p>
+    </div>`;
+    const t = bot('<span class="typing"><i></i><i></i><i></i></span>', true); scrollBottom();
+    wait(500).then(() => { t.querySelector('.bubble').innerHTML = html; busy = false; scrollBottom(); });
+  }
+  function handleResult(e) {
+    if (e.target.closest('[data-more-find]')) { const conds = (ans.cond || []).filter(v => v !== 'none'); state.filters = new Set([...(ans.pain === 'severe' ? ['inpatient'] : []), ...conds]); state.city = ans.city || '전체'; state.district = ans.dist || '전체'; renderFind(); go('/find'); return; }
+    if (e.target.closest('[data-restart]')) return restart();
+    const o = e.target.closest('[data-open]'); if (o) return openDetail(+o.dataset.open);
+    const b = e.target.closest('[data-book]'); if (b) return openBooking(+b.dataset.book);
+  }
+  function restart() { ans = {}; step = 0; busy = false; box.innerHTML = ''; progress(); bot('안녕하세요, 한방에입니다. 사고 뒤 처리, 같이 정리해 볼게요. 답은 누르기만 하면 됩니다.'); ask(); }
+  $('#chatRestart').addEventListener('click', restart);
+  let started = false;
+  const startIfVisible = () => { if (!started && state.page === 'chat') { started = true; restart(); } };
+  window.addEventListener('hashchange', () => setTimeout(startIfVisible, 0)); setTimeout(startIfVisible, 0);
+})();
+
 /* 히어로 조건 칩 12개 (픽토그램 포함) */
 $('#hotChips').innerHTML = [...FILTERS_T, ...FILTERS_C].map(([k, l]) => `<button class="chip" type="button" data-hot="${esc(k)}" aria-pressed="false">${pic(k)}${l}</button>`).join('');
 /* 섹션 대제목 형광펜 */
