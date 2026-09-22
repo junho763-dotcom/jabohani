@@ -776,8 +776,52 @@
   .res .acts { display: flex; gap: 10px; flex-wrap: wrap; padding-top: 6px; }
   .res .warnbox { background: var(--tint); border-radius: 12px; padding: 12px 14px; font-size: 13px; color: var(--graphite); }
   .res .warnbox b { color: var(--ink); }
-  @media (max-width: 1023px) { .chat-grid { grid-template-columns: 1fr; } .chat-side { position: static; } .chat-side .display { font-size: 30px; } .chat { min-height: 0; } }
+  @media (max-width: 1023px) { .chat-grid { grid-template-columns: 1fr; } .chat-side { position: static; } .chat-side .display { font-size: 30px; } .chat-side { overflow: visible; } .chat-side .eyebrow, .chat-side .display, .chat-side > .meta, .chat-side > div { position: relative; z-index: 2; } .chat { min-height: 0; } }
   @media (max-width: 767px) { .chat-wrap { padding: 24px 0 120px; } .chat { padding: 14px; border-radius: 16px; } .msg .bubble { max-width: 90%; } .opts { margin-left: 0; } .hero-cta .btn.lg { width: 100%; } }
+
+  /* ===== 문진 카드 (live) ===== */
+  .chat-side .display { font-size: 30px; }
+  .ccard-wrap { position: relative; margin-top: 20px; }
+  .ccard-bg { position: absolute; left: 50%; top: 50%; width: 175%; max-width: none; aspect-ratio: 1; transform: translate(-50%, -50%); object-fit: cover; opacity: .6; pointer-events: none; -webkit-mask-image: radial-gradient(circle at 50% 50%, transparent 33%, #000 40%, #000 47%, transparent 62%); mask-image: radial-gradient(circle at 50% 50%, transparent 33%, #000 40%, #000 47%, transparent 62%); animation: spin 90s linear infinite; z-index: 0; }
+  @keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+  .ccard { position: relative; z-index: 1; background: #fffdf8; border: 1px solid var(--hair-soft); border-radius: 14px; padding: 18px 18px 20px; box-shadow: 0 24px 60px rgba(20,72,58,.14), inset 0 0 0 1px rgba(255,255,255,.6); background-image: repeating-linear-gradient(0deg, transparent 0 27px, rgba(20,72,58,.05) 27px 28px); }
+  .ccard-h { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 10px; border-bottom: 1.5px solid var(--ink); }
+  .ccard-h .wm { font-size: 20px; } .ccard-no { font-size: 11px; color: var(--slate); letter-spacing: .2px; }
+  .ccard-dots { display: flex; gap: 6px; margin: 10px 0 4px; }
+  .ccard-dots i { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--hair-soft); background: #fff; transition: background .2s, border-color .2s, transform .2s; }
+  .ccard-dots i.on { background: var(--ink); border-color: var(--ink); } .ccard-dots i.now { transform: scale(1.35); border-color: var(--ink); }
+  .ccard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; margin-top: 8px; }
+  .cf { display: grid; gap: 4px; align-content: start; padding: 8px 0; border-bottom: 1px dashed var(--hair-soft); min-height: 56px; }
+  .cf-body { grid-row: span 3; border-bottom: 0; align-content: start; }
+  .cf-wide { grid-column: 1 / -1; border-bottom: 0; }
+  .cf .cl { font-size: 11px; font-weight: 600; letter-spacing: .2px; color: var(--slate); }
+  .cf .cv { font-size: 15px; font-weight: 500; color: var(--ink); min-height: 22px; }
+  .cf .cv.small { font-size: 13px; font-weight: 400; color: var(--graphite); }
+  .cf .cv.fill { animation: pop .28s ease-out; }
+  @keyframes pop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .mini-body { width: 78px; height: 106px; }
+  .mini-body svg { width: 100%; height: 100%; }
+  .mini-body .sil { fill: #dfe8e0; transition: fill .3s; } .mini-body.has .sil { fill: #14483a; }
+  .mini-body .dotp { fill: var(--mint, #7fd1b0); stroke: #fffdf8; stroke-width: 12; opacity: 0; transform-origin: center; transform-box: fill-box; }
+  .mini-body .dotp.on { opacity: 1; animation: ping .6s ease-out; }
+  @keyframes ping { 0% { transform: scale(.4); } 60% { transform: scale(1.4); } 100% { transform: scale(1); } }
+  .tl-dots { display: flex; gap: 6px; align-items: center; }
+  .tl-dots i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--hair-soft); background: #fff; position: relative; }
+  .tl-dots i + i::before { content: ""; position: absolute; right: 100%; top: 50%; width: 6px; height: 1px; background: var(--hair-soft); }
+  .tl-dots i.on { background: var(--ink); border-color: var(--ink); }
+  .gauge { display: flex; gap: 4px; }
+  .gauge i { width: 26px; height: 10px; border-radius: 3px; background: var(--tint); border: 1px solid var(--hair-soft); transition: background .25s; }
+  .gauge i.on { background: var(--ink); border-color: var(--ink); }
+  .gauge.severe i.on { background: #0b2a21; }
+  .seal { position: absolute; right: 14px; bottom: 14px; z-index: 2; }
+  .seal .seal-in { display: grid; place-items: center; gap: 0; width: 92px; height: 92px; border-radius: 50%; border: 3px solid #0f4a39; color: #0f4a39; background: rgba(255,253,248,.85); transform: rotate(-12deg); font-family: "Noto Sans KR", sans-serif; letter-spacing: -.04em; line-height: 1; animation: stamp .5s cubic-bezier(.2,1.4,.4,1); box-shadow: 0 0 0 4px rgba(15,74,57,.08); }
+  .seal .seal-wm { display: block; font-size: 22px; } .seal .seal-in b { font-weight: 900; } .seal .seal-in i { font-style: normal; font-weight: 300; } .seal .seal-in small { display: block; font-size: 9px; font-weight: 600; letter-spacing: .3px; margin-top: 4px; font-family: var(--font); }
+  @keyframes stamp { 0% { opacity: 0; transform: rotate(-12deg) scale(1.8); } 60% { opacity: 1; transform: rotate(-12deg) scale(.96); } 100% { transform: rotate(-12deg) scale(1); } }
+  .ccard.done { border-color: var(--ink); }
+  .opt { transition: border-color .12s, background .12s, transform .08s; } .opt:active { transform: scale(.96); }
+  .msg .bubble { transform-origin: left bottom; animation: bub .22s ease-out; } .msg.me .bubble { transform-origin: right bottom; }
+  @keyframes bub { from { opacity: 0; transform: scale(.94) translateY(6px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 1023px) { .ccard-bg { display: none; } .mini-body { width: 60px; height: 82px; } }
 </style>
 
 <a class="skip" href="#main">본문으로 건너가기</a>
@@ -977,11 +1021,26 @@
       <div class="wrap chat-grid">
         <aside class="chat-side">
           <p class="eyebrow">빠른 문진 · 30초</p>
-          <h1 class="display" id="chatPageTitle" tabindex="-1">몇 가지만 고르면<br>알아서 정리해 드립니다.</h1>
-          <p class="lead">다친 부위, 사고 경위, 통증 정도, 보험 접수 상태, 지역. 답을 누르기만 하면 받을 치료와 가까운 한의원, 지금 해야 할 처리 순서가 나옵니다.</p>
-          <div class="chat-progress"><div class="bar"><i id="chatBar"></i></div><span class="meta num" id="chatStep">0 / 7</span></div>
-          <p class="meta">진단이 아니라 안내입니다. 어지럼·구토·마비·의식 저하가 있으면 문진보다 응급실이 먼저입니다.</p>
-          <button class="tlink muted" type="button" id="chatRestart" style="margin-top:8px">처음부터 다시 →</button>
+          <h1 class="display" id="chatPageTitle" tabindex="-1">답을 누르면<br>문진 카드가 채워집니다.</h1>
+          <div class="ccard-wrap">
+            <img class="ccard-bg" id="ccardBg" alt="" aria-hidden="true">
+            <div class="ccard" id="ccard" aria-live="polite" aria-label="문진 카드">
+              <div class="ccard-h"><span class="wm"><b>한방</b><i>에</i><span class="dot">.</span></span><span class="ccard-no num">문진 카드 · <span id="ccardDate"></span></span></div>
+              <div class="ccard-dots" id="ccardDots" aria-hidden="true"></div>
+              <div class="ccard-grid">
+                <div class="cf cf-body"><span class="cl">다친 부위</span><div class="mini-body" id="miniBody"></div><span class="cv" id="cfPart">—</span></div>
+                <div class="cf"><span class="cl">사고 경위</span><span class="cv" id="cfAcc">—</span></div>
+                <div class="cf"><span class="cl">경과</span><div class="tl-dots" id="cfWhen"><i data-v="today"></i><i data-v="yday"></i><i data-v="days"></i><i data-v="week"></i></div><span class="cv small" id="cfWhenT">—</span></div>
+                <div class="cf"><span class="cl">통증</span><div class="gauge" id="cfPain"><i></i><i></i><i></i></div><span class="cv small" id="cfPainT">—</span></div>
+                <div class="cf"><span class="cl">보험 접수</span><span class="cv" id="cfIns">—</span></div>
+                <div class="cf"><span class="cl">지역</span><span class="cv" id="cfRegion">—</span></div>
+                <div class="cf cf-wide"><span class="cl">조건</span><span class="cv" id="cfCond">—</span></div>
+              </div>
+              <div class="seal" id="ccardSeal" hidden><span class="seal-in"><span class="seal-wm"><b>한방</b><i>에</i></span><small>추천 완료</small></span></div>
+            </div>
+          </div>
+          <p class="meta" style="margin-top:14px">진단이 아니라 안내입니다. 어지럼·구토·마비·의식 저하가 있으면 문진보다 응급실이 먼저입니다.</p>
+          <div style="display:flex;gap:16px;align-items:center;margin-top:8px"><span class="meta num" id="chatStep">0 / 7</span><span class="chat-progress" style="flex:1;margin:0"><span class="bar"><i id="chatBar"></i></span></span><button class="tlink muted" type="button" id="chatRestart">처음부터 다시 →</button></div>
         </aside>
         <div class="chat" id="chat" role="log" aria-live="polite"></div>
       </div>
@@ -1942,6 +2001,25 @@ renderBody('neck');
     { id: 'cond', q: '꼭 필요한 조건이 있나요?', sub: '여러 개 골라도 됩니다.', multi: true, opts: () => COND },
   ];
   const TOTAL = Q.length - 1; // dist counts with city
+  /* 문진 카드 */
+  const CARD = { acc: ACC, when: WHEN, pain: PAIN, ins: INS, cond: COND };
+  const cardDots = $('#ccardDots'); if (cardDots) cardDots.innerHTML = Array.from({ length: TOTAL }, () => '<i></i>').join('');
+  const dateEl = $('#ccardDate'); if (dateEl) dateEl.textContent = new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
+  const bgImg = $('#ccardBg'); if (bgImg && typeof KEYVISUAL !== 'undefined') bgImg.src = KEYVISUAL;
+  (function miniBody() { const host = $('#miniBody'); const src = $('#bodySvg'); if (!host || !src) return; const sils = $$('.sil', src).map(p => `<path class="sil" d="${p.getAttribute('d')}"/>`).join(''); const dots = $$('.hs', src).map(g => { const c = g.querySelector('.dot'); return `<circle class="dotp" data-part="${g.dataset.part}" cx="${c.getAttribute('cx')}" cy="${c.getAttribute('cy')}" r="105"/>`; }).join(''); host.innerHTML = `<svg viewBox="0 0 1509 2048" aria-hidden="true">${sils}${dots}</svg>`; })();
+  const setCv = (id, text) => { const el = $(id); if (!el) return; el.textContent = text; el.classList.remove('fill'); void el.offsetWidth; el.classList.add('fill'); };
+  function updateCard(a, done) {
+    const part = PARTS.find(p => p.k === a.part);
+    setCv('#cfPart', part ? part.short : '—'); const mb = $('#miniBody'); if (mb) { mb.classList.toggle('has', !!part); $$('.dotp', mb).forEach(d => d.classList.toggle('on', !!part && d.dataset.part === part.k)); }
+    setCv('#cfAcc', a.acc ? label('acc', a.acc) : '—');
+    $$('#cfWhen i').forEach(i => i.classList.toggle('on', !!a.when && WHEN.findIndex(w => w[0] === i.dataset.v) <= WHEN.findIndex(w => w[0] === a.when))); setCv('#cfWhenT', a.when ? label('when', a.when) : '—');
+    const lvl = { mild: 1, mod: 2, severe: 3 }[a.pain] || 0; $$('#cfPain i').forEach((i, k) => i.classList.toggle('on', k < lvl)); $('#cfPain')?.classList.toggle('severe', a.pain === 'severe'); setCv('#cfPainT', a.pain ? label('pain', a.pain) : '—');
+    setCv('#cfIns', a.ins ? label('ins', a.ins) : '—');
+    setCv('#cfRegion', a.city ? `${a.city}${a.dist ? ' ' + (a.dist === '전체' ? '전체' : a.dist) : ''}` : '—');
+    setCv('#cfCond', a.cond ? (a.cond.filter(v => v !== 'none').map(v => label('cond', v)).join(' · ') || '특별히 없음') : '—');
+    const n = Math.min(step, TOTAL); $$('#ccardDots i').forEach((d, k) => { d.classList.toggle('on', k < n); d.classList.toggle('now', k === n && !done); });
+    const seal = $('#ccardSeal'); if (seal) { seal.hidden = !done; $('#ccard')?.classList.toggle('done', !!done); }
+  }
   let ans = {}, step = 0, busy = false;
   const label = (id, v) => { const src = { part: PARTS.map(p => [p.k, p.short]), acc: ACC, when: WHEN, pain: PAIN, ins: INS, cond: COND }[id]; if (!src) return v; const f = src.find(x => x[0] === v); return f ? f[1] : v; };
   const bot = (html, wide) => { const m = document.createElement('div'); m.className = 'msg' + (wide ? ' wide' : ''); m.innerHTML = `<span class="av" aria-hidden="true">한</span><div class="bubble">${html}</div>`; box.appendChild(m); return m; };
@@ -1967,7 +2045,7 @@ renderBody('neck');
       if (!e.target.closest('[data-go]')) return;
       const vs = $$('.opt[aria-pressed="true"]', opts).map(x => x.dataset.v).filter(v => v !== 'none'); ans[q.id] = vs; opts.remove(); me(vs.length ? vs.map(v => label(q.id, v)).join(', ') : '특별히 없어요');
     } else { if (!b) return; ans[q.id] = b.dataset.v; opts.remove(); me(b.textContent.trim()); }
-    step++; progress(); ask();
+    step++; progress(); updateCard(ans, false); ask();
   });
   function pick(city, dist, conds, needBed) {
     const scope = CLINICS.filter(c => c.city === city && (dist === '전체' || c.district === dist));
@@ -1975,7 +2053,7 @@ renderBody('neck');
     return scope.map(c => [score(c), c]).sort((a, b) => b[0] - a[0] || a[1].name.localeCompare(b[1].name, 'ko')).map(x => x[1]);
   }
   function result() {
-    progress(); busy = true;
+    progress(); busy = true; updateCard(ans, true);
     const part = PARTS.find(p => p.k === ans.part) || PARTS[1]; const severe = ans.pain === 'severe'; const conds = (ans.cond || []).filter(v => v !== 'none');
     const list = pick(ans.city, ans.dist || '전체', conds, severe); const top = list.slice(0, 3);
     const treats = [...part.treats]; if (severe && !treats.includes('inpatient')) treats.push('inpatient');
@@ -2008,7 +2086,7 @@ renderBody('neck');
     const o = e.target.closest('[data-open]'); if (o) return openDetail(+o.dataset.open);
     const b = e.target.closest('[data-book]'); if (b) return openBooking(+b.dataset.book);
   }
-  function restart() { ans = {}; step = 0; busy = false; box.innerHTML = ''; progress(); bot('안녕하세요, 한방에입니다. 사고 뒤 처리, 같이 정리해 볼게요. 답은 누르기만 하면 됩니다.'); ask(); }
+  function restart() { ans = {}; step = 0; busy = false; box.innerHTML = ''; progress(); updateCard({}, false); bot('안녕하세요, 한방에입니다. 사고 뒤 처리, 같이 정리해 볼게요. 답은 누르기만 하면 됩니다.'); ask(); }
   $('#chatRestart').addEventListener('click', restart);
   let started = false;
   const startIfVisible = () => { if (!started && state.page === 'chat') { started = true; restart(); } };
