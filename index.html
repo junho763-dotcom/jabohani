@@ -851,6 +851,14 @@
   .est .acts { padding-top: 0; }
   @media (max-width: 1023px) { .home-chat .chat-side .display { font-size: 34px; } }
   @media (max-width: 767px) { .home-chat { padding: 20px 0 56px; } .msg.wide .av { display: none; } .msg.wide .bubble { padding: 12px; } .est-chart .rrow, .est-chart .raxis { grid-template-columns: 1fr; } .est-mix .mx { grid-template-columns: 1fr; gap: 4px; } .est-mix .v { text-align: left; } .est-big .num { font-size: 32px; } .cf-est { padding-right: 96px; } }
+
+  .est-cmp { display: grid; gap: 4px; padding: 12px 14px; background: var(--tint); border-radius: 12px; }
+  .est-cmp h5 { margin: 0 0 4px; font-size: 12px; font-weight: 600; color: var(--slate); letter-spacing: .2px; }
+  .est-cmp .rrow { grid-template-columns: 120px 1fr 72px; gap: 10px; padding: 6px 0; border-bottom: 0; } .est-cmp .rrow .lbl, .est-cmp .rrow .val { font-size: 12px; color: var(--graphite); }
+  .est-cmp .rtrack { height: 16px; background-image: none; border-radius: 4px; background: rgba(255,255,255,.7); } .est-cmp .rbar { top: 4px; height: 8px; background: #9fb8ad; }
+  .est-cmp .rrow.hit .rbar { background: var(--ink); height: 10px; top: 3px; } .est-cmp .rrow.hit .lbl, .est-cmp .rrow.hit .val { color: var(--ink); font-weight: 700; }
+  .est-cmp .meta { margin-top: 4px; font-size: 11.5px; }
+  @media (max-width: 767px) { .est-cmp .rrow { grid-template-columns: 1fr; gap: 4px; } }
 </style>
 
 <a class="skip" href="#main">본문으로 건너가기</a>
@@ -891,7 +899,7 @@
         <aside class="chat-side">
           <p class="eyebrow">교통사고 한의원 비교·예약 · 30초 문진</p>
           <h1 class="display" id="chatPageTitle" tabindex="-1">교통사고 처리도,<br><span class="wm"><b>한방</b><i>에</i><span class="dot">.</span></span></h1>
-          <p class="lead">어디를 다쳤는지부터 예상 합의금까지, 답만 누르면 정리됩니다. 오른쪽 채팅에서 바로 시작하세요.</p>
+          <p class="lead">다친 부위, 차량 파손 정도, 상대 보험사까지 답만 누르면 받을 치료와 가까운 한의원, 예상 합의금 범위가 정리됩니다.</p>
           <div class="ccard-wrap">
             <img class="ccard-bg" id="ccardBg" alt="" aria-hidden="true">
             <div class="ccard" id="ccard" aria-live="polite" aria-label="문진 카드">
@@ -904,6 +912,8 @@
                 <div class="cf"><span class="cl">통증</span><div class="gauge" id="cfPain"><i></i><i></i><i></i></div><span class="cv small" id="cfPainT">—</span></div>
                 <div class="cf"><span class="cl">보험 접수</span><span class="cv" id="cfIns">—</span></div>
                 <div class="cf"><span class="cl">지역</span><span class="cv" id="cfRegion">—</span></div>
+                <div class="cf"><span class="cl">차량 파손</span><span class="cv small" id="cfDmg">—</span></div>
+                <div class="cf"><span class="cl">보험사</span><span class="cv small" id="cfInsr">—</span></div>
                 <div class="cf"><span class="cl">진단</span><span class="cv small" id="cfDx">—</span></div>
                 <div class="cf"><span class="cl">입원</span><span class="cv small" id="cfStay">—</span></div>
                 <div class="cf cf-wide"><span class="cl">조건</span><span class="cv" id="cfCond">—</span></div>
@@ -924,7 +934,7 @@
       <p class="eyebrow">교통사고 한의원 비교·예약 · 한방에</p>
       <h2 class="display" id="heroTitle">한방(韓方)으로,<br>지역별 한의원 비교·예약.</h2>
       <p class="lead">보험 접수부터 치료, 합의 준비까지 지역별 한의원을 비교하고 바로 예약합니다. 보험사 접수번호가 있으면 본인부담금은 0원입니다.</p>
-      <div class="hero-cta"><a class="btn primary lg" href="#/chat"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>30초 문진으로 한의원 추천 받기</a><span class="meta">9가지만 고르면 치료·한의원·처리 순서를 정리해 드립니다</span></div>
+      <div class="hero-cta"><a class="btn primary lg" href="#/chat"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>30초 문진으로 한의원 추천 받기</a><span class="meta">11가지만 고르면 치료·한의원·처리 순서를 정리해 드립니다</span></div>
       <form class="search" id="searchForm" role="search">
         <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg>
         <label class="sr" for="q">검색어</label>
@@ -1989,6 +1999,7 @@ renderBody('neck');
 })();
 
 /* 보험사별 합의금 예시 (자리표시값 · 사례 0건) — 상해급수 기준 3구간 */
+const INSURERS = [['DB손해보험', '옛 동부화재', 0], ['삼성화재', '', 5], ['현대해상', '', -5], ['KB손해보험', '', 0], ['메리츠화재', '', -10], ['한화손해보험', '', 5], ['롯데손해보험', '', 0], ['흥국화재', '', -5]];
 (function insurers() {
   const el = $('#insurerTable'); if (!el) return;
   const cols = [
@@ -1997,7 +2008,7 @@ renderBody('neck');
     ['상해 9~11급 · 중등도', '골절·인대 파열 등 · 입원 1~2주 이상 · 병원 협진', 550],
   ];
   const base = [[50, 120], [150, 300], [250, 500]];
-  const rows = [['DB손해보험', '옛 동부화재', 0], ['삼성화재', '', 5], ['현대해상', '', -5], ['KB손해보험', '', 0], ['메리츠화재', '', -10], ['한화손해보험', '', 5], ['롯데손해보험', '', 0], ['흥국화재', '', -5]];
+  const rows = INSURERS;
   el.innerHTML = `<thead><tr><th>보험사</th>${cols.map(([c, d]) => `<th>${c}<span class="d" style="display:block;font-weight:400;color:var(--stone)">${d}</span></th>`).join('')}<th>사례</th></tr></thead><tbody>${rows.map(([n, sub, adj]) => `<tr><td>${n}${sub ? `<span class="d">${sub}</span>` : ''}</td>${base.map(([a, b]) => `<td class="n0 num">${a + adj}~${b + adj}만원<span class="cnt">예시</span></td>`).join('')}<td class="num n0">0건</td></tr>`).join('')}</tbody>`;
   const ch = $('#insurerCharts'); if (!ch) return;
   ch.innerHTML = cols.map(([c, d, max], ci) => { const [a0, b0] = base[ci]; const ticks = [0, max / 5, max * 2 / 5, max * 3 / 5, max * 4 / 5, max].map(v => Math.round(v));
@@ -2023,19 +2034,23 @@ renderBody('neck');
   const WHEN = [['today', '오늘'], ['yday', '어제'], ['days', '2~3일 전'], ['week', '1주 이상 전']];
   const PAIN = [['mild', '뻐근한 정도, 일상은 가능'], ['mod', '일상은 되지만 계속 아파요'], ['severe', '움직이기 힘들 정도예요']];
   const INS = [['have', '접수번호 있어요'], ['soon', '접수 예정이에요'], ['dunno', '어떻게 하는지 몰라요'], ['fault', '내 과실이라 고민이에요']];
+  const DMG = [['scratch', '범퍼 긁힘·살짝 찌그러짐'], ['bumper', '범퍼 교체 수준'], ['hood', '본넷·펜더·문짝 파손'], ['airbag', '에어백 전개·폐차 수준'], ['none', '차량 없음·잘 모름']];
+  const INSR = [...INSURERS.map(([n]) => [n, n]), ['etc', '기타·아직 몰라요']];
   const DX = [['w2', '진단 2주 (염좌·타박)'], ['w3', '진단 3주 이상'], ['fx', '골절·인대 손상'], ['none', '아직 안 받았어요']];
   const STAY = [['out', '통원만 할 거예요'], ['short', '단기 입원 3~7일 고려'], ['long', '입원 2주 이상 필요'], ['dunno', '잘 모르겠어요']];
   const COND = [['night', '야간 진료'], ['weekend', '주말 진료'], ['pickup', '픽업 차량'], ['parking', '주차'], ['none', '특별히 없어요']];
   const Q = [
     { id: 'part', q: '어디를 다치셨나요?', sub: '가장 불편한 곳 하나만 골라 주세요.', opts: () => PARTS.map(p => [p.k, p.short, PART_PIC[p.k]]) },
     { id: 'acc', q: '교통사고는 어떻게 나신 건가요?', opts: () => ACC },
+    { id: 'dmg', q: '차량은 어느 정도 파손됐나요?', sub: '보험사는 차량 파손 정도로 사고 크기를 먼저 판단합니다.', opts: () => DMG },
     { id: 'when', q: '사고는 언제였나요?', opts: () => WHEN },
     { id: 'pain', q: '지금 통증은 어느 정도인가요?', opts: () => PAIN },
     { id: 'ins', q: '보험사 접수는 하셨나요?', sub: '상대 차 보험사에 대인 접수를 하면 접수번호가 문자로 옵니다.', opts: () => INS },
+    { id: 'insurer', q: a => a.ins === 'fault' ? '접수할 보험사는 어디인가요?' : '상대 차 보험사는 어디인가요?', sub: '보험사별 합의 기준 비교에 씁니다.', opts: () => INSR },
     { id: 'dx', q: '진단서는 받으셨나요?', sub: '합의금 범위를 잡는 데 씁니다. 아직이면 "아직"을 눌러도 됩니다.', opts: () => DX },
     { id: 'stay', q: '입원 계획이 있나요?', sub: '입원 여부는 한의사 판단 사항이지만, 합의금 범위가 달라집니다.', opts: () => STAY },
     { id: 'city', q: '어느 지역 한의원이 편하세요?', opts: () => Object.keys(REGIONS).map(c => [c, `${c} · 입점 ${CLINICS.filter(x => x.city === c).length}곳`]) },
-    { id: 'dist', q: c => `${c} 어디가 좋으세요?`, opts: a => [['전체', `${a.city} 전체`], ...REGIONS[a.city].map(d => [d, `${d} ${CLINICS.filter(x => x.city === a.city && x.district === d).length}`])] },
+    { id: 'dist', q: a => `${a.city} 어디가 좋으세요?`, opts: a => [['전체', `${a.city} 전체`], ...REGIONS[a.city].map(d => [d, `${d} ${CLINICS.filter(x => x.city === a.city && x.district === d).length}`])] },
     { id: 'cond', q: '꼭 필요한 조건이 있나요?', sub: '여러 개 골라도 됩니다.', multi: true, opts: () => COND },
   ];
   const TOTAL = Q.length - 1; // dist counts with city
@@ -2052,15 +2067,15 @@ renderBody('neck');
     setCv('#cfAcc', a.acc ? label('acc', a.acc) : '—');
     $$('#cfWhen i').forEach(i => i.classList.toggle('on', !!a.when && WHEN.findIndex(w => w[0] === i.dataset.v) <= WHEN.findIndex(w => w[0] === a.when))); setCv('#cfWhenT', a.when ? label('when', a.when) : '—');
     const lvl = { mild: 1, mod: 2, severe: 3 }[a.pain] || 0; $$('#cfPain i').forEach((i, k) => i.classList.toggle('on', k < lvl)); $('#cfPain')?.classList.toggle('severe', a.pain === 'severe'); setCv('#cfPainT', a.pain ? label('pain', a.pain) : '—');
-    setCv('#cfIns', a.ins ? label('ins', a.ins) : '—'); setCv('#cfDx', a.dx ? label('dx', a.dx) : '—'); setCv('#cfStay', a.stay ? label('stay', a.stay) : '—');
-    const ew = $('#cfEstWrap'); if (ew) { ew.hidden = !done; if (done) { const e = estimate(a); setCv('#cfEst', `${e.row.min}~${e.row.max}만원`); $('#cfEstSub').textContent = `${e.grade} · ${e.row.k}${e.fault ? ' · 과실만큼 감액' : ''}`; } }
+    setCv('#cfIns', a.ins ? label('ins', a.ins) : '—'); setCv('#cfDx', a.dx ? label('dx', a.dx) : '—'); setCv('#cfDmg', a.dmg ? label('dmg', a.dmg) : '—'); setCv('#cfInsr', a.insurer ? label('insurer', a.insurer) : '—'); setCv('#cfStay', a.stay ? label('stay', a.stay) : '—');
+    const ew = $('#cfEstWrap'); if (ew) { ew.hidden = !done; if (done) { const e = estimate(a); setCv('#cfEst', `${e.row.min}~${e.row.max}만원`); $('#cfEstSub').textContent = `${e.grade} · ${e.insurer} · ${e.row.k}${e.fault ? ' · 과실만큼 감액' : ''}`; } }
     setCv('#cfRegion', a.city ? `${a.city}${a.dist ? ' ' + (a.dist === '전체' ? '전체' : a.dist) : ''}` : '—');
     setCv('#cfCond', a.cond ? (a.cond.filter(v => v !== 'none').map(v => label('cond', v)).join(' · ') || '특별히 없음') : '—');
     const n = Math.min(step, TOTAL); $$('#ccardDots i').forEach((d, k) => { d.classList.toggle('on', k < n); d.classList.toggle('now', k === n && !done); });
     const seal = $('#ccardSeal'); if (seal) { seal.hidden = !done; $('#ccard')?.classList.toggle('done', !!done); }
   }
   let ans = {}, step = 0, busy = false;
-  const label = (id, v) => { const src = { part: PARTS.map(p => [p.k, p.short]), acc: ACC, when: WHEN, pain: PAIN, ins: INS, dx: DX, stay: STAY, cond: COND }[id]; if (!src) return v; const f = src.find(x => x[0] === v); return f ? f[1] : v; };
+  const label = (id, v) => { const src = { part: PARTS.map(p => [p.k, p.short]), acc: ACC, when: WHEN, pain: PAIN, ins: INS, dmg: DMG, insurer: INSR, dx: DX, stay: STAY, cond: COND }[id]; if (!src) return v; const f = src.find(x => x[0] === v); return f ? f[1] : v; };
   const bot = (html, wide) => { const m = document.createElement('div'); m.className = 'msg' + (wide ? ' wide' : ''); m.innerHTML = `<span class="av" aria-hidden="true">한</span><div class="bubble">${html}</div>`; box.appendChild(m); return m; };
   const me = text => { const m = document.createElement('div'); m.className = 'msg me'; m.innerHTML = `<div class="bubble">${esc(text)}</div>`; box.appendChild(m); };
   const progress = () => { const n = Math.min(step, TOTAL); $('#chatBar').style.width = (n / TOTAL * 100) + '%'; $('#chatStep').textContent = `${n} / ${TOTAL}`; };
@@ -2070,7 +2085,7 @@ renderBody('neck');
     const q = Q[step]; if (!q) return result();
     if (q.id === 'dist' && !REGIONS[ans.city]) { step++; return ask(); }
     busy = true; const t = bot('<span class="typing"><i></i><i></i><i></i></span>'); scrollBottom(); await wait(420);
-    t.querySelector('.bubble').innerHTML = `${esc(typeof q.q === 'function' ? q.q(ans.city) : q.q)}${q.sub ? `<span class="sub">${esc(q.sub)}</span>` : ''}`;
+    t.querySelector('.bubble').innerHTML = `${esc(typeof q.q === 'function' ? q.q(ans) : q.q)}${q.sub ? `<span class="sub">${esc(q.sub)}</span>` : ''}`;
     const opts = document.createElement('div'); opts.className = 'opts'; opts.dataset.id = q.id;
     opts.innerHTML = q.opts(ans).map(([v, l, pic]) => `<button class="opt" type="button" data-v="${esc(v)}" aria-pressed="false">${pic ? `<svg class="pic" viewBox="0 0 24 24" aria-hidden="true">${pic}</svg>` : ''}${esc(l)}</button>`).join('') + (q.multi ? '<button class="btn primary go" type="button" data-go>선택 완료</button>' : '');
     box.appendChild(opts); busy = false; scrollBottom();
@@ -2094,23 +2109,33 @@ renderBody('neck');
   function estimate(a) {
     const severe = a.pain === 'severe'; let idx;
     if (a.stay === 'long' || a.dx === 'fx') idx = 4; else if (a.stay === 'short') idx = 3; else if (a.dx === 'w3' || severe) idx = 2; else if (a.pain === 'mod' || a.dx === 'w2') idx = 1; else idx = 0;
+    // 사고 크기(차량 파손)로 구간 보정: 큰 사고는 하한을 올리고, 경미 손상은 보험사가 경미사고 기준으로 보는 경우가 많음
+    const floor = { airbag: 3, hood: 2, bumper: 1 }[a.dmg]; if (floor !== undefined && idx < floor) idx = floor;
+    const light = a.dmg === 'scratch';
     const grade = idx >= 4 ? '상해 9~11급' : idx >= 2 ? '상해 12~13급' : '상해 14급';
-    return { idx, row: SETTLE[idx], grade, fault: a.ins === 'fault', fx: a.dx === 'fx' };
+    const insr = INSURERS.find(x => x[0] === a.insurer); const adj = insr ? insr[2] : 0;
+    const base = SETTLE[idx]; const row = { ...base, min: Math.max(0, base.min + adj), max: base.max + adj };
+    return { idx, row, base, grade, adj, insr, insurer: insr ? insr[0] : '보험사 미정', light, fault: a.ins === 'fault', fx: a.dx === 'fx' };
   }
   function estHtml(a) {
     const e = estimate(a); const r = e.row;
     const rows = SETTLE.map((x, i) => `<div class="rrow${i === e.idx ? ' hit' : ''}" title="${x.k}: ${x.min}~${x.max}만원 (예시)"><span class="lbl">${x.k}</span><span class="rtrack" aria-hidden="true"><span class="rbar" style="left:${x.min / SET_MAX * 100}%;width:${(x.max - x.min) / SET_MAX * 100}%"></span></span><span class="val num">${x.min}~${x.max}</span></div>`).join('');
     const mix = STACK.map(([n, pct, cls, d]) => `<div class="mx"><span class="k">${n}<small>${d}</small></span><span class="b" aria-hidden="true"><i class="${cls}" style="width:${pct}%"></i></span><span class="v num">${Math.round(r.min * pct / 100)}~${Math.round(r.max * pct / 100)}<small>만원</small></span></div>`).join('');
+    const cmp = `<div class="est-cmp"><h5>보험사 반영 · 예시 표 기준</h5>${[[e.insurer, e.row], ['8개사 평균', e.base]].map(([n, x], i) => `<div class="rrow${i === 0 ? ' hit' : ''}"><span class="lbl">${esc(n)}</span><span class="rtrack" aria-hidden="true"><span class="rbar" style="left:${x.min / SET_MAX * 100}%;width:${(x.max - x.min) / SET_MAX * 100}%"></span></span><span class="val num">${x.min}~${x.max}</span></div>`).join('')}<p class="meta">${e.insr ? `${esc(e.insurer)}: 예시 표에서 8개사 평균 대비 ${e.adj > 0 ? '+' : ''}${e.adj}만원. ` : '보험사를 고르면 보험사별 예시 기준으로 보정됩니다. '}실제 사례가 쌓이면 이 표가 갱신됩니다(현재 사례 0건).</p></div>`;
     const notes = [];
+    if (e.light) notes.push('범퍼 긁힘 수준의 <b>경미 손상 사고</b>는 보험사가 "경미사고 기준"으로 치료 기간을 짧게 보고 합의금을 낮게 제시하는 경우가 많습니다. 사고 당일 진찰 기록과 진단서가 더 중요해집니다.');
+    if (a.dmg === 'airbag') notes.push('<b>에어백 전개·폐차 수준</b>이면 사고 크기 자체가 상해 근거가 됩니다. 정비 견적서·사고 사진을 보관하고, 병원 영상 검사를 먼저 받으세요.');
+    if (a.dmg === 'hood' || a.dmg === 'bumper') notes.push('<b>차량 수리 견적서</b>를 받아 두세요. 파손 정도가 사고 충격의 객관적 근거가 됩니다.');
     if (e.fault) notes.push('<b>내 과실 비율만큼</b> 위자료·휴업손해에서 감액됩니다. 과실 30%면 대략 30% 낮아진다고 보면 됩니다. 치료비는 별개입니다.');
     if (e.fx) notes.push('골절·인대 손상은 <b>병원 협진</b>이 붙고 급수가 올라가 범위가 넓어집니다. 진단서의 급수를 꼭 확인하세요.');
     if (a.dx === 'none') notes.push('<b>진단서를 받으면</b> 범위가 좁혀집니다. 진단 주수와 상해 급수가 합의금의 출발점입니다.');
     if (a.stay === 'dunno') notes.push('입원 여부는 진찰 뒤 한의사가 정합니다. 예약 폼에서 <b>"입원 상담"</b>을 켜두면 병상 확인 뒤 연락합니다.');
     notes.push('합의는 <b>치료가 끝난 뒤</b>. 첫 제시액은 시작점이고, 진단서·통원확인서·영수증이 근거입니다.');
     return `<div class="est">
-      <div class="est-h"><h4>내 합의금은 얼마나? · 예시</h4><span class="meta">${e.grade} 기준 · 사례 0건 자리표시값</span></div>
+      <div class="est-h"><h4>내 합의금은 얼마나? · 예시</h4><span class="meta">${e.grade} · ${esc(e.insurer)} · ${esc(label('dmg', a.dmg))} 기준 · 사례 0건 예시값</span></div>
       <div class="est-big"><span class="num">${r.min}~${r.max}</span><small>만원</small><span class="est-k">${esc(r.k)} · ${esc(r.sub)}</span></div>
       <div class="rchart est-chart" role="img" aria-label="치료 형태별 합의금 범위 예시, 내 구간 강조">${rows}<div class="raxis"><span></span><span class="ticks num">${[0, 100, 200, 300, 400, 500].map(t => `<span>${t}</span>`).join('')}</span><span></span></div></div>
+      ${cmp}
       <div class="est-mix" aria-label="합의금 구성 예시">${mix}</div>
       <ul class="est-notes">${notes.map(n => `<li>${n}</li>`).join('')}</ul>
       <p class="meta">예시값(만원)입니다. 실제 금액은 과실 비율, 상해 급수, 소득, 치료 기간, 보험사 담당자 재량에 따라 크게 다릅니다. 한방에는 합의를 대행하거나 금액을 보장하지 않습니다.</p>
@@ -2134,7 +2159,7 @@ renderBody('neck');
     know.push('<b>합의는 치료가 끝난 뒤에</b>. 보험사가 먼저 제시하는 금액은 시작점이고, 진단서·통원확인서·영수증이 협상 근거가 됩니다.');
     const cnt = { yes: CLINICS.filter(c => catStatus(c, part.treats[0]) === 'yes').length };
     const html = `<div class="res">
-      <div><h4>정리하면</h4><div class="sum"><span class="tag yes">${esc(part.short)}</span><span class="tag fill">${esc(label('acc', ans.acc))}</span><span class="tag fill">${esc(label('when', ans.when))}</span><span class="tag fill">${esc(label('pain', ans.pain))}</span><span class="tag fill">${esc(label('ins', ans.ins))}</span><span class="tag fill">${esc(label('dx', ans.dx))}</span><span class="tag fill">${esc(label('stay', ans.stay))}</span><span class="tag fill">${esc(ans.city)} ${esc(ans.dist === '전체' || !ans.dist ? '전체' : ans.dist)}</span>${conds.map(v => `<span class="tag fill">${esc(label('cond', v))}</span>`).join('')}</div></div>
+      <div><h4>정리하면</h4><div class="sum"><span class="tag yes">${esc(part.short)}</span><span class="tag fill">${esc(label('acc', ans.acc))}</span><span class="tag fill">${esc(label('when', ans.when))}</span><span class="tag fill">${esc(label('pain', ans.pain))}</span><span class="tag fill">${esc(label('ins', ans.ins))}</span><span class="tag fill">${esc(label('dmg', ans.dmg))}</span><span class="tag fill">${esc(label('insurer', ans.insurer))}</span><span class="tag fill">${esc(label('dx', ans.dx))}</span><span class="tag fill">${esc(label('stay', ans.stay))}</span><span class="tag fill">${esc(ans.city)} ${esc(ans.dist === '전체' || !ans.dist ? '전체' : ans.dist)}</span>${conds.map(v => `<span class="tag fill">${esc(label('cond', v))}</span>`).join('')}</div></div>
       <div><h4>받을 수 있는 치료 · 누르면 설명으로</h4><div class="tchips">${treats.map(t => { const c = catByKey(t); const st = catCounts(t); const ask = !st.yes.length; return `<a class="${ask ? 'ask' : ''}" href="#/cat/${CAT_SLUG(t)}">${pic(t)}${esc(c ? c.title : t)}<span class="st">${ask ? '한의원 확인' : `제공 ${st.yes.length}곳`}</span></a>`; }).join('')}</div><p class="meta" style="margin-top:8px">${esc(part.sym)}</p></div>
       <div><h4>추천 한의원 · ${esc(ans.city)} ${esc(ans.dist && ans.dist !== '전체' ? ans.dist : '전체')} ${list.length}곳 중 ${top.length}곳</h4>${top.length ? top.map(c => crowHtml(c, catStatus(c, part.treats[0]))).join('') : '<p class="meta">이 지역엔 아직 입점 한의원이 없습니다. 인접 지역을 선택해 보세요.</p>'}${conds.length ? '<p class="meta" style="margin-top:8px">선택한 조건(야간·주말·픽업·주차)은 한의원 확인 전이라 "확인 중"으로 표시됩니다. 전화로 먼저 확인하실 수 있습니다.</p>' : ''}</div>
       ${estHtml(ans)}
