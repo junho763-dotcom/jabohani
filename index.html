@@ -838,7 +838,7 @@
   .est-big small { font-size: 16px; font-weight: 600; color: var(--ink); } .est-big .est-k { flex-basis: 100%; font-size: 13px; color: var(--graphite); }
   .est-chart .rrow { grid-template-columns: 120px 1fr 72px; padding: 7px 0; gap: 10px; } .est-chart .rrow .lbl { font-size: 12px; } .est-chart .rrow .val { font-size: 12px; }
   .est-chart .rtrack { height: 18px; } .est-chart .rbar { top: 5px; height: 8px; background: var(--hair-soft); }
-  .est-chart .rrow.hit .rbar { background: var(--ink); height: 12px; top: 3px; box-shadow: 0 0 0 3px rgba(127,209,176,.45); } .est-chart .rrow.hit .lbl, .est-chart .rrow.hit .val { color: var(--ink); font-weight: 700; }
+  .est-chart .rrow.hit .rbar { background: rgba(15,74,57,.22); height: 8px; top: 5px; } .rmark { position: absolute; top: 3px; height: 12px; border-radius: 4px; background: var(--ink); box-shadow: 0 0 0 3px rgba(127,209,176,.5); } .est-chart .val b, .est-cmp .val b { font-weight: 700; } .est-chart .rrow.hit .lbl, .est-chart .rrow.hit .val { color: var(--ink); font-weight: 700; }
   .est-chart .rrow:not(.hit) .lbl, .est-chart .rrow:not(.hit) .val { color: var(--stone); }
   .est-chart .raxis { grid-template-columns: 120px 1fr 72px; gap: 10px; }
   .est-mix { display: grid; gap: 6px; }
@@ -856,7 +856,7 @@
   .est-cmp h5 { margin: 0 0 4px; font-size: 12px; font-weight: 600; color: var(--slate); letter-spacing: .2px; }
   .est-cmp .rrow { grid-template-columns: 120px 1fr 72px; gap: 10px; padding: 6px 0; border-bottom: 0; } .est-cmp .rrow .lbl, .est-cmp .rrow .val { font-size: 12px; color: var(--graphite); }
   .est-cmp .rtrack { height: 16px; background-image: none; border-radius: 4px; background: rgba(255,255,255,.7); } .est-cmp .rbar { top: 4px; height: 8px; background: #9fb8ad; }
-  .est-cmp .rrow.hit .rbar { background: var(--ink); height: 10px; top: 3px; } .est-cmp .rrow.hit .lbl, .est-cmp .rrow.hit .val { color: var(--ink); font-weight: 700; }
+  .est-cmp .rrow.hit .rbar { background: rgba(15,74,57,.22); height: 8px; top: 4px; } .est-cmp .rmark { top: 2px; } .est-cmp .rrow.hit .lbl, .est-cmp .rrow.hit .val { color: var(--ink); font-weight: 700; }
   .est-cmp .meta { margin-top: 4px; font-size: 11.5px; }
   @media (max-width: 767px) { .est-cmp .rrow { grid-template-columns: 1fr; gap: 4px; } }
 </style>
@@ -2068,7 +2068,7 @@ const INSURERS = [['DB손해보험', '옛 동부화재', 0], ['삼성화재', ''
     $$('#cfWhen i').forEach(i => i.classList.toggle('on', !!a.when && WHEN.findIndex(w => w[0] === i.dataset.v) <= WHEN.findIndex(w => w[0] === a.when))); setCv('#cfWhenT', a.when ? label('when', a.when) : '—');
     const lvl = { mild: 1, mod: 2, severe: 3 }[a.pain] || 0; $$('#cfPain i').forEach((i, k) => i.classList.toggle('on', k < lvl)); $('#cfPain')?.classList.toggle('severe', a.pain === 'severe'); setCv('#cfPainT', a.pain ? label('pain', a.pain) : '—');
     setCv('#cfIns', a.ins ? label('ins', a.ins) : '—'); setCv('#cfDx', a.dx ? label('dx', a.dx) : '—'); setCv('#cfDmg', a.dmg ? label('dmg', a.dmg) : '—'); setCv('#cfInsr', a.insurer ? label('insurer', a.insurer) : '—'); setCv('#cfStay', a.stay ? label('stay', a.stay) : '—');
-    const ew = $('#cfEstWrap'); if (ew) { ew.hidden = !done; if (done) { const e = estimate(a); setCv('#cfEst', `${e.row.min}~${e.row.max}만원`); $('#cfEstSub').textContent = `${e.grade} · ${e.insurer} · ${e.row.k}${e.fault ? ' · 과실만큼 감액' : ''}`; } }
+    const ew = $('#cfEstWrap'); if (ew) { ew.hidden = !done; if (done) { const e = estimate(a); setCv('#cfEst', `${e.lo}~${e.hi}만원`); $('#cfEstSub').textContent = `${e.grade} · ${e.insurer} · ${e.row.k}${e.fault ? ' · 과실만큼 감액' : ''}`; } }
     setCv('#cfRegion', a.city ? `${a.city}${a.dist ? ' ' + (a.dist === '전체' ? '전체' : a.dist) : ''}` : '—');
     setCv('#cfCond', a.cond ? (a.cond.filter(v => v !== 'none').map(v => label('cond', v)).join(' · ') || '특별히 없음') : '—');
     const n = Math.min(step, TOTAL); $$('#ccardDots i').forEach((d, k) => { d.classList.toggle('on', k < n); d.classList.toggle('now', k === n && !done); });
@@ -2115,13 +2115,20 @@ const INSURERS = [['DB손해보험', '옛 동부화재', 0], ['삼성화재', ''
     const grade = idx >= 4 ? '상해 9~11급' : idx >= 2 ? '상해 12~13급' : '상해 14급';
     const insr = INSURERS.find(x => x[0] === a.insurer); const adj = insr ? insr[2] : 0;
     const base = SETTLE[idx]; const row = { ...base, min: Math.max(0, base.min + adj), max: base.max + adj };
-    return { idx, row, base, grade, adj, insr, insurer: insr ? insr[0] : '보험사 미정', light, fault: a.ins === 'fault', fx: a.dx === 'fx' };
+    // 구간 안에서 위치를 잡아 좁은 예상 범위로: 통증·진단·파손·입원 신호 평균
+    const sig = []; const pushSig = (m, k) => { const v = m[k]; if (v !== undefined) sig.push(v); };
+    pushSig({ mild: 0, mod: .5, severe: 1 }, a.pain); pushSig({ none: .3, w2: .3, w3: .7, fx: 1 }, a.dx); pushSig({ scratch: 0, bumper: .35, hood: .65, airbag: 1 }, a.dmg); pushSig({ out: .2, short: .5, long: .9, dunno: .4 }, a.stay);
+    const t = sig.length ? sig.reduce((x, y) => x + y, 0) / sig.length : .5;
+    const span = row.max - row.min, center = row.min + span * t, half = Math.max(10, Math.round(span * .15 / 5) * 5), r5 = v => Math.round(v / 5) * 5;
+    const lo = Math.max(row.min, r5(center - half)), hi = Math.min(row.max, r5(center + half));
+    return { idx, row, base, lo, hi, t, grade, adj, insr, insurer: insr ? insr[0] : '보험사 미정', light, fault: a.ins === 'fault', fx: a.dx === 'fx' };
   }
   function estHtml(a) {
     const e = estimate(a); const r = e.row;
-    const rows = SETTLE.map((x, i) => `<div class="rrow${i === e.idx ? ' hit' : ''}" title="${x.k}: ${x.min}~${x.max}만원 (예시)"><span class="lbl">${x.k}</span><span class="rtrack" aria-hidden="true"><span class="rbar" style="left:${x.min / SET_MAX * 100}%;width:${(x.max - x.min) / SET_MAX * 100}%"></span></span><span class="val num">${x.min}~${x.max}</span></div>`).join('');
-    const mix = STACK.map(([n, pct, cls, d]) => `<div class="mx"><span class="k">${n}<small>${d}</small></span><span class="b" aria-hidden="true"><i class="${cls}" style="width:${pct}%"></i></span><span class="v num">${Math.round(r.min * pct / 100)}~${Math.round(r.max * pct / 100)}<small>만원</small></span></div>`).join('');
-    const cmp = `<div class="est-cmp"><h5>보험사 반영 · 예시 표 기준</h5>${[[e.insurer, e.row], ['8개사 평균', e.base]].map(([n, x], i) => `<div class="rrow${i === 0 ? ' hit' : ''}"><span class="lbl">${esc(n)}</span><span class="rtrack" aria-hidden="true"><span class="rbar" style="left:${x.min / SET_MAX * 100}%;width:${(x.max - x.min) / SET_MAX * 100}%"></span></span><span class="val num">${x.min}~${x.max}</span></div>`).join('')}<p class="meta">${e.insr ? `${esc(e.insurer)}: 예시 표에서 8개사 평균 대비 ${e.adj > 0 ? '+' : ''}${e.adj}만원. ` : '보험사를 고르면 보험사별 예시 기준으로 보정됩니다. '}실제 사례가 쌓이면 이 표가 갱신됩니다(현재 사례 0건).</p></div>`;
+    const mark = `<span class="rmark" style="left:${e.lo / SET_MAX * 100}%;width:${Math.max(1.2, (e.hi - e.lo) / SET_MAX * 100)}%"></span>`;
+    const rows = SETTLE.map((x, i) => `<div class="rrow${i === e.idx ? ' hit' : ''}" title="${x.k}: ${x.min}~${x.max}만원 (예시)"><span class="lbl">${x.k}</span><span class="rtrack" aria-hidden="true"><span class="rbar" style="left:${x.min / SET_MAX * 100}%;width:${(x.max - x.min) / SET_MAX * 100}%"></span>${i === e.idx ? mark : ''}</span><span class="val num">${i === e.idx ? `<b>${e.lo}~${e.hi}</b>` : `${x.min}~${x.max}`}</span></div>`).join('');
+    const mix = STACK.map(([n, pct, cls, d]) => `<div class="mx"><span class="k">${n}<small>${d}</small></span><span class="b" aria-hidden="true"><i class="${cls}" style="width:${pct}%"></i></span><span class="v num">${Math.round(e.lo * pct / 100)}~${Math.round(e.hi * pct / 100)}<small>만원</small></span></div>`).join('');
+    const cmp = `<div class="est-cmp"><h5>보험사 반영 · 예시 표 기준</h5>${[[e.insurer, e.row], ['8개사 평균', e.base]].map(([n, x], i) => `<div class="rrow${i === 0 ? ' hit' : ''}"><span class="lbl">${esc(n)}</span><span class="rtrack" aria-hidden="true"><span class="rbar" style="left:${x.min / SET_MAX * 100}%;width:${(x.max - x.min) / SET_MAX * 100}%"></span>${i === 0 ? mark : ''}</span><span class="val num">${i === 0 ? `<b>${e.lo}~${e.hi}</b>` : `${x.min}~${x.max}`}</span></div>`).join('')}<p class="meta">${e.insr ? `${esc(e.insurer)}: 예시 표에서 8개사 평균 대비 ${e.adj > 0 ? '+' : ''}${e.adj}만원. ` : '보험사를 고르면 보험사별 예시 기준으로 보정됩니다. '}실제 사례가 쌓이면 이 표가 갱신됩니다(현재 사례 0건).</p></div>`;
     const notes = [];
     if (e.light) notes.push('범퍼 긁힘 수준의 <b>경미 손상 사고</b>는 보험사가 "경미사고 기준"으로 치료 기간을 짧게 보고 합의금을 낮게 제시하는 경우가 많습니다. 사고 당일 진찰 기록과 진단서가 더 중요해집니다.');
     if (a.dmg === 'airbag') notes.push('<b>에어백 전개·폐차 수준</b>이면 사고 크기 자체가 상해 근거가 됩니다. 정비 견적서·사고 사진을 보관하고, 병원 영상 검사를 먼저 받으세요.');
@@ -2133,7 +2140,7 @@ const INSURERS = [['DB손해보험', '옛 동부화재', 0], ['삼성화재', ''
     notes.push('합의는 <b>치료가 끝난 뒤</b>. 첫 제시액은 시작점이고, 진단서·통원확인서·영수증이 근거입니다.');
     return `<div class="est">
       <div class="est-h"><h4>내 합의금은 얼마나? · 예시</h4><span class="meta">${e.grade} · ${esc(e.insurer)} · ${esc(label('dmg', a.dmg))} 기준 · 사례 0건 예시값</span></div>
-      <div class="est-big"><span class="num">${r.min}~${r.max}</span><small>만원</small><span class="est-k">${esc(r.k)} · ${esc(r.sub)}</span></div>
+      <div class="est-big"><span class="num">${e.lo}~${e.hi}</span><small>만원</small><span class="est-k">${esc(r.k)} · ${esc(r.sub)} · 참고 범위 ${r.min}~${r.max}만원</span></div>
       <div class="rchart est-chart" role="img" aria-label="치료 형태별 합의금 범위 예시, 내 구간 강조">${rows}<div class="raxis"><span></span><span class="ticks num">${[0, 100, 200, 300, 400, 500].map(t => `<span>${t}</span>`).join('')}</span><span></span></div></div>
       ${cmp}
       <div class="est-mix" aria-label="합의금 구성 예시">${mix}</div>
