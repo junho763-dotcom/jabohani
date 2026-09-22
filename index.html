@@ -859,6 +859,22 @@
   .est-cmp .rrow.hit .rbar { background: rgba(15,74,57,.22); height: 8px; top: 4px; } .est-cmp .rmark { top: 2px; } .est-cmp .rrow.hit .lbl, .est-cmp .rrow.hit .val { color: var(--ink); font-weight: 700; }
   .est-cmp .meta { margin-top: 4px; font-size: 11.5px; }
   @media (max-width: 767px) { .est-cmp .rrow { grid-template-columns: 1fr; gap: 4px; } }
+
+  /* ===== 보험사 공시 지표 · 표준약관 기준선 ===== */
+  .ins-charts { grid-template-columns: repeat(2, 1fr); }
+  .rbar.solid { background: var(--ink-soft); } .rbar.solid::before { display: none; } .rbar.solid::after { display: none; }
+  .avgline { position: absolute; top: 0; bottom: 0; width: 0; border-left: 2px dashed #7fd1b0; }
+  .avgkey { display: inline-block; width: 0; height: 10px; border-left: 2px dashed #7fd1b0; margin-right: 6px; vertical-align: -1px; }
+  .std-card dl.spec > div { grid-template-columns: 96px 1fr; padding: 9px 0; } .std-card dl.spec dd { font-size: 14px; } .std-card dl.spec dd small { font-size: 12px; }
+  table.insurers tr.avg td { font-weight: 600; color: var(--ink); border-top: 1.5px solid var(--ink); }
+  .est-std { display: grid; grid-template-columns: auto auto 1fr; gap: 4px 12px; align-items: baseline; padding: 10px 12px; border-radius: 10px; background: var(--tint); }
+  .est-std .k { font-size: 12px; font-weight: 600; color: var(--slate); } .est-std .v { font-size: 18px; font-weight: 700; color: var(--ink); } .est-std .d { grid-column: 1 / -1; font-size: 12px; color: var(--graphite); line-height: 1.5; }
+  .est-cmp .ind { display: grid; grid-template-columns: 140px 1fr 120px; gap: 10px; align-items: center; padding: 6px 0; }
+  .est-cmp .ind .lbl { font-size: 12px; color: var(--ink); font-weight: 600; display: grid; } .est-cmp .ind .lbl small { font-weight: 400; color: var(--stone); font-size: 10.5px; }
+  .est-cmp .ind .rtrack { height: 14px; background: rgba(255,255,255,.7); border-radius: 4px; background-image: none; } .est-cmp .ind .rbar { top: 3px; height: 8px; background: var(--ink); } .est-cmp .ind .rbar.good { background: #3f8a6b; }
+  .est-cmp .ind .val { font-size: 12px; font-weight: 700; color: var(--ink); text-align: right; display: grid; } .est-cmp .ind .val small { font-weight: 400; color: var(--slate); font-size: 10.5px; }
+  @media (max-width: 1023px) { .ins-charts { grid-template-columns: 1fr; } }
+  @media (max-width: 767px) { .est-cmp .ind { grid-template-columns: 1fr; gap: 4px; } .est-cmp .ind .val { text-align: left; } .est-std { grid-template-columns: 1fr; } }
 </style>
 
 <a class="skip" href="#main">본문으로 건너가기</a>
@@ -1131,12 +1147,12 @@
 </div></div></div></section>
     <section class="sec" id="guide-insurers" aria-labelledby="guideInsTitle">
       <div class="wrap">
-        <div class="lockup"><p class="eyebrow">보험사별 합의금 · 데모</p><h2 class="h-md" id="guideInsTitle">보험사마다 합의 기준이 다릅니다.</h2><p class="lead">자동차보험 상해급수(1~14급) 기준으로 합의금 범위를 보험사별로 모아 보여드릴 자리입니다. 한의원 치료 대상은 대부분 12~14급 경상이며, 골절 등 9~11급은 병원 협진이 필요합니다. 아래 숫자는 실제 통계가 아닌 자리표시 예시이며, 진료를 마친 분들의 익명 합의 사례가 쌓이면 실제 값으로 교체됩니다. 동부화재는 2017년부터 DB손해보험입니다.</p></div>
+        <div class="lockup"><p class="eyebrow">보험사별 기준 · 공시값</p><h2 class="h-md" id="guideInsTitle">합의금 기준은 모든 보험사가 같습니다. 다른 건 태도입니다.</h2><p class="lead">위자료·휴업손해·교통비의 지급 기준은 금융감독원 자동차보험 표준약관 하나로 정해져 있어 보험사마다 다르지 않습니다. 보험사별 합의금은 어디에도 공시되지 않지만, 지급을 얼마나 깐깐하게 하는지는 손해보험협회 공시의 부지급률과 민원 건수로 읽을 수 있습니다. 아래 숫자는 공시값 그대로이며, 동부화재는 2017년부터 DB손해보험입니다.</p></div>
         <div class="ins-charts" id="insurerCharts"></div>
         <p class="p-sub" style="margin:40px 0 8px">상세 표</p>
         <div class="ins-wrap"><table class="ins insurers" id="insurerTable"></table></div>
-        <div class="row-cta" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:16px"><button class="btn primary" type="button" data-auth>내 합의 사례 익명 제보</button><span class="meta">제보는 보험사·사고 규모·치료 형태·합의금만 익명으로 수집하며, 20건 이상 모인 칸부터 실제 범위로 표시합니다.</span></div>
-        <p class="meta" style="margin-top:12px">면책: 합의금은 과실 비율, 상해 급수, 소득, 치료 기간, 담당자 재량에 따라 크게 달라집니다. 한방에는 합의를 대행하거나 금액을 보장하지 않으며, 특정 보험사를 평가하지 않습니다.</p>
+        <div class="row-cta" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:16px"><button class="btn primary" type="button" data-auth>내 합의 사례 익명 제보</button><span class="meta">합의금 자체는 공시가 없어 제보로만 모입니다. 보험사·사고 규모·치료 형태·합의금만 익명으로 수집하고, 20건 이상 모인 칸부터 보험사별 실제 범위를 표시합니다.</span></div>
+        <p class="meta" style="margin-top:12px">면책: 부지급률과 민원 건수는 손해보험협회 소비자포털 공시값(부지급률 2025년 하반기, 민원 2026년 2분기)이며 지급 태도의 참고 지표일 뿐 합의금과 직접 연결되지 않습니다. 부지급률은 직전 3개 회계연도 신계약 중 해당 반기에 심사가 끝난 청구 기준입니다. 합의금은 과실 비율, 상해 급수, 소득, 치료 기간에 따라 달라지며, 한방에는 합의를 대행하거나 금액을 보장하지 않고 특정 보험사를 평가하지 않습니다.</p>
       </div>
     </section>
     <section class="sec rule" id="guide-settle" aria-labelledby="guideSettleTitle">
@@ -1998,21 +2014,35 @@ renderBody('neck');
   $('#orbit').innerHTML = items.map(([ic, l, st, href], i) => { const ang = -90 + i * 45; const x = 50 + R * Math.cos(ang * Math.PI / 180), y = 50 + R * Math.sin(ang * Math.PI / 180); return `<a class="oc" href="${href}" style="left:${x.toFixed(1)}%;top:${y.toFixed(1)}%">${pic(ic)}${l}<span class="st">${st}</span></a>`; }).join('') + '<span class="core wm"><b>한방</b><i>에</i><span class="dot">.</span></span>';
 })();
 
-/* 보험사별 합의금 예시 (자리표시값 · 사례 0건) — 상해급수 기준 3구간 */
-const INSURERS = [['DB손해보험', '옛 동부화재', 0], ['삼성화재', '', 5], ['현대해상', '', -5], ['KB손해보험', '', 0], ['메리츠화재', '', -10], ['한화손해보험', '', 5], ['롯데손해보험', '', 0], ['흥국화재', '', -5]];
+/* 보험사별 공시 지표 (손해보험협회 소비자포털 공시값) — 합의금 자체는 공시되지 않음 */
+const INSURERS = [
+  { n:'삼성화재',    sub:'',          nonpay:0.49, cmpl:5.81, autoCmpl:11.93 },
+  { n:'현대해상',    sub:'',          nonpay:0.48, cmpl:7.59, autoCmpl:8.70 },
+  { n:'DB손해보험',  sub:'옛 동부화재', nonpay:0.47, cmpl:7.37, autoCmpl:10.87 },
+  { n:'KB손해보험',  sub:'',          nonpay:0.43, cmpl:7.36, autoCmpl:11.94 },
+  { n:'메리츠화재',  sub:'',          nonpay:0.38, cmpl:7.73, autoCmpl:10.73 },
+  { n:'한화손해보험', sub:'',          nonpay:0.28, cmpl:6.50, autoCmpl:null },
+  { n:'롯데손해보험', sub:'',          nonpay:0.14, cmpl:7.23, autoCmpl:null },
+  { n:'흥국화재',    sub:'',          nonpay:0.40, cmpl:7.08, autoCmpl:null },
+];
+const INS_AVG = k => k === 'nonpay' ? 0.45 : (v => v.reduce((x, y) => x + y, 0) / v.length)(INSURERS.map(x => x[k]).filter(x => x != null));
+const INS_META = {
+  nonpay:   { t:'자동차보험 부지급률', d:'보험금 청구 뒤 지급되지 않은 비율. 낮을수록 지급에 관대한 편.', u:'%', max:0.6, per:'2025년 하반기', src:'손해보험협회 소비자포털 공시' },
+  cmpl:     { t:'민원 환산건수 · 전체 상품', d:'보유계약 10만건당 민원 건수. 낮을수록 분쟁이 적은 편.', u:'건', max:10, per:'2026년 2분기', src:'손해보험협회 민원건수 공시' },
+  autoCmpl: { t:'자동차보험 민원 환산건수', d:'자동차보험만 따로 본 10만건당 민원. 대형 5개사만 집계.', u:'건', max:14, per:'2026년 2분기', src:'손해보험협회 공시 집계(뉴스웨이 2026-09-07)' },
+};
+/* 표준약관 기준선 (금융감독원 자동차보험 표준약관 · 대인배상 지급기준 · 전 보험사 동일) */
+const STD = { wi: { '8급':30, '9급':25, '10~11급':20, '12~14급':15 }, fare: 0.8 /* 통원 1일 8,000원 = 0.8만원 */, lost: 85 /* 휴업손해 지급률 % */, minorWeeks: 4 };
 (function insurers() {
   const el = $('#insurerTable'); if (!el) return;
-  const cols = [
-    ['상해 14급 · 경상', '경추·요추 염좌, 타박 · 진단 2주 · 통원 2~3주', 150],
-    ['상해 12~13급 · 경상', '염좌·타박 진단 3주, 뇌진탕 · 통원 3~4주 또는 입원 3~7일', 350],
-    ['상해 9~11급 · 중등도', '골절·인대 파열 등 · 입원 1~2주 이상 · 병원 협진', 550],
-  ];
-  const base = [[50, 120], [150, 300], [250, 500]];
-  const rows = INSURERS;
-  el.innerHTML = `<thead><tr><th>보험사</th>${cols.map(([c, d]) => `<th>${c}<span class="d" style="display:block;font-weight:400;color:var(--stone)">${d}</span></th>`).join('')}<th>사례</th></tr></thead><tbody>${rows.map(([n, sub, adj]) => `<tr><td>${n}${sub ? `<span class="d">${sub}</span>` : ''}</td>${base.map(([a, b]) => `<td class="n0 num">${a + adj}~${b + adj}만원<span class="cnt">예시</span></td>`).join('')}<td class="num n0">0건</td></tr>`).join('')}</tbody>`;
+  const f2 = v => v == null ? '—' : v.toFixed(2);
+  const KEYS = ['nonpay', 'cmpl', 'autoCmpl'];
+  el.innerHTML = `<thead><tr><th>보험사</th>${KEYS.map(k => `<th>${INS_META[k].t}<span class="d" style="display:block;font-weight:400;color:var(--stone)">${INS_META[k].per} · ${INS_META[k].u === '%' ? '낮을수록 관대' : '10만건당 · 낮을수록 분쟁 적음'}</span></th>`).join('')}</tr></thead><tbody>${INSURERS.map(x => `<tr><td>${x.n}${x.sub ? `<span class="d">${x.sub}</span>` : ''}</td>${KEYS.map(k => `<td class="num">${x[k] == null ? '<span class="cnt">미집계</span>' : f2(x[k]) + INS_META[k].u}</td>`).join('')}</tr>`).join('')}<tr class="avg"><td>업계 평균</td>${KEYS.map(k => `<td class="num">${f2(INS_AVG(k))}${INS_META[k].u}</td>`).join('')}</tr></tbody>`;
   const ch = $('#insurerCharts'); if (!ch) return;
-  ch.innerHTML = cols.map(([c, d, max], ci) => { const [a0, b0] = base[ci]; const ticks = [0, max / 5, max * 2 / 5, max * 3 / 5, max * 4 / 5, max].map(v => Math.round(v));
-    return `<div class="ins-chart"><div class="chart-h"><span class="t">${c}</span><span class="meta">예시 · 만원</span></div><p class="meta" style="margin:-6px 0 10px">${d}</p><div class="rchart">${rows.map(([n, sub, adj]) => `<div class="rrow" title="${n}: ${a0 + adj}~${b0 + adj}만원 (예시)"><span class="lbl">${n}</span><span class="rtrack" aria-hidden="true"><span class="rbar" style="left:${(a0 + adj) / max * 100}%;width:${(b0 - a0) / max * 100}%"></span></span><span class="val num">${a0 + adj}~${b0 + adj}</span></div>`).join('')}<div class="raxis"><span></span><span class="ticks num">${ticks.map(t => `<span>${t}</span>`).join('')}</span><span></span></div></div></div>`; }).join('');
+  const std = `<div class="ins-chart std-card"><div class="chart-h"><span class="t">표준약관 기준선 · 전 보험사 동일</span><span class="meta">금융감독원 자동차보험 표준약관</span></div><p class="meta" style="margin:-6px 0 10px">보험사가 처음 제시하는 금액은 대개 이 기준선에 향후치료비를 얹은 값입니다.</p>
+    <dl class="spec"><div><dt>부상 위자료</dt><dd>${Object.entries(STD.wi).reverse().map(([g, v]) => `${g} ${v}만원`).join(' · ')}<small>상해급수별 정액 · 장해가 남지 않는 경우</small></dd></div><div><dt>휴업손해</dt><dd>1일 수입 감소액 × 쉰 날 × ${STD.lost}%<small>소득 증빙이 없으면 일용근로자 임금 기준</small></dd></div><div><dt>통원 교통비</dt><dd>통원 1일 8,000원<small>기타손해배상금 · 통원 일수만큼</small></dd></div><div><dt>경상환자 규정</dt><dd>치료 ${STD.minorWeeks}주를 넘기면 진단서 제출<small>12~14급 · 2023년 개정 · 본인 과실만큼 치료비 부담</small></dd></div></dl></div>`;
+  const chart = k => { const m = INS_META[k]; const av = INS_AVG(k); const rows = INSURERS.filter(x => x[k] != null).sort((a, b) => a[k] - b[k]); return `<div class="ins-chart"><div class="chart-h"><span class="t">${m.t}</span><span class="meta">${m.per}</span></div><p class="meta" style="margin:-6px 0 10px">${m.d}</p><div class="rchart">${rows.map(x => `<div class="rrow" title="${x.n}: ${x[k].toFixed(2)}${m.u} (${m.src}, ${m.per})"><span class="lbl">${x.n}</span><span class="rtrack" aria-hidden="true"><span class="rbar solid" style="left:0;width:${x[k] / m.max * 100}%"></span><span class="avgline" style="left:${av / m.max * 100}%"></span></span><span class="val num">${x[k].toFixed(2)}${m.u}</span></div>`).join('')}<div class="raxis"><span></span><span class="meta"><i class="avgkey"></i>업계 평균 ${av.toFixed(2)}${m.u} · 출처 ${m.src}</span><span></span></div></div></div>`; };
+  ch.innerHTML = std + chart('nonpay') + chart('cmpl') + chart('autoCmpl');
 })();
 /* 한의원 찾기 헤더: 지역 클러스터 */
 (function regionCloud() {
@@ -2035,7 +2065,7 @@ const INSURERS = [['DB손해보험', '옛 동부화재', 0], ['삼성화재', ''
   const PAIN = [['mild', '뻐근한 정도, 일상은 가능'], ['mod', '일상은 되지만 계속 아파요'], ['severe', '움직이기 힘들 정도예요']];
   const INS = [['have', '접수번호 있어요'], ['soon', '접수 예정이에요'], ['dunno', '어떻게 하는지 몰라요'], ['fault', '내 과실이라 고민이에요']];
   const DMG = [['scratch', '범퍼 긁힘·살짝 찌그러짐'], ['bumper', '범퍼 교체 수준'], ['hood', '본넷·펜더·문짝 파손'], ['airbag', '에어백 전개·폐차 수준'], ['none', '차량 없음·잘 모름']];
-  const INSR = [...INSURERS.map(([n]) => [n, n]), ['etc', '기타·아직 몰라요']];
+  const INSR = [...INSURERS.map(x => [x.n, x.n]), ['etc', '기타·아직 몰라요']];
   const DX = [['w2', '진단 2주 (염좌·타박)'], ['w3', '진단 3주 이상'], ['fx', '골절·인대 손상'], ['none', '아직 안 받았어요']];
   const STAY = [['out', '통원만 할 거예요'], ['short', '단기 입원 3~7일 고려'], ['long', '입원 2주 이상 필요'], ['dunno', '잘 모르겠어요']];
   const COND = [['night', '야간 진료'], ['weekend', '주말 진료'], ['pickup', '픽업 차량'], ['parking', '주차'], ['none', '특별히 없어요']];
@@ -2046,7 +2076,7 @@ const INSURERS = [['DB손해보험', '옛 동부화재', 0], ['삼성화재', ''
     { id: 'when', q: '사고는 언제였나요?', opts: () => WHEN },
     { id: 'pain', q: '지금 통증은 어느 정도인가요?', opts: () => PAIN },
     { id: 'ins', q: '보험사 접수는 하셨나요?', sub: '상대 차 보험사에 대인 접수를 하면 접수번호가 문자로 옵니다.', opts: () => INS },
-    { id: 'insurer', q: a => a.ins === 'fault' ? '접수할 보험사는 어디인가요?' : '상대 차 보험사는 어디인가요?', sub: '보험사별 합의 기준 비교에 씁니다.', opts: () => INSR },
+    { id: 'insurer', q: a => a.ins === 'fault' ? '접수할 보험사는 어디인가요?' : '상대 차 보험사는 어디인가요?', sub: '공시된 부지급률·민원 지표를 함께 보여드립니다.', opts: () => INSR },
     { id: 'dx', q: '진단서는 받으셨나요?', sub: '합의금 범위를 잡는 데 씁니다. 아직이면 "아직"을 눌러도 됩니다.', opts: () => DX },
     { id: 'stay', q: '입원 계획이 있나요?', sub: '입원 여부는 한의사 판단 사항이지만, 합의금 범위가 달라집니다.', opts: () => STAY },
     { id: 'city', q: '어느 지역 한의원이 편하세요?', opts: () => Object.keys(REGIONS).map(c => [c, `${c} · 입점 ${CLINICS.filter(x => x.city === c).length}곳`]) },
@@ -2113,34 +2143,39 @@ const INSURERS = [['DB손해보험', '옛 동부화재', 0], ['삼성화재', ''
     const floor = { airbag: 3, hood: 2, bumper: 1 }[a.dmg]; if (floor !== undefined && idx < floor) idx = floor;
     const light = a.dmg === 'scratch';
     const grade = idx >= 4 ? '상해 9~11급' : idx >= 2 ? '상해 12~13급' : '상해 14급';
-    const insr = INSURERS.find(x => x[0] === a.insurer); const adj = insr ? insr[2] : 0;
-    const base = SETTLE[idx]; const row = { ...base, min: Math.max(0, base.min + adj), max: base.max + adj };
+    const insr = INSURERS.find(x => x.n === a.insurer) || null; const adj = 0;
+    const base = SETTLE[idx]; const row = { ...base };
+    // 표준약관 기준선: 위자료(급수별 정액) + 통원 교통비(8,000원 × 통원 일수). 휴업손해는 소득 증빙 시 별도.
+    const days = [4, 8, 12, 8, 10][idx]; const fare = Math.round(STD.fare * days * 10) / 10; const wiLo = idx >= 4 ? STD.wi['10~11급'] : STD.wi['12~14급'], wiHi = idx >= 4 ? STD.wi['9급'] : STD.wi['12~14급'];
+    const std = { days, fare, wi: wiLo === wiHi ? `${wiLo}` : `${wiLo}~${wiHi}`, total: wiLo === wiHi ? `${Math.round(wiLo + fare)}` : `${Math.round(wiLo + fare)}~${Math.round(wiHi + fare)}`, stay: idx >= 3 };
     // 구간 안에서 위치를 잡아 좁은 예상 범위로: 통증·진단·파손·입원 신호 평균
     const sig = []; const pushSig = (m, k) => { const v = m[k]; if (v !== undefined) sig.push(v); };
     pushSig({ mild: 0, mod: .5, severe: 1 }, a.pain); pushSig({ none: .3, w2: .3, w3: .7, fx: 1 }, a.dx); pushSig({ scratch: 0, bumper: .35, hood: .65, airbag: 1 }, a.dmg); pushSig({ out: .2, short: .5, long: .9, dunno: .4 }, a.stay);
     const t = sig.length ? sig.reduce((x, y) => x + y, 0) / sig.length : .5;
     const span = row.max - row.min, center = row.min + span * t, half = Math.max(10, Math.round(span * .15 / 5) * 5), r5 = v => Math.round(v / 5) * 5;
     const lo = Math.max(row.min, r5(center - half)), hi = Math.min(row.max, r5(center + half));
-    return { idx, row, base, lo, hi, t, grade, adj, insr, insurer: insr ? insr[0] : '보험사 미정', light, fault: a.ins === 'fault', fx: a.dx === 'fx' };
+    return { idx, row, base, lo, hi, t, grade, adj, insr, std, insurer: insr ? insr.n : '보험사 미정', light, fault: a.ins === 'fault', fx: a.dx === 'fx' };
   }
   function estHtml(a) {
     const e = estimate(a); const r = e.row;
     const mark = `<span class="rmark" style="left:${e.lo / SET_MAX * 100}%;width:${Math.max(1.2, (e.hi - e.lo) / SET_MAX * 100)}%"></span>`;
     const rows = SETTLE.map((x, i) => `<div class="rrow${i === e.idx ? ' hit' : ''}" title="${x.k}: ${x.min}~${x.max}만원 (예시)"><span class="lbl">${x.k}</span><span class="rtrack" aria-hidden="true"><span class="rbar" style="left:${x.min / SET_MAX * 100}%;width:${(x.max - x.min) / SET_MAX * 100}%"></span>${i === e.idx ? mark : ''}</span><span class="val num">${i === e.idx ? `<b>${e.lo}~${e.hi}</b>` : `${x.min}~${x.max}`}</span></div>`).join('');
     const mix = STACK.map(([n, pct, cls, d]) => `<div class="mx"><span class="k">${n}<small>${d}</small></span><span class="b" aria-hidden="true"><i class="${cls}" style="width:${pct}%"></i></span><span class="v num">${Math.round(e.lo * pct / 100)}~${Math.round(e.hi * pct / 100)}<small>만원</small></span></div>`).join('');
-    const cmp = `<div class="est-cmp"><h5>보험사 반영 · 예시 표 기준</h5>${[[e.insurer, e.row], ['8개사 평균', e.base]].map(([n, x], i) => `<div class="rrow${i === 0 ? ' hit' : ''}"><span class="lbl">${esc(n)}</span><span class="rtrack" aria-hidden="true"><span class="rbar" style="left:${x.min / SET_MAX * 100}%;width:${(x.max - x.min) / SET_MAX * 100}%"></span>${i === 0 ? mark : ''}</span><span class="val num">${i === 0 ? `<b>${e.lo}~${e.hi}</b>` : `${x.min}~${x.max}`}</span></div>`).join('')}<p class="meta">${e.insr ? `${esc(e.insurer)}: 예시 표에서 8개사 평균 대비 ${e.adj > 0 ? '+' : ''}${e.adj}만원. ` : '보험사를 고르면 보험사별 예시 기준으로 보정됩니다. '}실제 사례가 쌓이면 이 표가 갱신됩니다(현재 사례 0건).</p></div>`;
+    const ind = e.insr ? ['nonpay', 'cmpl', 'autoCmpl'].filter(k => e.insr[k] != null).map(k => { const m = INS_META[k]; const av = INS_AVG(k); const v = e.insr[k]; const better = v <= av; return `<div class="ind"><span class="lbl">${m.t}<small>${m.per}</small></span><span class="rtrack" aria-hidden="true"><span class="rbar solid ${better ? 'good' : ''}" style="left:0;width:${v / m.max * 100}%"></span><span class="avgline" style="left:${av / m.max * 100}%"></span></span><span class="val num">${v.toFixed(2)}${m.u}<small>평균 ${av.toFixed(2)}${m.u} · ${better ? '평균보다 낮음' : '평균보다 높음'}</small></span></div>`; }).join('') : '';
+    const cmp = `<div class="est-cmp"><h5>${e.insr ? esc(e.insurer) + ' 공시 지표 · 손해보험협회' : '보험사 지표'}</h5>${ind || '<p class="meta">보험사를 고르면 부지급률·민원 건수 공시값을 업계 평균과 비교해 드립니다.</p>'}<p class="meta">합의금 자체는 어느 보험사도 공시하지 않습니다. 지급 기준은 표준약관으로 전 보험사 동일하고, 위 지표는 지급을 얼마나 깐깐하게 하는지 보는 참고값입니다.</p></div>`;
     const notes = [];
     if (e.light) notes.push('범퍼 긁힘 수준의 <b>경미 손상 사고</b>는 보험사가 "경미사고 기준"으로 치료 기간을 짧게 보고 합의금을 낮게 제시하는 경우가 많습니다. 사고 당일 진찰 기록과 진단서가 더 중요해집니다.');
     if (a.dmg === 'airbag') notes.push('<b>에어백 전개·폐차 수준</b>이면 사고 크기 자체가 상해 근거가 됩니다. 정비 견적서·사고 사진을 보관하고, 병원 영상 검사를 먼저 받으세요.');
     if (a.dmg === 'hood' || a.dmg === 'bumper') notes.push('<b>차량 수리 견적서</b>를 받아 두세요. 파손 정도가 사고 충격의 객관적 근거가 됩니다.');
+    if (e.insr) notes.push(`<b>${esc(e.insurer)}</b>의 자동차보험 부지급률은 ${e.insr.nonpay.toFixed(2)}%(업계 평균 ${INS_AVG('nonpay').toFixed(2)}%), 민원은 10만건당 ${e.insr.cmpl.toFixed(2)}건(평균 ${INS_AVG('cmpl').toFixed(2)}건)입니다. 지표가 좋아도 합의금은 결국 진단서·통원확인서가 정합니다.`);
     if (e.fault) notes.push('<b>내 과실 비율만큼</b> 위자료·휴업손해에서 감액됩니다. 과실 30%면 대략 30% 낮아진다고 보면 됩니다. 치료비는 별개입니다.');
     if (e.fx) notes.push('골절·인대 손상은 <b>병원 협진</b>이 붙고 급수가 올라가 범위가 넓어집니다. 진단서의 급수를 꼭 확인하세요.');
     if (a.dx === 'none') notes.push('<b>진단서를 받으면</b> 범위가 좁혀집니다. 진단 주수와 상해 급수가 합의금의 출발점입니다.');
     if (a.stay === 'dunno') notes.push('입원 여부는 진찰 뒤 한의사가 정합니다. 예약 폼에서 <b>"입원 상담"</b>을 켜두면 병상 확인 뒤 연락합니다.');
     notes.push('합의는 <b>치료가 끝난 뒤</b>. 첫 제시액은 시작점이고, 진단서·통원확인서·영수증이 근거입니다.');
     return `<div class="est">
-      <div class="est-h"><h4>내 합의금은 얼마나? · 예시</h4><span class="meta">${e.grade} · ${esc(e.insurer)} · ${esc(label('dmg', a.dmg))} 기준 · 사례 0건 예시값</span></div>
-      <div class="est-big"><span class="num">${e.lo}~${e.hi}</span><small>만원</small><span class="est-k">${esc(r.k)} · ${esc(r.sub)} · 참고 범위 ${r.min}~${r.max}만원</span></div>
+      <div class="est-h"><h4>내 합의금은 얼마나? · 예시</h4><span class="meta">${e.grade} · ${esc(e.insurer)} · ${esc(label('dmg', a.dmg))} 기준 · 범위는 예시값</span></div>
+      <div class="est-big"><span class="num">${e.lo}~${e.hi}</span><small>만원</small><span class="est-k">${esc(r.k)} · ${esc(r.sub)} · 참고 범위 ${r.min}~${r.max}만원</span></div>\n      <div class="est-std"><span class="k">표준약관 기준선</span><span class="v num">약 ${e.std.total}만원</span><span class="d">위자료 ${e.std.wi}만원 (${e.grade}) + 통원 교통비 8,000원 × ${e.std.days}일${e.std.stay ? ' · 입원 시 간병비 등 별도' : ''} · 휴업손해는 소득 증빙 시 85% 추가. 보험사 첫 제시액은 보통 여기에 향후치료비를 얹은 값입니다.</span></div>
       <div class="rchart est-chart" role="img" aria-label="치료 형태별 합의금 범위 예시, 내 구간 강조">${rows}<div class="raxis"><span></span><span class="ticks num">${[0, 100, 200, 300, 400, 500].map(t => `<span>${t}</span>`).join('')}</span><span></span></div></div>
       ${cmp}
       <div class="est-mix" aria-label="합의금 구성 예시">${mix}</div>
