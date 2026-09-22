@@ -822,6 +822,35 @@
   .msg .bubble { transform-origin: left bottom; animation: bub .22s ease-out; } .msg.me .bubble { transform-origin: right bottom; }
   @keyframes bub { from { opacity: 0; transform: scale(.94) translateY(6px); } to { opacity: 1; transform: none; } }
   @media (max-width: 1023px) { .ccard-bg { display: none; } .mini-body { width: 60px; height: 82px; } }
+
+  /* ===== 홈 문진 · 합의금 추정 ===== */
+  .home-chat { padding: 40px 0 72px; }
+  .home-chat .chat-side .display { font-size: 44px; line-height: 1.12; letter-spacing: -.03em; }
+  .home-chat .chat-side .lead { margin-top: 14px; font-size: 16px; }
+  .home-chat .ccard-wrap { margin-top: 22px; }
+  .cf-est { border-top: 1.5px solid var(--ink); border-bottom: 0; padding-right: 104px; margin-top: 4px; }
+  .cf-est .cv { font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
+  .cf-est .meta { font-size: 11px; }
+  .est { background: #fff; border: 1.5px solid var(--ink); border-radius: 16px; padding: 18px 18px 16px; display: grid; gap: 14px; }
+  .est-h { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; } .est-h h4 { margin: 0; }
+  .est-big { display: flex; align-items: baseline; gap: 6px 10px; flex-wrap: wrap; }
+  .est-big .num { font-size: 40px; font-weight: 700; letter-spacing: -.03em; line-height: 1; color: var(--ink); }
+  .est-big small { font-size: 16px; font-weight: 600; color: var(--ink); } .est-big .est-k { flex-basis: 100%; font-size: 13px; color: var(--graphite); }
+  .est-chart .rrow { grid-template-columns: 120px 1fr 72px; padding: 7px 0; gap: 10px; } .est-chart .rrow .lbl { font-size: 12px; } .est-chart .rrow .val { font-size: 12px; }
+  .est-chart .rtrack { height: 18px; } .est-chart .rbar { top: 5px; height: 8px; background: var(--hair-soft); }
+  .est-chart .rrow.hit .rbar { background: var(--ink); height: 12px; top: 3px; box-shadow: 0 0 0 3px rgba(127,209,176,.45); } .est-chart .rrow.hit .lbl, .est-chart .rrow.hit .val { color: var(--ink); font-weight: 700; }
+  .est-chart .rrow:not(.hit) .lbl, .est-chart .rrow:not(.hit) .val { color: var(--stone); }
+  .est-chart .raxis { grid-template-columns: 120px 1fr 72px; gap: 10px; }
+  .est-mix { display: grid; gap: 6px; }
+  .est-mix .mx { display: grid; grid-template-columns: 120px 1fr 96px; gap: 10px; align-items: center; font-size: 12px; }
+  .est-mix .k { color: var(--graphite); display: grid; } .est-mix .k small { color: var(--stone); font-size: 10px; }
+  .est-mix .b { height: 8px; background: var(--tint); border-radius: 4px; overflow: hidden; } .est-mix .b i { display: block; height: 100%; border-radius: 4px; }
+  .est-mix .b .s1 { background: var(--ink); } .est-mix .b .s2 { background: #3f6a5b; } .est-mix .b .s3 { background: #7fa093; } .est-mix .b .s4 { background: #c3d3cb; }
+  .est-mix .v { text-align: right; color: var(--ink); font-weight: 600; } .est-mix .v small { font-weight: 400; color: var(--stone); margin-left: 2px; }
+  .est-notes { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; } .est-notes li { font-size: 13px; color: var(--graphite); line-height: 1.5; padding-left: 14px; position: relative; } .est-notes li::before { content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--mint, #7fd1b0); } .est-notes b { color: var(--ink); font-weight: 600; }
+  .est .acts { padding-top: 0; }
+  @media (max-width: 1023px) { .home-chat .chat-side .display { font-size: 34px; } }
+  @media (max-width: 767px) { .home-chat { padding: 20px 0 56px; } .msg.wide .av { display: none; } .msg.wide .bubble { padding: 12px; } .est-chart .rrow, .est-chart .raxis { grid-template-columns: 1fr; } .est-mix .mx { grid-template-columns: 1fr; gap: 4px; } .est-mix .v { text-align: left; } .est-big .num { font-size: 32px; } .cf-est { padding-right: 96px; } }
 </style>
 
 <a class="skip" href="#main">본문으로 건너가기</a>
@@ -857,13 +886,45 @@
 <main id="main">
   <!-- ===== HOME ===== -->
   <div class="page" data-page="home">
+    <section class="chat-wrap home-chat" id="homeChat" aria-labelledby="chatPageTitle">
+      <div class="wrap chat-grid">
+        <aside class="chat-side">
+          <p class="eyebrow">교통사고 한의원 비교·예약 · 30초 문진</p>
+          <h1 class="display" id="chatPageTitle" tabindex="-1">교통사고 처리도,<br><span class="wm"><b>한방</b><i>에</i><span class="dot">.</span></span></h1>
+          <p class="lead">어디를 다쳤는지부터 예상 합의금까지, 답만 누르면 정리됩니다. 오른쪽 채팅에서 바로 시작하세요.</p>
+          <div class="ccard-wrap">
+            <img class="ccard-bg" id="ccardBg" alt="" aria-hidden="true">
+            <div class="ccard" id="ccard" aria-live="polite" aria-label="문진 카드">
+              <div class="ccard-h"><span class="wm"><b>한방</b><i>에</i><span class="dot">.</span></span><span class="ccard-no num">문진 카드 · <span id="ccardDate"></span></span></div>
+              <div class="ccard-dots" id="ccardDots" aria-hidden="true"></div>
+              <div class="ccard-grid">
+                <div class="cf cf-body"><span class="cl">다친 부위</span><div class="mini-body" id="miniBody"></div><span class="cv" id="cfPart">—</span></div>
+                <div class="cf"><span class="cl">사고 경위</span><span class="cv" id="cfAcc">—</span></div>
+                <div class="cf"><span class="cl">경과</span><div class="tl-dots" id="cfWhen"><i data-v="today"></i><i data-v="yday"></i><i data-v="days"></i><i data-v="week"></i></div><span class="cv small" id="cfWhenT">—</span></div>
+                <div class="cf"><span class="cl">통증</span><div class="gauge" id="cfPain"><i></i><i></i><i></i></div><span class="cv small" id="cfPainT">—</span></div>
+                <div class="cf"><span class="cl">보험 접수</span><span class="cv" id="cfIns">—</span></div>
+                <div class="cf"><span class="cl">지역</span><span class="cv" id="cfRegion">—</span></div>
+                <div class="cf"><span class="cl">진단</span><span class="cv small" id="cfDx">—</span></div>
+                <div class="cf"><span class="cl">입원</span><span class="cv small" id="cfStay">—</span></div>
+                <div class="cf cf-wide"><span class="cl">조건</span><span class="cv" id="cfCond">—</span></div>
+                <div class="cf cf-wide cf-est" id="cfEstWrap" hidden><span class="cl">예상 합의금 · 예시</span><span class="cv" id="cfEst">—</span><span class="meta" id="cfEstSub"></span></div>
+              </div>
+              <div class="seal" id="ccardSeal" hidden><span class="seal-in"><span class="seal-wm"><b>한방</b><i>에</i></span><small>추천 완료</small></span></div>
+            </div>
+          </div>
+          <p class="meta" style="margin-top:14px">진단이 아니라 안내입니다. 어지럼·구토·마비·의식 저하가 있으면 문진보다 응급실이 먼저입니다.</p>
+          <div style="display:flex;gap:16px;align-items:center;margin-top:8px"><span class="meta num" id="chatStep">0 / 7</span><span class="chat-progress" style="flex:1;margin:0"><span class="bar"><i id="chatBar"></i></span></span><button class="tlink muted" type="button" id="chatRestart">처음부터 다시 →</button></div>
+        </aside>
+        <div class="chat" id="chat" role="log" aria-live="polite"></div>
+      </div>
+    </section>
     <section class="hero kv-hero" aria-labelledby="heroTitle">
   <div class="wrap hero-grid">
     <div class="hero-text">
       <p class="eyebrow">교통사고 한의원 비교·예약 · 한방에</p>
-      <h1 class="display" id="heroTitle">교통사고 처리도,<br><span class="wm"><b>한방</b><i>에</i><span class="dot">.</span></span></h1>
-      <p class="lead">한방(韓方)으로, 한방에. 보험 접수부터 치료, 합의 준비까지 지역별 한의원을 비교하고 바로 예약합니다. 보험사 접수번호가 있으면 본인부담금은 0원입니다.</p>
-      <div class="hero-cta"><a class="btn primary lg" href="#/chat"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>30초 문진으로 한의원 추천 받기</a><span class="meta">7가지만 고르면 치료·한의원·처리 순서를 정리해 드립니다</span></div>
+      <h2 class="display" id="heroTitle">한방(韓方)으로,<br>지역별 한의원 비교·예약.</h2>
+      <p class="lead">보험 접수부터 치료, 합의 준비까지 지역별 한의원을 비교하고 바로 예약합니다. 보험사 접수번호가 있으면 본인부담금은 0원입니다.</p>
+      <div class="hero-cta"><a class="btn primary lg" href="#/chat"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>30초 문진으로 한의원 추천 받기</a><span class="meta">9가지만 고르면 치료·한의원·처리 순서를 정리해 드립니다</span></div>
       <form class="search" id="searchForm" role="search">
         <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg>
         <label class="sr" for="q">검색어</label>
@@ -1016,36 +1077,6 @@
 
 
   <!-- ===== CHAT ===== -->
-  <div class="page" data-page="chat" hidden>
-    <section class="chat-wrap">
-      <div class="wrap chat-grid">
-        <aside class="chat-side">
-          <p class="eyebrow">빠른 문진 · 30초</p>
-          <h1 class="display" id="chatPageTitle" tabindex="-1">답을 누르면<br>문진 카드가 채워집니다.</h1>
-          <div class="ccard-wrap">
-            <img class="ccard-bg" id="ccardBg" alt="" aria-hidden="true">
-            <div class="ccard" id="ccard" aria-live="polite" aria-label="문진 카드">
-              <div class="ccard-h"><span class="wm"><b>한방</b><i>에</i><span class="dot">.</span></span><span class="ccard-no num">문진 카드 · <span id="ccardDate"></span></span></div>
-              <div class="ccard-dots" id="ccardDots" aria-hidden="true"></div>
-              <div class="ccard-grid">
-                <div class="cf cf-body"><span class="cl">다친 부위</span><div class="mini-body" id="miniBody"></div><span class="cv" id="cfPart">—</span></div>
-                <div class="cf"><span class="cl">사고 경위</span><span class="cv" id="cfAcc">—</span></div>
-                <div class="cf"><span class="cl">경과</span><div class="tl-dots" id="cfWhen"><i data-v="today"></i><i data-v="yday"></i><i data-v="days"></i><i data-v="week"></i></div><span class="cv small" id="cfWhenT">—</span></div>
-                <div class="cf"><span class="cl">통증</span><div class="gauge" id="cfPain"><i></i><i></i><i></i></div><span class="cv small" id="cfPainT">—</span></div>
-                <div class="cf"><span class="cl">보험 접수</span><span class="cv" id="cfIns">—</span></div>
-                <div class="cf"><span class="cl">지역</span><span class="cv" id="cfRegion">—</span></div>
-                <div class="cf cf-wide"><span class="cl">조건</span><span class="cv" id="cfCond">—</span></div>
-              </div>
-              <div class="seal" id="ccardSeal" hidden><span class="seal-in"><span class="seal-wm"><b>한방</b><i>에</i></span><small>추천 완료</small></span></div>
-            </div>
-          </div>
-          <p class="meta" style="margin-top:14px">진단이 아니라 안내입니다. 어지럼·구토·마비·의식 저하가 있으면 문진보다 응급실이 먼저입니다.</p>
-          <div style="display:flex;gap:16px;align-items:center;margin-top:8px"><span class="meta num" id="chatStep">0 / 7</span><span class="chat-progress" style="flex:1;margin:0"><span class="bar"><i id="chatBar"></i></span></span><button class="tlink muted" type="button" id="chatRestart">처음부터 다시 →</button></div>
-        </aside>
-        <div class="chat" id="chat" role="log" aria-live="polite"></div>
-      </div>
-    </section>
-  </div>
 
   <!-- ===== FIND ===== -->
   <div class="page" data-page="find" hidden>
@@ -1556,8 +1587,11 @@ const PAGES = { home:'한방에', chat:'빠른 문진 · 한방에', find:'한�
 const go = path => { if (location.hash === '#' + path) route(); else location.hash = '#' + path; };
 function route() {
   const h = location.hash || '#/'; const catKey = parseHash(); let page = catKey ? 'home' : (h.replace(/^#\/?/, '').split(/[/?]/)[0] || 'home'); if (!PAGES[page]) page = 'home';
+  const navKey = page; if (page === 'chat') page = 'home';
   const changed = state.page !== page;
-  if (changed) { $$('.page').forEach(p => p.hidden = p.dataset.page !== page); $$('.menu a, .mmenu a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === (page === 'home' ? '#/' : '#/' + page))); $$('#tabbar [data-tab]').forEach(b => b.classList.toggle('on', b.dataset.tab === page)); document.title = PAGES[page]; state.page = page; window.scrollTo(0, 0); $('#mobileMenu').dataset.open = 'false'; $('#menuBtn').setAttribute('aria-expanded', 'false'); if (page !== 'home') $(`.page[data-page="${page}"] h1`)?.focus({ preventScroll: true }); }
+  if (changed) { $$('.page').forEach(p => p.hidden = p.dataset.page !== page); $$('.menu a, .mmenu a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === (navKey === 'home' ? '#/' : '#/' + navKey))); $$('#tabbar [data-tab]').forEach(b => b.classList.toggle('on', b.dataset.tab === navKey)); document.title = PAGES[navKey]; state.page = page; window.scrollTo(0, 0); $('#mobileMenu').dataset.open = 'false'; $('#menuBtn').setAttribute('aria-expanded', 'false'); if (page !== 'home') $(`.page[data-page="${page}"] h1`)?.focus({ preventScroll: true }); }
+  if (!changed) { $$('.menu a, .mmenu a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === (navKey === 'home' ? '#/' : '#/' + navKey))); $$('#tabbar [data-tab]').forEach(b => b.classList.toggle('on', b.dataset.tab === navKey)); }
+  if (navKey === 'chat') requestAnimationFrame(() => { const el = $('#homeChat'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH() - 8, behavior: changed ? 'auto' : 'smooth' }); $('#chatPageTitle')?.focus({ preventScroll: true }); });
   if (catKey) { if (catKey !== state.cat) { state.lastTrigger = catKey; showCat(catKey, { focus: !changed }); } if (changed) requestAnimationFrame(() => { const y = $('#catRail').getBoundingClientRect().top + window.scrollY - navH() - 8; window.scrollTo({ top: y }); }); }
   else if (state.cat) hideCat();
 }
@@ -1989,6 +2023,8 @@ renderBody('neck');
   const WHEN = [['today', '오늘'], ['yday', '어제'], ['days', '2~3일 전'], ['week', '1주 이상 전']];
   const PAIN = [['mild', '뻐근한 정도, 일상은 가능'], ['mod', '일상은 되지만 계속 아파요'], ['severe', '움직이기 힘들 정도예요']];
   const INS = [['have', '접수번호 있어요'], ['soon', '접수 예정이에요'], ['dunno', '어떻게 하는지 몰라요'], ['fault', '내 과실이라 고민이에요']];
+  const DX = [['w2', '진단 2주 (염좌·타박)'], ['w3', '진단 3주 이상'], ['fx', '골절·인대 손상'], ['none', '아직 안 받았어요']];
+  const STAY = [['out', '통원만 할 거예요'], ['short', '단기 입원 3~7일 고려'], ['long', '입원 2주 이상 필요'], ['dunno', '잘 모르겠어요']];
   const COND = [['night', '야간 진료'], ['weekend', '주말 진료'], ['pickup', '픽업 차량'], ['parking', '주차'], ['none', '특별히 없어요']];
   const Q = [
     { id: 'part', q: '어디를 다치셨나요?', sub: '가장 불편한 곳 하나만 골라 주세요.', opts: () => PARTS.map(p => [p.k, p.short, PART_PIC[p.k]]) },
@@ -1996,6 +2032,8 @@ renderBody('neck');
     { id: 'when', q: '사고는 언제였나요?', opts: () => WHEN },
     { id: 'pain', q: '지금 통증은 어느 정도인가요?', opts: () => PAIN },
     { id: 'ins', q: '보험사 접수는 하셨나요?', sub: '상대 차 보험사에 대인 접수를 하면 접수번호가 문자로 옵니다.', opts: () => INS },
+    { id: 'dx', q: '진단서는 받으셨나요?', sub: '합의금 범위를 잡는 데 씁니다. 아직이면 "아직"을 눌러도 됩니다.', opts: () => DX },
+    { id: 'stay', q: '입원 계획이 있나요?', sub: '입원 여부는 한의사 판단 사항이지만, 합의금 범위가 달라집니다.', opts: () => STAY },
     { id: 'city', q: '어느 지역 한의원이 편하세요?', opts: () => Object.keys(REGIONS).map(c => [c, `${c} · 입점 ${CLINICS.filter(x => x.city === c).length}곳`]) },
     { id: 'dist', q: c => `${c} 어디가 좋으세요?`, opts: a => [['전체', `${a.city} 전체`], ...REGIONS[a.city].map(d => [d, `${d} ${CLINICS.filter(x => x.city === a.city && x.district === d).length}`])] },
     { id: 'cond', q: '꼭 필요한 조건이 있나요?', sub: '여러 개 골라도 됩니다.', multi: true, opts: () => COND },
@@ -2014,18 +2052,19 @@ renderBody('neck');
     setCv('#cfAcc', a.acc ? label('acc', a.acc) : '—');
     $$('#cfWhen i').forEach(i => i.classList.toggle('on', !!a.when && WHEN.findIndex(w => w[0] === i.dataset.v) <= WHEN.findIndex(w => w[0] === a.when))); setCv('#cfWhenT', a.when ? label('when', a.when) : '—');
     const lvl = { mild: 1, mod: 2, severe: 3 }[a.pain] || 0; $$('#cfPain i').forEach((i, k) => i.classList.toggle('on', k < lvl)); $('#cfPain')?.classList.toggle('severe', a.pain === 'severe'); setCv('#cfPainT', a.pain ? label('pain', a.pain) : '—');
-    setCv('#cfIns', a.ins ? label('ins', a.ins) : '—');
+    setCv('#cfIns', a.ins ? label('ins', a.ins) : '—'); setCv('#cfDx', a.dx ? label('dx', a.dx) : '—'); setCv('#cfStay', a.stay ? label('stay', a.stay) : '—');
+    const ew = $('#cfEstWrap'); if (ew) { ew.hidden = !done; if (done) { const e = estimate(a); setCv('#cfEst', `${e.row.min}~${e.row.max}만원`); $('#cfEstSub').textContent = `${e.grade} · ${e.row.k}${e.fault ? ' · 과실만큼 감액' : ''}`; } }
     setCv('#cfRegion', a.city ? `${a.city}${a.dist ? ' ' + (a.dist === '전체' ? '전체' : a.dist) : ''}` : '—');
     setCv('#cfCond', a.cond ? (a.cond.filter(v => v !== 'none').map(v => label('cond', v)).join(' · ') || '특별히 없음') : '—');
     const n = Math.min(step, TOTAL); $$('#ccardDots i').forEach((d, k) => { d.classList.toggle('on', k < n); d.classList.toggle('now', k === n && !done); });
     const seal = $('#ccardSeal'); if (seal) { seal.hidden = !done; $('#ccard')?.classList.toggle('done', !!done); }
   }
   let ans = {}, step = 0, busy = false;
-  const label = (id, v) => { const src = { part: PARTS.map(p => [p.k, p.short]), acc: ACC, when: WHEN, pain: PAIN, ins: INS, cond: COND }[id]; if (!src) return v; const f = src.find(x => x[0] === v); return f ? f[1] : v; };
+  const label = (id, v) => { const src = { part: PARTS.map(p => [p.k, p.short]), acc: ACC, when: WHEN, pain: PAIN, ins: INS, dx: DX, stay: STAY, cond: COND }[id]; if (!src) return v; const f = src.find(x => x[0] === v); return f ? f[1] : v; };
   const bot = (html, wide) => { const m = document.createElement('div'); m.className = 'msg' + (wide ? ' wide' : ''); m.innerHTML = `<span class="av" aria-hidden="true">한</span><div class="bubble">${html}</div>`; box.appendChild(m); return m; };
   const me = text => { const m = document.createElement('div'); m.className = 'msg me'; m.innerHTML = `<div class="bubble">${esc(text)}</div>`; box.appendChild(m); };
   const progress = () => { const n = Math.min(step, TOTAL); $('#chatBar').style.width = (n / TOTAL * 100) + '%'; $('#chatStep').textContent = `${n} / ${TOTAL}`; };
-  const scrollBottom = () => { const r = box.getBoundingClientRect(); if (r.bottom > innerHeight - 80) window.scrollTo({ top: window.scrollY + (r.bottom - innerHeight) + 120, behavior: 'smooth' }); };
+  const scrollBottom = () => { if (step === 0 && !ans.part) return; const r = box.getBoundingClientRect(); if (r.bottom > innerHeight - 80) window.scrollTo({ top: window.scrollY + (r.bottom - innerHeight) + 120, behavior: 'smooth' }); };
   const wait = ms => new Promise(r => setTimeout(r, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : ms));
   async function ask() {
     const q = Q[step]; if (!q) return result();
@@ -2052,6 +2091,32 @@ renderBody('neck');
     const score = c => { let sc = 0; conds.forEach(k => { const st = condStatus(c, k); sc += st === 'yes' ? 3 : st === 'ask' ? 1 : -5; }); if (needBed) sc += c.beds > 0 ? 3 : c.beds === null ? 1 : -2; return sc; };
     return scope.map(c => [score(c), c]).sort((a, b) => b[0] - a[0] || a[1].name.localeCompare(b[1].name, 'ko')).map(x => x[1]);
   }
+  function estimate(a) {
+    const severe = a.pain === 'severe'; let idx;
+    if (a.stay === 'long' || a.dx === 'fx') idx = 4; else if (a.stay === 'short') idx = 3; else if (a.dx === 'w3' || severe) idx = 2; else if (a.pain === 'mod' || a.dx === 'w2') idx = 1; else idx = 0;
+    const grade = idx >= 4 ? '상해 9~11급' : idx >= 2 ? '상해 12~13급' : '상해 14급';
+    return { idx, row: SETTLE[idx], grade, fault: a.ins === 'fault', fx: a.dx === 'fx' };
+  }
+  function estHtml(a) {
+    const e = estimate(a); const r = e.row;
+    const rows = SETTLE.map((x, i) => `<div class="rrow${i === e.idx ? ' hit' : ''}" title="${x.k}: ${x.min}~${x.max}만원 (예시)"><span class="lbl">${x.k}</span><span class="rtrack" aria-hidden="true"><span class="rbar" style="left:${x.min / SET_MAX * 100}%;width:${(x.max - x.min) / SET_MAX * 100}%"></span></span><span class="val num">${x.min}~${x.max}</span></div>`).join('');
+    const mix = STACK.map(([n, pct, cls, d]) => `<div class="mx"><span class="k">${n}<small>${d}</small></span><span class="b" aria-hidden="true"><i class="${cls}" style="width:${pct}%"></i></span><span class="v num">${Math.round(r.min * pct / 100)}~${Math.round(r.max * pct / 100)}<small>만원</small></span></div>`).join('');
+    const notes = [];
+    if (e.fault) notes.push('<b>내 과실 비율만큼</b> 위자료·휴업손해에서 감액됩니다. 과실 30%면 대략 30% 낮아진다고 보면 됩니다. 치료비는 별개입니다.');
+    if (e.fx) notes.push('골절·인대 손상은 <b>병원 협진</b>이 붙고 급수가 올라가 범위가 넓어집니다. 진단서의 급수를 꼭 확인하세요.');
+    if (a.dx === 'none') notes.push('<b>진단서를 받으면</b> 범위가 좁혀집니다. 진단 주수와 상해 급수가 합의금의 출발점입니다.');
+    if (a.stay === 'dunno') notes.push('입원 여부는 진찰 뒤 한의사가 정합니다. 예약 폼에서 <b>"입원 상담"</b>을 켜두면 병상 확인 뒤 연락합니다.');
+    notes.push('합의는 <b>치료가 끝난 뒤</b>. 첫 제시액은 시작점이고, 진단서·통원확인서·영수증이 근거입니다.');
+    return `<div class="est">
+      <div class="est-h"><h4>내 합의금은 얼마나? · 예시</h4><span class="meta">${e.grade} 기준 · 사례 0건 자리표시값</span></div>
+      <div class="est-big"><span class="num">${r.min}~${r.max}</span><small>만원</small><span class="est-k">${esc(r.k)} · ${esc(r.sub)}</span></div>
+      <div class="rchart est-chart" role="img" aria-label="치료 형태별 합의금 범위 예시, 내 구간 강조">${rows}<div class="raxis"><span></span><span class="ticks num">${[0, 100, 200, 300, 400, 500].map(t => `<span>${t}</span>`).join('')}</span><span></span></div></div>
+      <div class="est-mix" aria-label="합의금 구성 예시">${mix}</div>
+      <ul class="est-notes">${notes.map(n => `<li>${n}</li>`).join('')}</ul>
+      <p class="meta">예시값(만원)입니다. 실제 금액은 과실 비율, 상해 급수, 소득, 치료 기간, 보험사 담당자 재량에 따라 크게 다릅니다. 한방에는 합의를 대행하거나 금액을 보장하지 않습니다.</p>
+      <div class="acts"><a class="btn ghost" href="#/guide">보험사별 합의금 비교 →</a></div>
+    </div>`;
+  }
   function result() {
     progress(); busy = true; updateCard(ans, true);
     const part = PARTS.find(p => p.k === ans.part) || PARTS[1]; const severe = ans.pain === 'severe'; const conds = (ans.cond || []).filter(v => v !== 'none');
@@ -2069,9 +2134,10 @@ renderBody('neck');
     know.push('<b>합의는 치료가 끝난 뒤에</b>. 보험사가 먼저 제시하는 금액은 시작점이고, 진단서·통원확인서·영수증이 협상 근거가 됩니다.');
     const cnt = { yes: CLINICS.filter(c => catStatus(c, part.treats[0]) === 'yes').length };
     const html = `<div class="res">
-      <div><h4>정리하면</h4><div class="sum"><span class="tag yes">${esc(part.short)}</span><span class="tag fill">${esc(label('acc', ans.acc))}</span><span class="tag fill">${esc(label('when', ans.when))}</span><span class="tag fill">${esc(label('pain', ans.pain))}</span><span class="tag fill">${esc(label('ins', ans.ins))}</span><span class="tag fill">${esc(ans.city)} ${esc(ans.dist === '전체' || !ans.dist ? '전체' : ans.dist)}</span>${conds.map(v => `<span class="tag fill">${esc(label('cond', v))}</span>`).join('')}</div></div>
+      <div><h4>정리하면</h4><div class="sum"><span class="tag yes">${esc(part.short)}</span><span class="tag fill">${esc(label('acc', ans.acc))}</span><span class="tag fill">${esc(label('when', ans.when))}</span><span class="tag fill">${esc(label('pain', ans.pain))}</span><span class="tag fill">${esc(label('ins', ans.ins))}</span><span class="tag fill">${esc(label('dx', ans.dx))}</span><span class="tag fill">${esc(label('stay', ans.stay))}</span><span class="tag fill">${esc(ans.city)} ${esc(ans.dist === '전체' || !ans.dist ? '전체' : ans.dist)}</span>${conds.map(v => `<span class="tag fill">${esc(label('cond', v))}</span>`).join('')}</div></div>
       <div><h4>받을 수 있는 치료 · 누르면 설명으로</h4><div class="tchips">${treats.map(t => { const c = catByKey(t); const st = catCounts(t); const ask = !st.yes.length; return `<a class="${ask ? 'ask' : ''}" href="#/cat/${CAT_SLUG(t)}">${pic(t)}${esc(c ? c.title : t)}<span class="st">${ask ? '한의원 확인' : `제공 ${st.yes.length}곳`}</span></a>`; }).join('')}</div><p class="meta" style="margin-top:8px">${esc(part.sym)}</p></div>
       <div><h4>추천 한의원 · ${esc(ans.city)} ${esc(ans.dist && ans.dist !== '전체' ? ans.dist : '전체')} ${list.length}곳 중 ${top.length}곳</h4>${top.length ? top.map(c => crowHtml(c, catStatus(c, part.treats[0]))).join('') : '<p class="meta">이 지역엔 아직 입점 한의원이 없습니다. 인접 지역을 선택해 보세요.</p>'}${conds.length ? '<p class="meta" style="margin-top:8px">선택한 조건(야간·주말·픽업·주차)은 한의원 확인 전이라 "확인 중"으로 표시됩니다. 전화로 먼저 확인하실 수 있습니다.</p>' : ''}</div>
+      ${estHtml(ans)}
       <div><h4>지금 해야 할 것</h4><ol class="know">${know.map(k => `<li>${k}</li>`).join('')}</ol></div>
       <div class="warnbox"><b>먼저 병원에 가야 하는 경우</b> — ${esc(part.warn)}</div>
       <div class="acts"><button class="btn primary" type="button" data-more-find>이 조건으로 한의원 더 보기</button><a class="btn ghost" href="#/guide">보험 처리 노하우 더 보기</a><a class="btn ghost" href="#/cat/${CAT_SLUG(part.treats[0])}">치료 자세히</a><button class="tlink muted" type="button" data-restart>처음부터 다시</button></div>
@@ -2089,7 +2155,7 @@ renderBody('neck');
   function restart() { ans = {}; step = 0; busy = false; box.innerHTML = ''; progress(); updateCard({}, false); bot('안녕하세요, 한방에입니다. 사고 뒤 처리, 같이 정리해 볼게요. 답은 누르기만 하면 됩니다.'); ask(); }
   $('#chatRestart').addEventListener('click', restart);
   let started = false;
-  const startIfVisible = () => { if (!started && state.page === 'chat') { started = true; restart(); } };
+  const startIfVisible = () => { if (!started && state.page === 'home') { started = true; restart(); } };
   window.addEventListener('hashchange', () => setTimeout(startIfVisible, 0)); setTimeout(startIfVisible, 0);
 })();
 
