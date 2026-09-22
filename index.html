@@ -877,7 +877,7 @@
   @media (max-width: 767px) { .est-cmp .ind { grid-template-columns: 1fr; gap: 4px; } .est-cmp .ind .val { text-align: left; } .est-std { grid-template-columns: 1fr; } }
 
   /* ===== 모바일: 한 화면에 한 질문 ===== */
-  .step { display: grid; gap: 14px; align-content: start; min-height: calc(100vh - var(--nav-h) - 56px - 56px); animation: stepin .22s ease-out; }
+  .step { display: grid; gap: 14px; align-content: start; min-height: min(540px, calc(100vh - var(--nav-h) - 56px - 72px)); animation: stepin .22s ease-out; }
   @keyframes stepin { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
   .step-h { display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 8px; }
   .step-back { width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: var(--ink); background: var(--tint); } .step-back .i { width: 18px; height: 18px; }
@@ -912,6 +912,10 @@
     .step .opts[data-id="city"], .step .opts[data-id="dist"], .step .opts[data-id="cond"] { grid-template-columns: 1fr 1fr; }
     .step .opts[data-id="cond"] .go, .step .opts[data-id="dist"] .opt:first-child { grid-column: 1 / -1; }
     .hero.kv-hero .hero-cta { display: none; }
+    .kv { max-width: 320px; margin: 36px auto 12px; }
+    .orbit { transform: scale(.84); }
+    .kv .core { font-size: 18px; transform: translate(-50%, 44px); }
+    .hero.kv-hero .colophon { margin-top: 20px; }
   }
 </style>
 
