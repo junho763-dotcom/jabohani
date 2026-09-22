@@ -875,6 +875,44 @@
   .est-cmp .ind .val { font-size: 12px; font-weight: 700; color: var(--ink); text-align: right; display: grid; } .est-cmp .ind .val small { font-weight: 400; color: var(--slate); font-size: 10.5px; }
   @media (max-width: 1023px) { .ins-charts { grid-template-columns: 1fr; } }
   @media (max-width: 767px) { .est-cmp .ind { grid-template-columns: 1fr; gap: 4px; } .est-cmp .ind .val { text-align: left; } .est-std { grid-template-columns: 1fr; } }
+
+  /* ===== 모바일: 한 화면에 한 질문 ===== */
+  .step { display: grid; gap: 14px; align-content: start; min-height: calc(100vh - var(--nav-h) - 56px - 56px); animation: stepin .22s ease-out; }
+  @keyframes stepin { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
+  .step-h { display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 8px; }
+  .step-back { width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: var(--ink); background: var(--tint); } .step-back .i { width: 18px; height: 18px; }
+  .step-back[hidden] { display: none; }
+  .step-n { font-size: 13px; font-weight: 600; color: var(--slate); }
+  .step-h .wm { font-size: 18px; color: #0f3d30; }
+  .step-bar { height: 4px; background: var(--tint); border-radius: 2px; overflow: hidden; } .step-bar i { display: block; height: 100%; background: var(--ink); border-radius: 2px; transition: width .3s ease; }
+  .step-q { font-size: 26px; font-weight: 600; letter-spacing: -.02em; line-height: 1.25; color: #0f3d30; margin-top: 6px; }
+  .step-sub { font-size: 14px; color: var(--slate); margin-top: -6px; }
+  .step .opts { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 4px 0 0; animation: none; }
+  .step .opt { width: 100%; height: auto; min-height: 56px; padding: 14px 18px; justify-content: flex-start; text-align: left; border-radius: 14px; font-size: 16px; font-weight: 500; border: 1.5px solid var(--hair-soft); background: #fff; gap: 12px; white-space: normal; line-height: 1.3; }
+  .step .opt .pic { width: 22px; height: 22px; }
+  .step .opt:active { background: var(--tint); }
+  .step .opt[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .step .opts .go { height: 56px; width: 100%; font-size: 16px; margin-top: 6px; border-radius: 14px; }
+  .step-foot { margin-top: auto; padding-top: 16px; }
+  .res-step .res { margin-top: 4px; }
+  .res-step .res .acts .btn { width: 100%; height: 52px; }
+  .res-step .res .acts { flex-direction: column; align-items: stretch; }
+  .res-step .res .acts .tlink { align-self: center; }
+  .res-step .est { padding: 16px 14px; }
+  @media (max-width: 767px) {
+    .home-chat { padding: 12px 0 40px; }
+    .home-chat .chat-grid { gap: 20px; }
+    .home-chat .chat { order: -1; padding: 16px; border-radius: 18px; min-height: 0; }
+    .home-chat .chat-side { display: none; }
+    .home-chat.done .chat-side { display: block; }
+    .home-chat .chat-side .eyebrow, .home-chat .chat-side .display, .home-chat .chat-side .lead { display: none; }
+    .home-chat .ccard-wrap { margin-top: 0; }
+    .step .opts[data-id="part"] { grid-template-columns: 1fr 1fr; }
+    .step .opts[data-id="part"] .opt { min-height: 64px; }
+    .step .opts[data-id="city"], .step .opts[data-id="dist"], .step .opts[data-id="cond"] { grid-template-columns: 1fr 1fr; }
+    .step .opts[data-id="cond"] .go, .step .opts[data-id="dist"] .opt:first-child { grid-column: 1 / -1; }
+    .hero.kv-hero .hero-cta { display: none; }
+  }
 </style>
 
 <a class="skip" href="#main">본문으로 건너가기</a>
@@ -2107,20 +2145,41 @@ const STD = { wi: { '8급':30, '9급':25, '10~11급':20, '12~14급':15 }, fare: 
   let ans = {}, step = 0, busy = false;
   const label = (id, v) => { const src = { part: PARTS.map(p => [p.k, p.short]), acc: ACC, when: WHEN, pain: PAIN, ins: INS, dmg: DMG, insurer: INSR, dx: DX, stay: STAY, cond: COND }[id]; if (!src) return v; const f = src.find(x => x[0] === v); return f ? f[1] : v; };
   const bot = (html, wide) => { const m = document.createElement('div'); m.className = 'msg' + (wide ? ' wide' : ''); m.innerHTML = `<span class="av" aria-hidden="true">한</span><div class="bubble">${html}</div>`; box.appendChild(m); return m; };
-  const me = text => { const m = document.createElement('div'); m.className = 'msg me'; m.innerHTML = `<div class="bubble">${esc(text)}</div>`; box.appendChild(m); };
+  const stepMode = () => matchMedia('(max-width: 767px)').matches;
+  const toTop = () => { const y = box.getBoundingClientRect().top + window.scrollY - navH() - 8; if (Math.abs(window.scrollY - y) > 4) window.scrollTo({ top: y, behavior: 'auto' }); };
+  const me = text => { if (stepMode()) return; const m = document.createElement('div'); m.className = 'msg me'; m.innerHTML = `<div class="bubble">${esc(text)}</div>`; box.appendChild(m); };
   const progress = () => { const n = Math.min(step, TOTAL); $('#chatBar').style.width = (n / TOTAL * 100) + '%'; $('#chatStep').textContent = `${n} / ${TOTAL}`; };
-  const scrollBottom = () => { if (step === 0 && !ans.part) return; const r = box.getBoundingClientRect(); if (r.bottom > innerHeight - 80) window.scrollTo({ top: window.scrollY + (r.bottom - innerHeight) + 120, behavior: 'smooth' }); };
+  const scrollBottom = () => { if (stepMode()) return; if (step === 0 && !ans.part) return; const r = box.getBoundingClientRect(); if (r.bottom > innerHeight - 80) window.scrollTo({ top: window.scrollY + (r.bottom - innerHeight) + 120, behavior: 'smooth' }); };
   const wait = ms => new Promise(r => setTimeout(r, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : ms));
   async function ask() {
     const q = Q[step]; if (!q) return result();
     if (q.id === 'dist' && !REGIONS[ans.city]) { step++; return ask(); }
+    if (stepMode()) return askStep(q);
     busy = true; const t = bot('<span class="typing"><i></i><i></i><i></i></span>'); scrollBottom(); await wait(420);
     t.querySelector('.bubble').innerHTML = `${esc(typeof q.q === 'function' ? q.q(ans) : q.q)}${q.sub ? `<span class="sub">${esc(q.sub)}</span>` : ''}`;
     const opts = document.createElement('div'); opts.className = 'opts'; opts.dataset.id = q.id;
     opts.innerHTML = q.opts(ans).map(([v, l, pic]) => `<button class="opt" type="button" data-v="${esc(v)}" aria-pressed="false">${pic ? `<svg class="pic" viewBox="0 0 24 24" aria-hidden="true">${pic}</svg>` : ''}${esc(l)}</button>`).join('') + (q.multi ? '<button class="btn primary go" type="button" data-go>선택 완료</button>' : '');
     box.appendChild(opts); busy = false; scrollBottom();
   }
+  function askStep(q) {
+    const n = Math.min(step, TOTAL);
+    const opts = q.opts(ans).map(([v, l, pic]) => `<button class="opt" type="button" data-v="${esc(v)}" aria-pressed="false">${pic ? `<svg class="pic" viewBox="0 0 24 24" aria-hidden="true">${pic}</svg>` : ''}<span>${esc(l)}</span></button>`).join('') + (q.multi ? '<button class="btn primary go" type="button" data-go>선택 완료</button>' : '');
+    box.innerHTML = `<div class="step" data-id="${q.id}">
+      <div class="step-h"><button class="step-back" type="button" data-back aria-label="이전 질문" ${step ? '' : 'hidden'}><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><span class="step-n num">${n + 1} / ${TOTAL}</span><span class="wm"><b>한방</b><i>에</i><span class="dot">.</span></span></div>
+      <div class="step-bar" aria-hidden="true"><i style="width:${n / TOTAL * 100}%"></i></div>
+      <h3 class="step-q">${esc(typeof q.q === 'function' ? q.q(ans) : q.q)}</h3>${q.sub ? `<p class="step-sub">${esc(q.sub)}</p>` : ''}
+      <div class="opts" data-id="${q.id}">${opts}</div>
+      ${step === 0 ? '<p class="meta step-foot">진단이 아니라 안내입니다. 어지럼·구토·마비·의식 저하가 있으면 문진보다 응급실이 먼저입니다.</p>' : ''}
+    </div>`;
+    busy = false; toTop();
+  }
+  function goBack() {
+    if (step === 0) return;
+    step--; if (Q[step].id === 'dist' && !REGIONS[ans.city]) step--;
+    delete ans[Q[step].id]; $('#homeChat')?.classList.remove('done'); progress(); updateCard(ans, false); ask();
+  }
   box.addEventListener('click', e => {
+    if (e.target.closest('[data-back]')) return goBack();
     if (busy) return;
     const opts = e.target.closest('.opts'); if (!opts) return handleResult(e);
     const q = Q.find(x => x.id === opts.dataset.id); const b = e.target.closest('.opt');
@@ -2210,6 +2269,7 @@ const STD = { wi: { '8급':30, '9급':25, '10~11급':20, '12~14급':15 }, fare: 
       <div class="acts"><button class="btn primary" type="button" data-more-find>이 조건으로 한의원 더 보기</button><a class="btn ghost" href="#/guide">보험 처리 노하우 더 보기</a><a class="btn ghost" href="#/cat/${CAT_SLUG(part.treats[0])}">치료 자세히</a><button class="tlink muted" type="button" data-restart>처음부터 다시</button></div>
       <p class="meta">이 문진은 일반적인 안내이며 진단이 아닙니다. 실제 치료 구성은 진찰 뒤 한의사가 정합니다.</p>
     </div>`;
+    if (stepMode()) { box.innerHTML = `<div class="step res-step"><div class="step-h"><button class="step-back" type="button" data-back aria-label="이전 질문"><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><span class="step-n num">완료 · ${TOTAL} / ${TOTAL}</span><span class="wm"><b>한방</b><i>에</i><span class="dot">.</span></span></div><h3 class="step-q">정리해 드릴게요.</h3>${html}</div>`; busy = false; $('#homeChat')?.classList.add('done'); toTop(); return; }
     const t = bot('<span class="typing"><i></i><i></i><i></i></span>', true); scrollBottom();
     wait(500).then(() => { t.querySelector('.bubble').innerHTML = html; busy = false; scrollBottom(); });
   }
@@ -2219,11 +2279,12 @@ const STD = { wi: { '8급':30, '9급':25, '10~11급':20, '12~14급':15 }, fare: 
     const o = e.target.closest('[data-open]'); if (o) return openDetail(+o.dataset.open);
     const b = e.target.closest('[data-book]'); if (b) return openBooking(+b.dataset.book);
   }
-  function restart() { ans = {}; step = 0; busy = false; box.innerHTML = ''; progress(); updateCard({}, false); bot('안녕하세요, 한방에입니다. 사고 뒤 처리, 같이 정리해 볼게요. 답은 누르기만 하면 됩니다.'); ask(); }
-  $('#chatRestart').addEventListener('click', restart);
+  function restart() { ans = {}; step = 0; busy = false; box.innerHTML = ''; $('#homeChat')?.classList.remove('done'); progress(); updateCard({}, false); if (!stepMode()) bot('안녕하세요, 한방에입니다. 사고 뒤 처리, 같이 정리해 볼게요. 답은 누르기만 하면 됩니다.'); if (stepMode()) toTop(); ask(); }
+  $('#chatRestart').addEventListener('click', () => { restart(); if (stepMode()) toTop(); });
   let started = false;
   const startIfVisible = () => { if (!started && state.page === 'home') { started = true; restart(); } };
   window.addEventListener('hashchange', () => setTimeout(startIfVisible, 0)); setTimeout(startIfVisible, 0);
+  matchMedia('(max-width: 767px)').addEventListener('change', () => { if (!started) return; if (step >= Q.length || $('.res', box)) { box.innerHTML = ''; result(); } else { box.innerHTML = ''; if (!stepMode()) bot('이어서 계속할게요.'); ask(); } });
 })();
 
 /* 히어로 조건 칩 12개 (픽토그램 포함) */
