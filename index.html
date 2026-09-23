@@ -917,6 +917,13 @@
     .kv .core { font-size: 18px; transform: translate(-50%, 44px); }
     .hero.kv-hero .colophon { margin-top: 20px; }
   }
+
+  .ccard-row { display: flex; justify-content: space-between; align-items: center; margin: 10px 0 4px; } .ccard-row .ccard-dots { margin: 0; }
+  .ccard-kind { font-size: 11px; font-weight: 600; color: var(--ink); border: 1px solid var(--ink); border-radius: 9999px; padding: 2px 9px; letter-spacing: .2px; animation: pop .28s ease-out; }
+  .cov { display: grid; gap: 8px; }
+  .cov-r { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; align-items: center; font-size: 13px; color: var(--graphite); padding-bottom: 8px; border-bottom: 1px dashed var(--hair-soft); }
+  .cov-r:last-child { border-bottom: 0; padding-bottom: 0; }
+  .cov-r b { color: var(--ink); font-weight: 600; } .cov-r > span:last-child { grid-column: 2; font-size: 12px; }
 </style>
 
 <a class="skip" href="#main">본문으로 건너가기</a>
@@ -957,25 +964,28 @@
         <aside class="chat-side">
           <p class="eyebrow">교통사고 한의원 비교·예약 · 30초 문진</p>
           <h1 class="display" id="chatPageTitle" tabindex="-1">교통사고 처리도,<br><span class="wm"><b>한방</b><i>에</i><span class="dot">.</span></span></h1>
-          <p class="lead">다친 부위, 차량 파손 정도, 상대 보험사까지 답만 누르면 받을 치료와 가까운 한의원, 예상 합의금 범위가 정리됩니다.</p>
+          <p class="lead">어디가 아픈지, 교통사고인지부터 답만 누르면 받을 치료와 가까운 한의원이 정리됩니다. 교통사고면 보험 처리와 예상 합의금 범위까지.</p>
           <div class="ccard-wrap">
             <img class="ccard-bg" id="ccardBg" alt="" aria-hidden="true">
             <div class="ccard" id="ccard" aria-live="polite" aria-label="문진 카드">
               <div class="ccard-h"><span class="wm"><b>한방</b><i>에</i><span class="dot">.</span></span><span class="ccard-no num">문진 카드 · <span id="ccardDate"></span></span></div>
-              <div class="ccard-dots" id="ccardDots" aria-hidden="true"></div>
+              <div class="ccard-row"><div class="ccard-dots" id="ccardDots" aria-hidden="true"></div><span class="ccard-kind" id="cfKind" hidden></span></div>
               <div class="ccard-grid">
                 <div class="cf cf-body"><span class="cl">다친 부위</span><div class="mini-body" id="miniBody"></div><span class="cv" id="cfPart">—</span></div>
-                <div class="cf"><span class="cl">사고 경위</span><span class="cv" id="cfAcc">—</span></div>
+                <div class="cf" data-flow="acc"><span class="cl">사고 경위</span><span class="cv" id="cfAcc">—</span></div>
+                <div class="cf" data-flow="gen"><span class="cl">원인</span><span class="cv" id="cfCause">—</span></div>
                 <div class="cf"><span class="cl">경과</span><div class="tl-dots" id="cfWhen"><i data-v="today"></i><i data-v="yday"></i><i data-v="days"></i><i data-v="week"></i></div><span class="cv small" id="cfWhenT">—</span></div>
                 <div class="cf"><span class="cl">통증</span><div class="gauge" id="cfPain"><i></i><i></i><i></i></div><span class="cv small" id="cfPainT">—</span></div>
-                <div class="cf"><span class="cl">보험 접수</span><span class="cv" id="cfIns">—</span></div>
+                <div class="cf" data-flow="acc"><span class="cl">보험 접수</span><span class="cv" id="cfIns">—</span></div>
+                <div class="cf" data-flow="gen"><span class="cl">실손보험</span><span class="cv small" id="cfHins">—</span></div>
                 <div class="cf"><span class="cl">지역</span><span class="cv" id="cfRegion">—</span></div>
-                <div class="cf"><span class="cl">차량 파손</span><span class="cv small" id="cfDmg">—</span></div>
-                <div class="cf"><span class="cl">보험사</span><span class="cv small" id="cfInsr">—</span></div>
-                <div class="cf"><span class="cl">진단</span><span class="cv small" id="cfDx">—</span></div>
-                <div class="cf"><span class="cl">입원</span><span class="cv small" id="cfStay">—</span></div>
+                <div class="cf" data-flow="acc"><span class="cl">차량 파손</span><span class="cv small" id="cfDmg">—</span></div>
+                <div class="cf" data-flow="acc"><span class="cl">보험사</span><span class="cv small" id="cfInsr">—</span></div>
+                <div class="cf" data-flow="acc"><span class="cl">진단</span><span class="cv small" id="cfDx">—</span></div>
+                <div class="cf" data-flow="acc"><span class="cl">입원</span><span class="cv small" id="cfStay">—</span></div>
+                <div class="cf cf-wide" data-flow="gen"><span class="cl">동반 증상</span><span class="cv small" id="cfSym">—</span></div>
                 <div class="cf cf-wide"><span class="cl">조건</span><span class="cv" id="cfCond">—</span></div>
-                <div class="cf cf-wide cf-est" id="cfEstWrap" hidden><span class="cl">예상 합의금 · 예시</span><span class="cv" id="cfEst">—</span><span class="meta" id="cfEstSub"></span></div>
+                <div class="cf cf-wide cf-est" id="cfEstWrap" data-flow="acc" hidden><span class="cl">예상 합의금 · 예시</span><span class="cv" id="cfEst">—</span><span class="meta" id="cfEstSub"></span></div>
               </div>
               <div class="seal" id="ccardSeal" hidden><span class="seal-in"><span class="seal-wm"><b>한방</b><i>에</i></span><small>추천 완료</small></span></div>
             </div>
@@ -992,7 +1002,7 @@
       <p class="eyebrow">교통사고 한의원 비교·예약 · 한방에</p>
       <h2 class="display" id="heroTitle">한방(韓方)으로,<br>지역별 한의원 비교·예약.</h2>
       <p class="lead">보험 접수부터 치료, 합의 준비까지 지역별 한의원을 비교하고 바로 예약합니다. 보험사 접수번호가 있으면 본인부담금은 0원입니다.</p>
-      <div class="hero-cta"><a class="btn primary lg" href="#/chat"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>30초 문진으로 한의원 추천 받기</a><span class="meta">11가지만 고르면 치료·한의원·처리 순서를 정리해 드립니다</span></div>
+      <div class="hero-cta"><a class="btn primary lg" href="#/chat"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>30초 문진으로 한의원 추천 받기</a><span class="meta">질문 몇 개만 고르면 치료·한의원·처리 순서를 정리해 드립니다</span></div>
       <form class="search" id="searchForm" role="search">
         <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg>
         <label class="sr" for="q">검색어</label>
@@ -2111,8 +2121,21 @@ const STD = { wi: { '8급':30, '9급':25, '10~11급':20, '12~14급':15 }, fare: 
   const DX = [['w2', '진단 2주 (염좌·타박)'], ['w3', '진단 3주 이상'], ['fx', '골절·인대 손상'], ['none', '아직 안 받았어요']];
   const STAY = [['out', '통원만 할 거예요'], ['short', '단기 입원 3~7일 고려'], ['long', '입원 2주 이상 필요'], ['dunno', '잘 모르겠어요']];
   const COND = [['night', '야간 진료'], ['weekend', '주말 진료'], ['pickup', '픽업 차량'], ['parking', '주차'], ['none', '특별히 없어요']];
-  const Q = [
-    { id: 'part', q: '어디를 다치셨나요?', sub: '가장 불편한 곳 하나만 골라 주세요.', opts: () => PARTS.map(p => [p.k, p.short, PART_PIC[p.k]]) },
+  const KIND = [['acc', '네, 교통사고예요'], ['gen', '아니요, 다른 이유로 아파요']];
+  const ONSET = [['days', '며칠 전부터'], ['weeks', '1~4주 전부터'], ['months', '1~3개월'], ['chronic', '3개월 이상 (만성)']];
+  const CAUSE = [['sprain', '삐끗·들다가 갑자기'], ['sport', '운동·스포츠'], ['posture', '오래 앉아서·자세·반복 작업'], ['fall', '넘어짐·부딛힘'], ['unknown', '특별한 이유 없이']];
+  const SYM = [['numb', '저림·감각 이상'], ['swell', '붓기·열감'], ['night', '밤에 더 아파요·수면 방해'], ['head', '두통·어지럼'], ['none', '없어요']];
+  const HINS = [['have', '실손보험 있어요'], ['no', '없어요'], ['dunno', '잘 모르겠어요']];
+  const Q_HEAD = [
+    { id: 'part', q: '어디가 아프세요?', sub: '가장 불편한 곳 하나만 골라 주세요.', opts: () => PARTS.map(p => [p.k, p.short, PART_PIC[p.k]]) },
+    { id: 'kind', q: '교통사고로 다치신 건가요?', sub: '교통사고면 자동차보험 처리와 예상 합의금까지 함께 정리합니다. 아니어도 맞는 치료와 한의원을 찾아 드립니다.', opts: () => KIND },
+  ];
+  const Q_TAIL = [
+    { id: 'city', q: '어느 지역 한의원이 편하세요?', opts: () => Object.keys(REGIONS).map(c => [c, `${c} · 입점 ${CLINICS.filter(x => x.city === c).length}곳`]) },
+    { id: 'dist', q: a => `${a.city} 어디가 좋으세요?`, opts: a => [['전체', `${a.city} 전체`], ...REGIONS[a.city].map(d => [d, `${d} ${CLINICS.filter(x => x.city === a.city && x.district === d).length}`])] },
+    { id: 'cond', q: '꼭 필요한 조건이 있나요?', sub: '여러 개 골라도 됩니다.', multi: true, opts: () => COND },
+  ];
+  const Q_ACC = [
     { id: 'acc', q: '교통사고는 어떻게 나신 건가요?', opts: () => ACC },
     { id: 'dmg', q: '차량은 어느 정도 파손됐나요?', sub: '보험사는 차량 파손 정도로 사고 크기를 먼저 판단합니다.', opts: () => DMG },
     { id: 'when', q: '사고는 언제였나요?', opts: () => WHEN },
@@ -2121,42 +2144,54 @@ const STD = { wi: { '8급':30, '9급':25, '10~11급':20, '12~14급':15 }, fare: 
     { id: 'insurer', q: a => a.ins === 'fault' ? '접수할 보험사는 어디인가요?' : '상대 차 보험사는 어디인가요?', sub: '공시된 부지급률·민원 지표를 함께 보여드립니다.', opts: () => INSR },
     { id: 'dx', q: '진단서는 받으셨나요?', sub: '합의금 범위를 잡는 데 씁니다. 아직이면 "아직"을 눌러도 됩니다.', opts: () => DX },
     { id: 'stay', q: '입원 계획이 있나요?', sub: '입원 여부는 한의사 판단 사항이지만, 합의금 범위가 달라집니다.', opts: () => STAY },
-    { id: 'city', q: '어느 지역 한의원이 편하세요?', opts: () => Object.keys(REGIONS).map(c => [c, `${c} · 입점 ${CLINICS.filter(x => x.city === c).length}곳`]) },
-    { id: 'dist', q: a => `${a.city} 어디가 좋으세요?`, opts: a => [['전체', `${a.city} 전체`], ...REGIONS[a.city].map(d => [d, `${d} ${CLINICS.filter(x => x.city === a.city && x.district === d).length}`])] },
-    { id: 'cond', q: '꼭 필요한 조건이 있나요?', sub: '여러 개 골라도 됩니다.', multi: true, opts: () => COND },
+    ...Q_TAIL,
   ];
-  const TOTAL = Q.length - 1; // dist counts with city
+  const Q_GEN = [
+    { id: 'onset', q: '언제부터 아프셨나요?', opts: () => ONSET },
+    { id: 'cause', q: '어떻게 시작됐나요?', opts: () => CAUSE },
+    { id: 'pain', q: '지금 통증은 어느 정도인가요?', opts: () => PAIN },
+    { id: 'sym', q: '같이 나타나는 증상이 있나요?', sub: '여러 개 골라도 됩니다.', multi: true, opts: () => SYM },
+    { id: 'hins', q: '실손보험이 있으세요?', sub: '한의원 치료는 건강보험이 기본으로 적용되고, 실손은 본인부담금 일부를 돌려받는 데 씁니다.', opts: () => HINS },
+    ...Q_TAIL,
+  ];
+  const qs = () => [...Q_HEAD, ...(ans.kind === 'gen' ? Q_GEN : Q_ACC)];
+  const total = () => qs().length - 1; // dist counts with city
   /* 문진 카드 */
   const CARD = { acc: ACC, when: WHEN, pain: PAIN, ins: INS, cond: COND };
-  const cardDots = $('#ccardDots'); if (cardDots) cardDots.innerHTML = Array.from({ length: TOTAL }, () => '<i></i>').join('');
+  const cardDots = $('#ccardDots');
   const dateEl = $('#ccardDate'); if (dateEl) dateEl.textContent = new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
   const bgImg = $('#ccardBg'); if (bgImg && typeof KEYVISUAL !== 'undefined') bgImg.src = KEYVISUAL;
   (function miniBody() { const host = $('#miniBody'); const src = $('#bodySvg'); if (!host || !src) return; const sils = $$('.sil', src).map(p => `<path class="sil" d="${p.getAttribute('d')}"/>`).join(''); const dots = $$('.hs', src).map(g => { const c = g.querySelector('.dot'); return `<circle class="dotp" data-part="${g.dataset.part}" cx="${c.getAttribute('cx')}" cy="${c.getAttribute('cy')}" r="105"/>`; }).join(''); host.innerHTML = `<svg viewBox="0 0 1509 2048" aria-hidden="true">${sils}${dots}</svg>`; })();
   const setCv = (id, text) => { const el = $(id); if (!el) return; el.textContent = text; el.classList.remove('fill'); void el.offsetWidth; el.classList.add('fill'); };
   function updateCard(a, done) {
+    const gen = a.kind === 'gen'; $$('#ccard [data-flow]').forEach(el => { el.hidden = el.dataset.flow !== (gen ? 'gen' : 'acc'); });
+    const kindEl = $('#cfKind'); if (kindEl) { kindEl.hidden = !a.kind; kindEl.textContent = gen ? '일반 통증' : '교통사고'; }
+    setCv('#cfCause', a.cause ? label('cause', a.cause) : '—'); setCv('#cfHins', a.hins ? label('hins', a.hins) : '—');
+    setCv('#cfSym', a.sym ? (a.sym.filter(v => v !== 'none').map(v => label('sym', v)).join(' · ') || '없음') : '—');
     const part = PARTS.find(p => p.k === a.part);
     setCv('#cfPart', part ? part.short : '—'); const mb = $('#miniBody'); if (mb) { mb.classList.toggle('has', !!part); $$('.dotp', mb).forEach(d => d.classList.toggle('on', !!part && d.dataset.part === part.k)); }
     setCv('#cfAcc', a.acc ? label('acc', a.acc) : '—');
-    $$('#cfWhen i').forEach(i => i.classList.toggle('on', !!a.when && WHEN.findIndex(w => w[0] === i.dataset.v) <= WHEN.findIndex(w => w[0] === a.when))); setCv('#cfWhenT', a.when ? label('when', a.when) : '—');
+    const wIdx = gen ? ONSET.findIndex(w => w[0] === a.onset) : WHEN.findIndex(w => w[0] === a.when); $$('#cfWhen i').forEach((i, k) => i.classList.toggle('on', wIdx >= 0 && k <= wIdx)); setCv('#cfWhenT', gen ? (a.onset ? label('onset', a.onset) : '—') : (a.when ? label('when', a.when) : '—'));
     const lvl = { mild: 1, mod: 2, severe: 3 }[a.pain] || 0; $$('#cfPain i').forEach((i, k) => i.classList.toggle('on', k < lvl)); $('#cfPain')?.classList.toggle('severe', a.pain === 'severe'); setCv('#cfPainT', a.pain ? label('pain', a.pain) : '—');
     setCv('#cfIns', a.ins ? label('ins', a.ins) : '—'); setCv('#cfDx', a.dx ? label('dx', a.dx) : '—'); setCv('#cfDmg', a.dmg ? label('dmg', a.dmg) : '—'); setCv('#cfInsr', a.insurer ? label('insurer', a.insurer) : '—'); setCv('#cfStay', a.stay ? label('stay', a.stay) : '—');
-    const ew = $('#cfEstWrap'); if (ew) { ew.hidden = !done; if (done) { const e = estimate(a); setCv('#cfEst', `${e.lo}~${e.hi}만원`); $('#cfEstSub').textContent = `${e.grade} · ${e.insurer} · ${e.row.k}${e.fault ? ' · 과실만큼 감액' : ''}`; } }
+    const ew = $('#cfEstWrap'); if (ew) { ew.hidden = !done || gen; if (done && !gen) { const e = estimate(a); setCv('#cfEst', `${e.lo}~${e.hi}만원`); $('#cfEstSub').textContent = `${e.grade} · ${e.insurer} · ${e.row.k}${e.fault ? ' · 과실만큼 감액' : ''}`; } }
     setCv('#cfRegion', a.city ? `${a.city}${a.dist ? ' ' + (a.dist === '전체' ? '전체' : a.dist) : ''}` : '—');
     setCv('#cfCond', a.cond ? (a.cond.filter(v => v !== 'none').map(v => label('cond', v)).join(' · ') || '특별히 없음') : '—');
-    const n = Math.min(step, TOTAL); $$('#ccardDots i').forEach((d, k) => { d.classList.toggle('on', k < n); d.classList.toggle('now', k === n && !done); });
+    const T = total(); if (cardDots && cardDots.children.length !== T) cardDots.innerHTML = Array.from({ length: T }, () => '<i></i>').join('');
+    const n = Math.min(step, T); $$('#ccardDots i').forEach((d, k) => { d.classList.toggle('on', k < n); d.classList.toggle('now', k === n && !done); });
     const seal = $('#ccardSeal'); if (seal) { seal.hidden = !done; $('#ccard')?.classList.toggle('done', !!done); }
   }
   let ans = {}, step = 0, busy = false;
-  const label = (id, v) => { const src = { part: PARTS.map(p => [p.k, p.short]), acc: ACC, when: WHEN, pain: PAIN, ins: INS, dmg: DMG, insurer: INSR, dx: DX, stay: STAY, cond: COND }[id]; if (!src) return v; const f = src.find(x => x[0] === v); return f ? f[1] : v; };
+  const label = (id, v) => { const src = { part: PARTS.map(p => [p.k, p.short]), kind: KIND, onset: ONSET, cause: CAUSE, sym: SYM, hins: HINS, acc: ACC, when: WHEN, pain: PAIN, ins: INS, dmg: DMG, insurer: INSR, dx: DX, stay: STAY, cond: COND }[id]; if (!src) return v; const f = src.find(x => x[0] === v); return f ? f[1] : v; };
   const bot = (html, wide) => { const m = document.createElement('div'); m.className = 'msg' + (wide ? ' wide' : ''); m.innerHTML = `<span class="av" aria-hidden="true">한</span><div class="bubble">${html}</div>`; box.appendChild(m); return m; };
   const stepMode = () => matchMedia('(max-width: 767px)').matches;
   const toTop = () => { const y = box.getBoundingClientRect().top + window.scrollY - navH() - 8; if (Math.abs(window.scrollY - y) > 4) window.scrollTo({ top: y, behavior: 'auto' }); };
   const me = text => { if (stepMode()) return; const m = document.createElement('div'); m.className = 'msg me'; m.innerHTML = `<div class="bubble">${esc(text)}</div>`; box.appendChild(m); };
-  const progress = () => { const n = Math.min(step, TOTAL); $('#chatBar').style.width = (n / TOTAL * 100) + '%'; $('#chatStep').textContent = `${n} / ${TOTAL}`; };
+  const progress = () => { const n = Math.min(step, total()); $('#chatBar').style.width = (n / total() * 100) + '%'; $('#chatStep').textContent = `${n} / ${total()}`; };
   const scrollBottom = () => { if (stepMode()) return; if (step === 0 && !ans.part) return; const r = box.getBoundingClientRect(); if (r.bottom > innerHeight - 80) window.scrollTo({ top: window.scrollY + (r.bottom - innerHeight) + 120, behavior: 'smooth' }); };
   const wait = ms => new Promise(r => setTimeout(r, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : ms));
   async function ask() {
-    const q = Q[step]; if (!q) return result();
+    const q = qs()[step]; if (!q) return result();
     if (q.id === 'dist' && !REGIONS[ans.city]) { step++; return ask(); }
     if (stepMode()) return askStep(q);
     busy = true; const t = bot('<span class="typing"><i></i><i></i><i></i></span>'); scrollBottom(); await wait(420);
@@ -2166,11 +2201,11 @@ const STD = { wi: { '8급':30, '9급':25, '10~11급':20, '12~14급':15 }, fare: 
     box.appendChild(opts); busy = false; scrollBottom();
   }
   function askStep(q) {
-    const n = Math.min(step, TOTAL);
+    const n = Math.min(step, total());
     const opts = q.opts(ans).map(([v, l, pic]) => `<button class="opt" type="button" data-v="${esc(v)}" aria-pressed="false">${pic ? `<svg class="pic" viewBox="0 0 24 24" aria-hidden="true">${pic}</svg>` : ''}<span>${esc(l)}</span></button>`).join('') + (q.multi ? '<button class="btn primary go" type="button" data-go>선택 완료</button>' : '');
     box.innerHTML = `<div class="step" data-id="${q.id}">
-      <div class="step-h"><button class="step-back" type="button" data-back aria-label="이전 질문" ${step ? '' : 'hidden'}><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><span class="step-n num">${n + 1} / ${TOTAL}</span><span class="wm"><b>한방</b><i>에</i><span class="dot">.</span></span></div>
-      <div class="step-bar" aria-hidden="true"><i style="width:${n / TOTAL * 100}%"></i></div>
+      <div class="step-h"><button class="step-back" type="button" data-back aria-label="이전 질문" ${step ? '' : 'hidden'}><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><span class="step-n num">${n + 1} / ${total()}</span><span class="wm"><b>한방</b><i>에</i><span class="dot">.</span></span></div>
+      <div class="step-bar" aria-hidden="true"><i style="width:${n / total() * 100}%"></i></div>
       <h3 class="step-q">${esc(typeof q.q === 'function' ? q.q(ans) : q.q)}</h3>${q.sub ? `<p class="step-sub">${esc(q.sub)}</p>` : ''}
       <div class="opts" data-id="${q.id}">${opts}</div>
       ${step === 0 ? '<p class="meta step-foot">진단이 아니라 안내입니다. 어지럼·구토·마비·의식 저하가 있으면 문진보다 응급실이 먼저입니다.</p>' : ''}
@@ -2179,19 +2214,19 @@ const STD = { wi: { '8급':30, '9급':25, '10~11급':20, '12~14급':15 }, fare: 
   }
   function goBack() {
     if (step === 0) return;
-    step--; if (Q[step].id === 'dist' && !REGIONS[ans.city]) step--;
-    delete ans[Q[step].id]; $('#homeChat')?.classList.remove('done'); progress(); updateCard(ans, false); ask();
+    step--; if (qs()[step].id === 'dist' && !REGIONS[ans.city]) step--;
+    delete ans[qs()[step].id]; $('#homeChat')?.classList.remove('done'); progress(); updateCard(ans, false); ask();
   }
   box.addEventListener('click', e => {
     if (e.target.closest('[data-back]')) return goBack();
     if (busy) return;
     const opts = e.target.closest('.opts'); if (!opts) return handleResult(e);
-    const q = Q.find(x => x.id === opts.dataset.id); const b = e.target.closest('.opt');
+    const q = qs().find(x => x.id === opts.dataset.id); const b = e.target.closest('.opt');
     if (q.multi) {
       if (b) { if (b.dataset.v === 'none') { $$('.opt', opts).forEach(x => x.setAttribute('aria-pressed', x === b)); } else { b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true'); $('.opt[data-v="none"]', opts)?.setAttribute('aria-pressed', 'false'); } return; }
       if (!e.target.closest('[data-go]')) return;
       const vs = $$('.opt[aria-pressed="true"]', opts).map(x => x.dataset.v).filter(v => v !== 'none'); ans[q.id] = vs; opts.remove(); me(vs.length ? vs.map(v => label(q.id, v)).join(', ') : '특별히 없어요');
-    } else { if (!b) return; ans[q.id] = b.dataset.v; opts.remove(); me(b.textContent.trim()); }
+    } else { if (!b) return; if (q.id === 'kind' && ans.kind && ans.kind !== b.dataset.v) { [...Q_ACC, ...Q_GEN].forEach(x => delete ans[x.id]); } ans[q.id] = b.dataset.v; opts.remove(); me(b.textContent.trim()); }
     step++; progress(); updateCard(ans, false); ask();
   });
   function pick(city, dist, conds, needBed) {
@@ -2247,7 +2282,55 @@ const STD = { wi: { '8급':30, '9급':25, '10~11급':20, '12~14급':15 }, fare: 
       <div class="acts"><a class="btn ghost" href="#/guide">보험사별 합의금 비교 →</a></div>
     </div>`;
   }
+  function show(html, stepTitle) {
+    if (stepMode()) { box.innerHTML = `<div class="step res-step"><div class="step-h"><button class="step-back" type="button" data-back aria-label="이전 질문"><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><span class="step-n num">완료 · ${total()} / ${total()}</span><span class="wm"><b>한방</b><i>에</i><span class="dot">.</span></span></div><h3 class="step-q">${stepTitle}</h3>${html}</div>`; busy = false; $('#homeChat')?.classList.add('done'); toTop(); return; }
+    const t = bot('<span class="typing"><i></i><i></i><i></i></span>', true); scrollBottom();
+    wait(500).then(() => { t.querySelector('.bubble').innerHTML = html; busy = false; scrollBottom(); });
+  }
+  function resultGen() {
+    progress(); busy = true; updateCard(ans, true);
+    const part = PARTS.find(p => p.k === ans.part) || PARTS[1]; const severe = ans.pain === 'severe'; const conds = (ans.cond || []).filter(v => v !== 'none'); const syms = (ans.sym || []).filter(v => v !== 'none');
+    const list = pick(ans.city, ans.dist || '전체', conds, false); const top = list.slice(0, 3);
+    const treats = part.treats.filter(t => t !== 'inpatient');
+    const know = [];
+    if (ans.onset === 'days' && ['sprain', 'fall', 'sport'].includes(ans.cause)) know.push('<b>급성기(첫 2~3일)</b>에는 무리한 마사지·온열보다 안정이 먼저입니다. 붓기·열감이 있으면 냉찜질부터. 이 시기에 진찰을 받아야 회복이 빠릅니다.');
+    if (ans.onset === 'chronic') know.push('<b>3개월 넘게 이어진 통증</b>은 만성화 단계입니다. 추나·약침에 한약을 함께 쓰고 치료 기간을 길게 잡는 경우가 많습니다. 통증 일지(언제·어떤 동작에 심한지)를 적어 가면 진찰이 정확해집니다.');
+    if (ans.onset === 'months') know.push('<b>1~3개월 지속</b>된 통증은 지금 잡아야 만성화를 막습니다. 원인 동작을 찾아 치료와 함께 교정하는 것이 핵심입니다.');
+    if (ans.cause === 'posture') know.push('<b>자세·반복 작업</b>이 원인이면 치료만으로는 재발합니다. 모니터 높이, 의자, 30분마다 스트레칭을 함께 바꾸세요. 추나요법은 틀어진 정렬을 잡는 데 쓰입니다.');
+    if (ans.cause === 'sport') know.push('<b>운동 손상</b>은 인대·근육 손상 정도를 먼저 확인합니다. 통증 없는 범위에서 단계적으로 복귀하고, 같은 동작에서 다시 아프면 바로 진찰을.');
+    if (ans.cause === 'unknown') know.push('<b>뚜렷한 원인 없이</b> 시작된 통증은 자세 습관이나 내부 원인일 수 있습니다. 진찰에서 통증 부위 외에 전신 상태도 함께 봅니다.');
+    if (syms.includes('numb')) know.push('<b>저림·감각 이상</b>이 함께 있으면 신경 압박 가능성이 있어 영상 검사를 먼저 권합니다. 검사 결과를 가지고 오면 치료 계획이 명확해집니다.');
+    if (syms.includes('night')) know.push('<b>밤에 더 아프고 잠을 깨는 통증</b>은 염증이 심하거나 다른 원인일 수 있는 신호입니다. 진찰 때 꼭 말씀하세요.');
+    if (syms.includes('head')) know.push('<b>두통·어지럼</b>은 목 근육 긴장에서 오는 경우가 많지만, 지속되거나 심해지면 신경과 검사를 먼저 받으세요.');
+    if (syms.includes('swell')) know.push('<b>붓기·열감</b>이 있으면 급성 염증 단계입니다. 부항·뜸 같은 온열 자극은 가라앉은 뒤에 하는 것이 일반적입니다.');
+    if (severe) know.push('<b>움직이기 힘들 정도</b>면 예약 시 "통증 심함"을 알려 주세요. 첫 진료에서 검사 의뢰가 필요한지 먼저 판단합니다.');
+    know.push('<b>진찰·침·부항·뜸은 건강보험</b>이 적용됩니다. 추나요법도 건강보험 적용(연 20회 한도, 본인부담 50%). 약침·한약은 비급여가 기본이라 예약 시 금액을 확인하세요.');
+    const cover = [
+      ['진찰 · 침 · 부항 · 뜸', '건강보험 급여 · 한의원 외래 본인부담 약 30%', 'yes'],
+      ['추나요법', '건강보험 급여 · 연 20회 한도 · 본인부담 50% (탈구 등 특수추나 80%)', 'yes'],
+      ['약침', '비급여 · 한의원별 금액 확인', 'ask'],
+      ['한약(첩약)', '비급여 기본 · 일부 질환은 첩약 건강보험 시범사업 적용 가능, 한의원 확인', 'ask'],
+    ];
+    const hinsNote = ans.hins === 'have' ? '실손보험은 건강보험 급여 항목의 본인부담금을 보장합니다. 한의원 <b>비급여(약침·한약)</b>는 상품·가입 시기에 따라 보장되지 않는 경우가 많으니 약관의 "한방 비급여" 항목을 확인하세요. 영수증과 진료비 세부내역서를 챙기면 청구가 간단합니다.'
+      : ans.hins === 'no' ? '실손이 없어도 진찰·침·부항·뜸·추나는 건강보험으로 본인부담이 크지 않습니다. 비급여 항목은 예약 시 금액을 먼저 물어보세요.'
+      : '실손 가입 여부는 <b>내보험찾아줌(cont.insure.or.kr)</b>에서 조회할 수 있습니다. 있으면 급여 본인부담금을 돌려받을 수 있습니다.';
+    const html = `<div class="res">
+      <div><h4>정리하면</h4><div class="sum"><span class="tag yes">${esc(part.short)}</span><span class="tag fill">일반 통증</span><span class="tag fill">${esc(label('onset', ans.onset))}</span><span class="tag fill">${esc(label('cause', ans.cause))}</span><span class="tag fill">${esc(label('pain', ans.pain))}</span>${syms.map(v => `<span class="tag fill">${esc(label('sym', v))}</span>`).join('')}<span class="tag fill">${esc(label('hins', ans.hins))}</span><span class="tag fill">${esc(ans.city)} ${esc(ans.dist === '전체' || !ans.dist ? '전체' : ans.dist)}</span>${conds.map(v => `<span class="tag fill">${esc(label('cond', v))}</span>`).join('')}</div></div>
+      <div><h4>받을 수 있는 치료 · 누르면 설명으로</h4><div class="tchips">${treats.map(t => { const c = catByKey(t); const st = catCounts(t); const ask = !st.yes.length; return `<a class="${ask ? 'ask' : ''}" href="#/cat/${CAT_SLUG(t)}">${pic(t)}${esc(c ? c.title : t)}<span class="st">${ask ? '한의원 확인' : `제공 ${st.yes.length}곳`}</span></a>`; }).join('')}</div><p class="meta" style="margin-top:8px">${esc(part.sym)}</p></div>
+      <div><h4>추천 한의원 · ${esc(ans.city)} ${esc(ans.dist && ans.dist !== '전체' ? ans.dist : '전체')} ${list.length}곳 중 ${top.length}곳</h4>${top.length ? top.map(c => crowHtml(c, catStatus(c, treats[0]))).join('') : '<p class="meta">이 지역엔 아직 입점 한의원이 없습니다. 인접 지역을 선택해 보세요.</p>'}${conds.length ? '<p class="meta" style="margin-top:8px">선택한 조건(야간·주말·픽업·주차)은 한의원 확인 전이라 "확인 중"으로 표시됩니다. 전화로 먼저 확인하실 수 있습니다.</p>' : ''}</div>
+      <div class="est"><div class="est-h"><h4>비용은 어떻게 되나?</h4><span class="meta">건강보험 기준 · 금액은 한의원별 확인</span></div>
+        <div class="cov">${cover.map(([n, d, st]) => `<div class="cov-r"><span class="tag ${st === 'yes' ? 'yes' : 'fill'}">${st === 'yes' ? '건보 적용' : '확인'}</span><b>${n}</b><span>${d}</span></div>`).join('')}</div>
+        <p class="body" style="font-size:13px">${hinsNote}</p>
+        <p class="meta">교통사고가 아닌 일반 통증은 자동차보험 대상이 아니며 합의금도 없습니다. 위 기준은 일반적인 건강보험 적용 원칙이고, 세부 본인부담은 한의원과 진료 내용에 따라 다릅니다.</p></div>
+      <div><h4>알아두면 좋은 것</h4><ol class="know">${know.map(k => `<li>${k}</li>`).join('')}</ol></div>
+      <div class="warnbox"><b>먼저 병원에 가야 하는 경우</b> — ${esc(part.warn)}</div>
+      <div class="acts"><button class="btn primary" type="button" data-more-find>이 조건으로 한의원 더 보기</button><a class="btn ghost" href="#/cat/${CAT_SLUG(treats[0])}">치료 자세히</a><button class="tlink muted" type="button" data-restart>처음부터 다시</button></div>
+      <p class="meta">이 문진은 일반적인 안내이며 진단이 아닙니다. 실제 치료 구성은 진찰 뒤 한의사가 정합니다.</p>
+    </div>`;
+    show(html, '정리해 드릴게요.');
+  }
   function result() {
+    if (ans.kind === 'gen') return resultGen();
     progress(); busy = true; updateCard(ans, true);
     const part = PARTS.find(p => p.k === ans.part) || PARTS[1]; const severe = ans.pain === 'severe'; const conds = (ans.cond || []).filter(v => v !== 'none');
     const list = pick(ans.city, ans.dist || '전체', conds, severe); const top = list.slice(0, 3);
@@ -2264,7 +2347,7 @@ const STD = { wi: { '8급':30, '9급':25, '10~11급':20, '12~14급':15 }, fare: 
     know.push('<b>합의는 치료가 끝난 뒤에</b>. 보험사가 먼저 제시하는 금액은 시작점이고, 진단서·통원확인서·영수증이 협상 근거가 됩니다.');
     const cnt = { yes: CLINICS.filter(c => catStatus(c, part.treats[0]) === 'yes').length };
     const html = `<div class="res">
-      <div><h4>정리하면</h4><div class="sum"><span class="tag yes">${esc(part.short)}</span><span class="tag fill">${esc(label('acc', ans.acc))}</span><span class="tag fill">${esc(label('when', ans.when))}</span><span class="tag fill">${esc(label('pain', ans.pain))}</span><span class="tag fill">${esc(label('ins', ans.ins))}</span><span class="tag fill">${esc(label('dmg', ans.dmg))}</span><span class="tag fill">${esc(label('insurer', ans.insurer))}</span><span class="tag fill">${esc(label('dx', ans.dx))}</span><span class="tag fill">${esc(label('stay', ans.stay))}</span><span class="tag fill">${esc(ans.city)} ${esc(ans.dist === '전체' || !ans.dist ? '전체' : ans.dist)}</span>${conds.map(v => `<span class="tag fill">${esc(label('cond', v))}</span>`).join('')}</div></div>
+      <div><h4>정리하면</h4><div class="sum"><span class="tag yes">${esc(part.short)}</span><span class="tag fill">교통사고</span><span class="tag fill">${esc(label('acc', ans.acc))}</span><span class="tag fill">${esc(label('when', ans.when))}</span><span class="tag fill">${esc(label('pain', ans.pain))}</span><span class="tag fill">${esc(label('ins', ans.ins))}</span><span class="tag fill">${esc(label('dmg', ans.dmg))}</span><span class="tag fill">${esc(label('insurer', ans.insurer))}</span><span class="tag fill">${esc(label('dx', ans.dx))}</span><span class="tag fill">${esc(label('stay', ans.stay))}</span><span class="tag fill">${esc(ans.city)} ${esc(ans.dist === '전체' || !ans.dist ? '전체' : ans.dist)}</span>${conds.map(v => `<span class="tag fill">${esc(label('cond', v))}</span>`).join('')}</div></div>
       <div><h4>받을 수 있는 치료 · 누르면 설명으로</h4><div class="tchips">${treats.map(t => { const c = catByKey(t); const st = catCounts(t); const ask = !st.yes.length; return `<a class="${ask ? 'ask' : ''}" href="#/cat/${CAT_SLUG(t)}">${pic(t)}${esc(c ? c.title : t)}<span class="st">${ask ? '한의원 확인' : `제공 ${st.yes.length}곳`}</span></a>`; }).join('')}</div><p class="meta" style="margin-top:8px">${esc(part.sym)}</p></div>
       <div><h4>추천 한의원 · ${esc(ans.city)} ${esc(ans.dist && ans.dist !== '전체' ? ans.dist : '전체')} ${list.length}곳 중 ${top.length}곳</h4>${top.length ? top.map(c => crowHtml(c, catStatus(c, part.treats[0]))).join('') : '<p class="meta">이 지역엔 아직 입점 한의원이 없습니다. 인접 지역을 선택해 보세요.</p>'}${conds.length ? '<p class="meta" style="margin-top:8px">선택한 조건(야간·주말·픽업·주차)은 한의원 확인 전이라 "확인 중"으로 표시됩니다. 전화로 먼저 확인하실 수 있습니다.</p>' : ''}</div>
       ${estHtml(ans)}
@@ -2273,22 +2356,20 @@ const STD = { wi: { '8급':30, '9급':25, '10~11급':20, '12~14급':15 }, fare: 
       <div class="acts"><button class="btn primary" type="button" data-more-find>이 조건으로 한의원 더 보기</button><a class="btn ghost" href="#/guide">보험 처리 노하우 더 보기</a><a class="btn ghost" href="#/cat/${CAT_SLUG(part.treats[0])}">치료 자세히</a><button class="tlink muted" type="button" data-restart>처음부터 다시</button></div>
       <p class="meta">이 문진은 일반적인 안내이며 진단이 아닙니다. 실제 치료 구성은 진찰 뒤 한의사가 정합니다.</p>
     </div>`;
-    if (stepMode()) { box.innerHTML = `<div class="step res-step"><div class="step-h"><button class="step-back" type="button" data-back aria-label="이전 질문"><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><span class="step-n num">완료 · ${TOTAL} / ${TOTAL}</span><span class="wm"><b>한방</b><i>에</i><span class="dot">.</span></span></div><h3 class="step-q">정리해 드릴게요.</h3>${html}</div>`; busy = false; $('#homeChat')?.classList.add('done'); toTop(); return; }
-    const t = bot('<span class="typing"><i></i><i></i><i></i></span>', true); scrollBottom();
-    wait(500).then(() => { t.querySelector('.bubble').innerHTML = html; busy = false; scrollBottom(); });
+    show(html, '정리해 드릴게요.');
   }
   function handleResult(e) {
-    if (e.target.closest('[data-more-find]')) { const conds = (ans.cond || []).filter(v => v !== 'none'); state.filters = new Set([...(ans.pain === 'severe' ? ['inpatient'] : []), ...conds]); state.city = ans.city || '전체'; state.district = ans.dist || '전체'; renderFind(); go('/find'); return; }
+    if (e.target.closest('[data-more-find]')) { const conds = (ans.cond || []).filter(v => v !== 'none'); state.filters = new Set([...(ans.kind !== 'gen' && ans.pain === 'severe' ? ['inpatient'] : []), ...conds]); state.city = ans.city || '전체'; state.district = ans.dist || '전체'; renderFind(); go('/find'); return; }
     if (e.target.closest('[data-restart]')) return restart();
     const o = e.target.closest('[data-open]'); if (o) return openDetail(+o.dataset.open);
     const b = e.target.closest('[data-book]'); if (b) return openBooking(+b.dataset.book);
   }
-  function restart() { ans = {}; step = 0; busy = false; box.innerHTML = ''; $('#homeChat')?.classList.remove('done'); progress(); updateCard({}, false); if (!stepMode()) bot('안녕하세요, 한방에입니다. 사고 뒤 처리, 같이 정리해 볼게요. 답은 누르기만 하면 됩니다.'); if (stepMode()) toTop(); ask(); }
+  function restart() { ans = {}; step = 0; busy = false; box.innerHTML = ''; $('#homeChat')?.classList.remove('done'); progress(); updateCard({}, false); if (!stepMode()) bot('안녕하세요, 한방에입니다. 어디가 불편한지부터 같이 정리해 볼게요. 답은 누르기만 하면 됩니다.'); if (stepMode()) toTop(); ask(); }
   $('#chatRestart').addEventListener('click', () => { restart(); if (stepMode()) toTop(); });
   let started = false;
   const startIfVisible = () => { if (!started && state.page === 'home') { started = true; restart(); } };
   window.addEventListener('hashchange', () => setTimeout(startIfVisible, 0)); setTimeout(startIfVisible, 0);
-  matchMedia('(max-width: 767px)').addEventListener('change', () => { if (!started) return; if (step >= Q.length || $('.res', box)) { box.innerHTML = ''; result(); } else { box.innerHTML = ''; if (!stepMode()) bot('이어서 계속할게요.'); ask(); } });
+  matchMedia('(max-width: 767px)').addEventListener('change', () => { if (!started) return; if (step >= qs().length || $('.res', box)) { box.innerHTML = ''; result(); } else { box.innerHTML = ''; if (!stepMode()) bot('이어서 계속할게요.'); ask(); } });
 })();
 
 /* 히어로 조건 칩 12개 (픽토그램 포함) */
